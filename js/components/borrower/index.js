@@ -21,10 +21,14 @@ class BorrowerHomeComponent extends React.Component {
               />
               <Text>关于我们</Text>
             </View>
-            <View style={styles.navView}>
+            <View style={[styles.navView, styles.navPromote]}>
               <Image
                 source={require("./img/promote.png")}
                 style={styles.navIcon}
+              />
+              <Image
+                source={require("./img/promote-tip.png")}
+                style={styles.navTipIcon}
               />
               <Text>提升额度</Text>
             </View>
@@ -56,15 +60,21 @@ BorrowerHomeComponent.navigationOptions = {
 
 const styles = StyleSheet.create({
   banner: {
-    overflow: 'hidden'
+    overflow: 'hidden',
+    paddingLeft: 20,
+    paddingRight: 20,
+    backgroundColor: '#fff',
   },
   bannerImg: {
-    height: 100,
-    resizeMode: 'stretch',
+    width: Dimensions.get('window').width - 40,
+    height: (Dimensions.get('window').width - 40) * 200 / 670,
+    resizeMode: 'contain',
   },
   nav: {
     paddingLeft: 15,
     paddingRight: 15,
+    paddingTop: 20,
+    paddingBottom: 10,
     flexDirection: 'row',
     backgroundColor: '#fff',
   },
@@ -72,17 +82,27 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  navPromote: {
+    position: 'relative',
+  },
   navIcon: {
     width: 55,
     height: 55,
+    marginBottom: 11,
+  },
+  navTipIcon: {
+    width: 20,
+    height: 23,
+    position: 'absolute',
+    top: 0,
+    right: 30,
   },
   notice: {
     marginTop: 10,
     paddingLeft: 15,
     height: 40,
-    flexDirection:'column',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
+    flexDirection:'row',
+    alignItems: 'center',
     backgroundColor: '#fff',
   },
   noticeIcon: {
@@ -90,6 +110,7 @@ const styles = StyleSheet.create({
     height: 25,
   },
   noticeText: {
+    marginLeft: 10,
     fontSize: 13,
     color: '#999',
   },
