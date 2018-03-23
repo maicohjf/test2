@@ -4,6 +4,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import { Dimensions, View, Image, StyleSheet, TextInput, Button, Text, TouchableOpacity } from "react-native";
+import { Spinner } from 'native-base';
 import { login } from '../../actions';
 import Utils from '../../utils';
 import { utils } from "redux-saga";
@@ -122,30 +123,58 @@ class LoginComponent extends React.Component {
   }
 
   render() {
-    console.log(this.state.phone);
+    console.log(this.props.common);
     return (
       <View style={styles.loginContainer}>
+        {
+          this.props.common.isLoading && <Spinner />
+        }
+        <Image
+          source={require("./img/logo.png")}
+          style={styles.logo}
+        />
+        <View style={[styles.phoneRow, styles.loginBorder]}>
           <Image
-            source={require("./img/logo.png")}
-            style={styles.logo}
+            source={!this.state.phone ? require("./img/icon-phone.png") : require("./img/icon-phone-active.png") }
+            style={styles.inputIcon}
           />
-          <View style={[styles.phoneRow, styles.loginBorder]}>
+          <TextInput
+            onChangeText={text => this.handleSPhoneChange(text)}
+            value={this.formatPhone(this.state.phone)}
+            style={[styles.loginInput, styles.phoneInput]}
+            maxLength={13}
+            keyboardType="numeric"
+            placeholder="请输入手机号码"
+          />
+          {
+            this.state.phone &&
+            <TouchableOpacity onPress={() => {
+              this.handleClearPhone();
+            }}>
+              <Image
+                source={require("./img/icon-delete.png") }
+                style={styles.deleteIcon}
+              />
+            </TouchableOpacity>
+          }
+        </View>
+        <View style={styles.smsCodeRow}>
+          <View style={[styles.smsCode, styles.loginBorder]}>
             <Image
-              source={!this.state.phone ? require("./img/icon-phone.png") : require("./img/icon-phone-active.png") }
+              source={!this.state.smsCode ? require("./img/icon-verifying.png") : require("./img/icon-verifying-active.png") }
               style={styles.inputIcon}
             />
             <TextInput
-              onChangeText={text => this.handleSPhoneChange(text)}
-              value={this.formatPhone(this.state.phone)}
-              style={[styles.loginInput, styles.phoneInput]}
-              maxLength={13}
-              keyboardType="numeric"
-              placeholder="请输入手机号码"
+              style={[styles.loginInput, styles.smsCodeInput]}
+              onChangeText={text => this.handleSmsCodeChange(text)}
+              value={this.state.smsCode}
+              maxLength={6}
+              placeholder="请输入验证码"
             />
             {
-              this.state.phone &&
+              this.state.smsCode &&
               <TouchableOpacity onPress={() => {
-                this.handleClearPhone();
+                this.handleClearSmsCode();
               }}>
                 <Image
                   source={require("./img/icon-delete.png") }
@@ -154,51 +183,26 @@ class LoginComponent extends React.Component {
               </TouchableOpacity>
             }
           </View>
-          <View style={styles.smsCodeRow}>
-            <View style={[styles.smsCode, styles.loginBorder]}>
-              <Image
-                source={!this.state.smsCode ? require("./img/icon-verifying.png") : require("./img/icon-verifying-active.png") }
-                style={styles.inputIcon}
-              />
-              <TextInput
-                style={[styles.loginInput, styles.smsCodeInput]}
-                onChangeText={text => this.handleSmsCodeChange(text)}
-                value={this.state.smsCode}
-                maxLength={6}
-                placeholder="请输入验证码"
-              />
-              {
-                this.state.smsCode &&
-                <TouchableOpacity onPress={() => {
-                  this.handleClearSmsCode();
-                }}>
-                  <Image
-                    source={require("./img/icon-delete.png") }
-                    style={styles.deleteIcon}
-                  />
-                </TouchableOpacity>
-              }
-            </View>
-            <TouchableOpacity onPress={() => {
-              this.handleGetSmsCode();
-            }}>
-              <View style={(Utils.isPhoneNumValid(this.state.phone) && !this.state.isCounting)
-                  ? [styles.smsCodeBtn, styles.smsCodeBtnActive]
-                  : styles.smsCodeBtn}>
-                <Text style={{fontSize:12, color:'#fff'}}>
-                  { this.state.isCounting ? `倒计时${this.state.countdown}秒` : "获取验证码" }
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
           <TouchableOpacity onPress={() => {
-              this.handleLogin();
-            }}>
-            <View style={styles.btn}>
-              <Text style={{fontSize:16, color:'#fff'}}>登录</Text>
+            this.handleGetSmsCode();
+          }}>
+            <View style={(Utils.isPhoneNumValid(this.state.phone) && !this.state.isCounting)
+                ? [styles.smsCodeBtn, styles.smsCodeBtnActive]
+                : styles.smsCodeBtn}>
+              <Text style={{fontSize:12, color:'#fff'}}>
+                { this.state.isCounting ? `倒计时${this.state.countdown}秒` : "获取验证码" }
+              </Text>
             </View>
           </TouchableOpacity>
-          <Text style={styles.notice}>新用户登录即同意<Text style={styles.noticeStrong}>《钱家用户注册协议》</Text></Text>
+        </View>
+        <TouchableOpacity onPress={() => {
+            this.handleLogin();
+          }}>
+          <View style={styles.btn}>
+            <Text style={{fontSize:16, color:'#fff'}}>登录</Text>
+          </View>
+        </TouchableOpacity>
+        <Text style={styles.notice}>新用户登录即同意<Text style={styles.noticeStrong}>《钱家用户注册协议》</Text></Text>
       </View>
     );
   }
@@ -301,9 +305,10 @@ const styles = StyleSheet.create({
 });
   
 /* exports ================================================================== */
-function mapStateToProps({ auth }) {
+function mapStateToProps({ auth, common }) {
   return {
-    auth
+    common,
+    auth,
   };
 }
 

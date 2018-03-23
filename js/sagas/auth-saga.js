@@ -6,9 +6,15 @@ import ActionsTypes from '../actions/actionsTypes';
 export function* login(action) {
   try {
     console.log(action.data);
+    yield put({
+      type: ActionsTypes.LOADING_START,
+    });
     yield call(delay, 400);
     yield put({
       type: ActionsTypes.USER_LOGIN_SUCCESS,
+    });
+    yield put({
+      type: ActionsTypes.LOADING_END,
     });
   }
   catch (err) {
