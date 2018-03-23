@@ -21,6 +21,8 @@ class LoginComponent extends React.Component {
     this.state = {
       phone: '',
       smsCode: '',
+      countdown: 60,
+      isCounting: false,
     }
   }
 
@@ -86,8 +88,25 @@ class LoginComponent extends React.Component {
   }
 
   handleGetSmsCode() {
-    if (Utils.isPhoneNumValid(this.state.phone)) {
+    if (Utils.isPhoneNumValid(this.state.phone) && !this.state.isCounting) {
+      this.setTimer();
+    }
+  }
 
+  setTimer() {
+    if (this.state.countdown === 0) {
+      this.setState({
+        isCounting: false,
+        countdown: 60,
+      });
+    } else {
+      this.setState({
+        isCounting: true,
+        countdown: this.state.countdown - 1,
+      });
+      setTimeout(() => {  
+        this.setTimer();
+      }, 1000);
     }
   }
 
@@ -163,8 +182,12 @@ class LoginComponent extends React.Component {
             <TouchableOpacity onPress={() => {
               this.handleGetSmsCode();
             }}>
-              <View style={Utils.isPhoneNumValid(this.state.phone) ? [styles.smsCodeBtn, styles.smsCodeBtnActive] : styles.smsCodeBtn}>
-                <Text style={{fontSize:12, color:'#fff'}}>获取验证码</Text>
+              <View style={(Utils.isPhoneNumValid(this.state.phone) && !this.state.isCounting)
+                  ? [styles.smsCodeBtn, styles.smsCodeBtnActive]
+                  : styles.smsCodeBtn}>
+                <Text style={{fontSize:12, color:'#fff'}}>
+                  { this.state.isCounting ? `倒计时${this.state.countdown}秒` : "获取验证码" }
+                </Text>
               </View>
             </TouchableOpacity>
           </View>
