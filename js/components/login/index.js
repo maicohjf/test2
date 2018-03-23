@@ -8,7 +8,10 @@ import { Spinner } from 'native-base';
 import { login } from '../../actions';
 import Utils from '../../utils';
 import { utils } from "redux-saga";
+import Config from 'react-native-config';
 
+const host = Config.API_URL;
+console.log(host);
 const resetAction = NavigationActions.reset({
   index: 0,
   actions: [
