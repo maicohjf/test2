@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import { Dimensions, View, Image, StyleSheet, TextInput, Button, Text, TouchableOpacity } from "react-native";
 import { login } from '../../actions';
+import Utils from '../../utils';
+import { utils } from "redux-saga";
 
 const resetAction = NavigationActions.reset({
   index: 0,
@@ -83,6 +85,12 @@ class LoginComponent extends React.Component {
     });
   }
 
+  handleGetSmsCode() {
+    if (Utils.isPhoneNumValid(this.state.phone)) {
+
+    }
+  }
+
   formatPhone(phone) {
     let value = phone;
     if (phone && phone.length > 7) {
@@ -153,9 +161,9 @@ class LoginComponent extends React.Component {
               }
             </View>
             <TouchableOpacity onPress={() => {
-              this.handleLogin();
+              this.handleGetSmsCode();
             }}>
-              <View style={styles.smsCodeBtn}>
+              <View style={Utils.isPhoneNumValid(this.state.phone) ? [styles.smsCodeBtn, styles.smsCodeBtnActive] : styles.smsCodeBtn}>
                 <Text style={{fontSize:12, color:'#fff'}}>获取验证码</Text>
               </View>
             </TouchableOpacity>
@@ -247,6 +255,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
     borderRadius: 4,
     alignSelf: 'flex-end',
+  },
+  smsCodeBtnActive: {
+    backgroundColor: '#049bff',
   },
   notice: {
     marginTop: 15,
