@@ -53,18 +53,49 @@ class LoginComponent extends React.Component {
   }
 
   handleSPhoneChange(phone) {
+    let formatedPhone = phone.replace(/\s+/g,'');
+    const re = /^1\d{0,10}$/;
+    const prePhone = this.state.phone;
+    if (formatedPhone == prePhone || !re.test(formatedPhone)) {
+      formatedPhone = prePhone;
+    };
+    // console.log(formatedPhone);
     this.setState({
-      phone: phone,
-    })
+      phone: formatedPhone,
+    });
   }
 
   handleSmsCodeChange(smsCode) {
     this.setState({
       smsCode: smsCode,
-    })
+    });
+  }
+
+  handleClearPhone() {
+    this.setState({
+      phone: '',
+    });
+  }
+
+  handleClearSmsCode() {
+    this.setState({
+      smsCode: '',
+    });
+  }
+
+  formatPhone(phone) {
+    let value = phone;
+    if (phone && phone.length > 7) {
+      value = `${phone.substring(0, 3)} ${phone.substring(3, 7)} ${phone.substring(7, phone.length)}`;
+    } else if (phone && phone.length > 3 && phone.length <= 7) {
+      value = `${phone.substring(0, 3)} ${phone.substring(3, phone.length)}`;
+    }
+    // console.log(value);
+    return value;
   }
 
   render() {
+    console.log(this.state.phone);
     return (
       <View style={styles.loginContainer}>
           <Image
@@ -73,26 +104,53 @@ class LoginComponent extends React.Component {
           />
           <View style={[styles.phoneRow, styles.loginBorder]}>
             <Image
-              source={require("./img/icon-phone.png")}
+              source={!this.state.phone ? require("./img/icon-phone.png") : require("./img/icon-phone-active.png") }
               style={styles.inputIcon}
             />
             <TextInput
               onChangeText={text => this.handleSPhoneChange(text)}
-              style={styles.loginInput}
+              value={this.formatPhone(this.state.phone)}
+              style={[styles.loginInput, styles.phoneInput]}
+              maxLength={13}
+              keyboardType="numeric"
               placeholder="请输入手机号码"
             />
+            {
+              this.state.phone &&
+              <TouchableOpacity onPress={() => {
+                this.handleClearPhone();
+              }}>
+                <Image
+                  source={require("./img/icon-delete.png") }
+                  style={styles.deleteIcon}
+                />
+              </TouchableOpacity>
+            }
           </View>
           <View style={styles.smsCodeRow}>
             <View style={[styles.smsCode, styles.loginBorder]}>
               <Image
-                source={require("./img/icon-verifying.png")}
+                source={!this.state.smsCode ? require("./img/icon-verifying.png") : require("./img/icon-verifying-active.png") }
                 style={styles.inputIcon}
               />
               <TextInput
-                style={styles.loginInput}
+                style={[styles.loginInput, styles.smsCodeInput]}
                 onChangeText={text => this.handleSmsCodeChange(text)}
+                value={this.state.smsCode}
+                maxLength={6}
                 placeholder="请输入验证码"
               />
+              {
+                this.state.smsCode &&
+                <TouchableOpacity onPress={() => {
+                  this.handleClearSmsCode();
+                }}>
+                  <Image
+                    source={require("./img/icon-delete.png") }
+                    style={styles.deleteIcon}
+                  />
+                </TouchableOpacity>
+              }
             </View>
             <TouchableOpacity onPress={() => {
               this.handleLogin();
@@ -137,7 +195,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#e5e5e5"
   },
   phoneRow: {
-    alignSelf: 'stretch',
+    width: Dimensions.get('window').width,
     flexDirection:"row",
     alignItems: "center",
   },
@@ -170,9 +228,20 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     fontSize: 16,
   },
+  phoneInput: {
+    width: 210,
+  },
+  smsCodeInput: {
+    width: 140,
+  },
+  deleteIcon: {
+    width: 15,
+    height: 15,
+  },
   smsCodeBtn: {
     width: 90,
     height: 30,
+    marginRight: 15,
     alignItems: "center",
     justifyContent: 'center',
     backgroundColor: '#ccc',
