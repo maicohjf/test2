@@ -20,7 +20,7 @@ export default class TabBar extends Component {
     return (
         <TouchableOpacity onPress={() => onPressHandler(page)} style={styles.tabInnerContainer} key={page}>
           <View style={styles.tab}>
-            <Image source={isTabActive ? icons[page].selected : icons[page].normal}
+            <Image source={isTabActive ? icons[page % 3].selected : icons[page % 3].normal}
                    style={isTabActive ? styles.tabIconSelected : styles.tabIcon}/>
             {!isTabActive && <Text style={styles.tabText}>{name}</Text>}
           </View>

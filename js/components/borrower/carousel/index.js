@@ -39,12 +39,17 @@ const ENTRIES1 = [
 const IS_IOS = Platform.OS === 'ios';
 const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
 
-const slideHeight = 120 * viewportWidth / 375;
-const slideWidth = 335;
-const itemHorizontalMargin = 5;
+function wp(percentage) {
+  const value = (percentage * viewportWidth) / 100;
+  return Math.round(value);
+}
+
+const slideHeight = viewportHeight * 0.18;
+const slideWidth = wp(82);
+const itemHorizontalMargin = wp(3);
 
 export const sliderWidth = viewportWidth;
-export const itemWidth = slideWidth + itemHorizontalMargin * 4;
+export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 const entryBorderRadius = 5;
 
@@ -56,7 +61,7 @@ export default class SnapCarousel extends Component {
   _renderItem({item, index}) {
     return (
         <TouchableOpacity activeOpacity={1} style={styles.slideInnerContainer} onPress={() => {
-          alert(`You've clicked '${viewportWidth / 375}'`);
+          alert(`You've clicked '${item.title}'`);
         }}>
           <View style={styles.imageContainer}>
             <Image
@@ -93,15 +98,11 @@ const styles = StyleSheet.create({
     marginBottom: IS_IOS ? 0 : -1, // Prevent a random Android rendering issue
     backgroundColor: 'white',
     borderRadius: entryBorderRadius,
-    // borderTopLeftRadius: entryBorderRadius,
-    // borderTopRightRadius: entryBorderRadius
   },
   image: {
     ...StyleSheet.absoluteFillObject,
     resizeMode: 'cover',
     flex: 1,
     borderRadius: entryBorderRadius,
-    // borderTopLeftRadius: entryBorderRadius,
-    // borderTopRightRadius: entryBorderRadius
   },
 });

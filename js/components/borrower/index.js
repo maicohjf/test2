@@ -1,7 +1,7 @@
 "use strict";
 
 import React from "react";
-import {View, Image, Text, StyleSheet} from "react-native";
+import {View, Image, Text, StyleSheet, TouchableOpacity} from "react-native";
 import SnapCarousel from './carousel'
 import CreditCard from './credit'
 
@@ -53,6 +53,16 @@ class BorrowerHomeComponent extends React.Component {
           </View>
 
           <CreditCard />
+
+          <View style={styles.bottomContainer}>
+            <TouchableOpacity onPress={() => {
+              alert("我要借款")
+            }}>
+              <View style={styles.btn}>
+                <Text style={{fontSize: 16, color: '#fff'}}>我要借款</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
     );
   }
@@ -134,6 +144,19 @@ const styles = StyleSheet.create({
   },
   noticeStrong: {
     color: '#388BED'
+  },
+  bottomContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btn: {
+    width: 320,
+    height: 44,
+    backgroundColor: '#049bff',
+    alignItems: "center",
+    justifyContent: 'center',
+    borderRadius: 50,
   }
 });
 
