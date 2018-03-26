@@ -1,69 +1,71 @@
 "use strict";
 
 import React from "react";
-import {View, Image, Text, StyleSheet, TouchableOpacity} from "react-native";
-import SnapCarousel from './carousel'
-import CreditCard from './credit'
+import {View, Image, Text, StyleSheet, TouchableOpacity, Alert, ScrollView} from "react-native";
+import SnapCarouselComponent from './carousel'
+import CreditCardComponent from './credit'
 
 class BorrowerHomeComponent extends React.Component {
   render() {
     return (
-        <View style={styles.container}>
-          <View style={styles.banner}>
-            <SnapCarousel />
-          </View>
-
-          <View style={styles.nav}>
-            <View style={styles.navView}>
-              <Image
-                  source={require("./img/about.png")}
-                  style={styles.navIcon}
-              />
-              <View style={styles.navIconShaw}/>
-              <Text style={styles.navText}>关于我们</Text>
+        <ScrollView style={{flex: 1}}>
+          <View style={styles.container}>
+            <View style={styles.banner}>
+              <SnapCarouselComponent />
             </View>
-            <View style={[styles.navView, styles.navPromote]}>
-              <Image
-                  source={require("./img/promote.png")}
-                  style={styles.navIcon}
-              />
-              <Image
-                  source={require("./img/promote-tip.png")}
-                  style={styles.navTipIcon}
-              />
-              <View style={styles.navIconShaw}/>
-              <Text style={styles.navText}>提升额度</Text>
-            </View>
-            <View style={styles.navView}>
-              <Image
-                  source={require("./img/invite.png")}
-                  style={styles.navIcon}
-              />
-              <View style={styles.navIconShaw}/>
-              <Text style={styles.navText}>邀好友</Text>
-            </View>
-          </View>
 
-          <View style={styles.notice}>
-            <Image
-                source={require("./img/notice-icon.png")}
-                style={styles.noticeIcon}
-            />
-            <Text style={styles.noticeText}>来自上海的李女士，成功借款<Text style={styles.noticeStrong}>4000</Text>元。</Text>
-          </View>
-
-          <CreditCard />
-
-          <View style={styles.bottomContainer}>
-            <TouchableOpacity onPress={() => {
-              alert("我要借款")
-            }}>
-              <View style={styles.btn}>
-                <Text style={{fontSize: 16, color: '#fff'}}>我要借款</Text>
+            <View style={styles.nav}>
+              <View style={styles.navView}>
+                <Image
+                    source={require("./img/about.png")}
+                    style={styles.navIcon}
+                />
+                <View style={styles.navIconShaw}/>
+                <Text style={styles.navText}>关于我们</Text>
               </View>
-            </TouchableOpacity>
+              <View style={[styles.navView, styles.navPromote]}>
+                <Image
+                    source={require("./img/promote.png")}
+                    style={styles.navIcon}
+                />
+                <Image
+                    source={require("./img/promote-tip.png")}
+                    style={styles.navTipIcon}
+                />
+                <View style={styles.navIconShaw}/>
+                <Text style={styles.navText}>提升额度</Text>
+              </View>
+              <View style={styles.navView}>
+                <Image
+                    source={require("./img/invite.png")}
+                    style={styles.navIcon}
+                />
+                <View style={styles.navIconShaw}/>
+                <Text style={styles.navText}>邀好友</Text>
+              </View>
+            </View>
+
+            <View style={styles.notice}>
+              <Image
+                  source={require("./img/notice-icon.png")}
+                  style={styles.noticeIcon}
+              />
+              <Text style={styles.noticeText}>来自上海的李女士，成功借款<Text style={styles.noticeStrong}>4000</Text>元。</Text>
+            </View>
+
+            <CreditCardComponent/>
+
+            <View style={styles.bottomContainer}>
+              <TouchableOpacity onPress={() => {
+                Alert.alert("我要借款")
+              }}>
+                <View style={styles.btn}>
+                  <Text style={{fontSize: 16, color: '#fff'}}>我要借款</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        </ScrollView>
     );
   }
 }

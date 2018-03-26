@@ -56,7 +56,7 @@ const entryBorderRadius = 5;
 /**
  * 走马灯效果组件
  */
-export default class SnapCarousel extends Component {
+export default class SnapCarouselComponent extends Component {
 
   _renderItem({item, index}) {
     return (

@@ -108,7 +108,7 @@ class LoginComponent extends React.Component {
         isCounting: true,
         countdown: this.state.countdown - 1,
       });
-      setTimeout(() => {  
+      setTimeout(() => {
         this.setTimer();
       }, 1000);
     }
@@ -150,7 +150,7 @@ class LoginComponent extends React.Component {
             placeholder="请输入手机号码"
           />
           {/* {
-            this.state.phone &&
+            this.state.phone ?
             <TouchableOpacity onPress={() => {
               this.handleClearPhone();
             }}>
@@ -158,7 +158,7 @@ class LoginComponent extends React.Component {
                 source={require("./img/icon-delete.png") }
                 style={styles.deleteIcon}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> : null
           } */}
         </View>
         <View style={styles.smsCodeRow}>
@@ -175,7 +175,7 @@ class LoginComponent extends React.Component {
               placeholder="请输入验证码"
             />
             {/* {
-              this.state.smsCode &&
+              this.state.smsCode ?
               <TouchableOpacity onPress={() => {
                 this.handleClearSmsCode();
               }}>
@@ -183,7 +183,7 @@ class LoginComponent extends React.Component {
                   source={require("./img/icon-delete.png") }
                   style={styles.deleteIcon}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> : null
             } */}
           </View>
           <TouchableOpacity onPress={() => {
@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   }
 });
-  
+
 /* exports ================================================================== */
 function mapStateToProps({ auth, common }) {
   return {
