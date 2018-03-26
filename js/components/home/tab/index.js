@@ -18,7 +18,7 @@ export default class TabBar extends Component {
 
   renderTab(name, page, isTabActive, onPressHandler) {
     return (
-        <TouchableOpacity onPress={() => onPressHandler(page)} style={styles.tabInnerContainer} key={page}>
+        <TouchableOpacity activeOpacity={1} onPress={() => onPressHandler(page)} style={styles.tabInnerContainer} key={page}>
           <View style={styles.tab}>
             <Image source={isTabActive ? icons[page % 3].selected : icons[page % 3].normal}
                    style={isTabActive ? styles.tabIconSelected : styles.tabIcon}/>
@@ -42,7 +42,7 @@ export default class TabBar extends Component {
   }
 }
 
-//本地icon list
+//本地tab icon list
 const icons = [
   {selected: require('../img/tab-woyaojiekuan-s.png'), normal: require('../img/tab-woyaojiekuan.png')},
   {selected: require('../img/tab-woyaotouzi-s.png'), normal: require('../img/tab-woyaotouzi.png')},

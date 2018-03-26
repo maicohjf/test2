@@ -1,0 +1,199 @@
+/**
+ * 借款信息--录入
+ * Created by liyanxi on 3/26/18.
+ */
+"use strict";
+
+import React, {Component} from "react";
+import {View, StyleSheet, Text, TextInput, Image, TouchableOpacity, Alert, PixelRatio} from 'react-native';
+import {Button} from 'native-base'
+
+export default class PublishBorrowInfoComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      identity: '',
+      amount: '',
+      deadline: '',
+      rate: '',
+      isRateFocus: false,
+      loanTime: '',
+      loanPurpose: '',
+      loanCity: '上海市'
+    }
+  }
+
+  handleCompleted() {
+    return this.state.amount
+  }
+
+  render() {
+    return (
+        <View style={styles.borrowInfoContainer}>
+          <View style={styles.infoRow}>
+            <Text style={styles.leftTextName}>个人身份</Text>
+            <TouchableOpacity style={styles.rightContainer} activeOpacity={1} onPress={() => {
+              Alert.alert('选择身份')
+            }}>
+              <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.identity}/>
+              <Image source={require('./img/arrownext_icon.png')} style={styles.rightArrowIcon}/>
+            </TouchableOpacity>
+            <View style={styles.horizontalLine}/>
+          </View>
+
+          <View style={styles.infoRow}>
+            <Text style={styles.leftTextName}>贷款金额（元）</Text>
+            <View style={styles.rightContainer}>
+              <TextInput placeholder={'1000-20万'} style={styles.rightText} maxLength={6} value={this.state.amount}
+                         onChangeText={text => this.setState({amount: text})} keyboardType='numeric'
+                         underlineColorAndroid='transparent'/>
+              {this.state.amount ? <TouchableOpacity activeOpacity={1} onPress={() => this.setState({amount: ''})}>
+                <Image source={require('./img/delete.png')} style={styles.rightDeleteIcon}/>
+              </TouchableOpacity> : null}
+            </View>
+            <View style={styles.horizontalLine}/>
+          </View>
+
+          <View style={styles.infoRow}>
+            <Text style={styles.leftTextName}>贷款期限（月）</Text>
+            <View style={styles.rightContainer}>
+              <TextInput placeholder={'1-24个月'} style={styles.rightText} maxLength={2} value={this.state.deadline}
+                         onChangeText={text => this.setState({deadline: text})} keyboardType='numeric'
+                         underlineColorAndroid='transparent'/>
+              {this.state.deadline ? <TouchableOpacity activeOpacity={1} onPress={() => this.setState({deadline: ''})}>
+                <Image source={require('./img/delete.png')} style={styles.rightDeleteIcon}/>
+              </TouchableOpacity> : null}
+            </View>
+            <View style={styles.horizontalLine}/>
+          </View>
+
+          <View style={styles.infoRow}>
+            <Text style={styles.leftTextName}>年化利率</Text>
+            <View style={styles.rightContainer}>
+              <TextInput placeholder={'10-36'} style={styles.rightText} maxLength={2} value={this.state.rate}
+                         onChangeText={text => this.setState({rate: text})} keyboardType='numeric'
+                         onBlur={() => this.setState({isRateFocus: false})}
+                         onFocus={() => this.setState({isRateFocus: true})}
+                         underlineColorAndroid='transparent'/>
+              <Text style={{color: this.state.isRateFocus ? '#000' : '#CCC', marginLeft: 2}}>%</Text>
+            </View>
+            <View style={styles.horizontalLine}/>
+          </View>
+
+          <View style={styles.infoRow}>
+            <Text style={styles.leftTextName}>期望放款时间</Text>
+            <TouchableOpacity style={styles.rightContainer} activeOpacity={1} onPress={() => {
+              Alert.alert('选择放款时间')
+            }}>
+              <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.loanTime}/>
+              <Image source={require('./img/arrownext_icon.png')} style={styles.rightArrowIcon}/>
+            </TouchableOpacity>
+            <View style={styles.horizontalLine}/>
+          </View>
+
+          <View style={styles.infoRow}>
+            <Text style={styles.leftTextName}>贷款用途</Text>
+            <TouchableOpacity style={styles.rightContainer} activeOpacity={1} onPress={() => {
+              Alert.alert('选择贷款用途')
+            }}>
+              <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.loanPurpose}/>
+              <Image source={require('./img/arrownext_icon.png')} style={styles.rightArrowIcon}/>
+            </TouchableOpacity>
+            <View style={styles.horizontalLine}/>
+          </View>
+
+          <View style={styles.infoRow}>
+            <Text style={styles.leftTextName}>贷款城市</Text>
+            <TouchableOpacity style={styles.rightContainer} activeOpacity={1} onPress={() => {
+              Alert.alert('选择贷款城市')
+            }}>
+              <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.loanCity}/>
+              <Image source={require('./img/arrownext_icon.png')} style={styles.rightArrowIcon}/>
+            </TouchableOpacity>
+            <View style={styles.horizontalLine}/>
+          </View>
+
+          <View>
+            <Button disabled={!this.handleCompleted()}
+                    style={[styles.btn, !this.handleCompleted() ? styles.btnBlur : '']}
+                    onPress={() => {
+                      Alert.alert("发布")
+                    }}><Text style={{fontSize: 16, color: '#fff'}}>发布</Text></Button>
+          </View>
+        </View>
+    );
+  }
+}
+
+
+PublishBorrowInfoComponent.navigationOptions = {
+  title: '借款信息',
+};
+
+
+const styles = StyleSheet.create({
+  borrowInfoContainer: {
+    flex: 1,
+    backgroundColor: '#F4F7F9',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  infoRow: {
+    minHeight: 44,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    paddingLeft: 15,
+    paddingRight: 15,
+  },
+  leftTextName: {
+    color: '#666666',
+    fontSize: 15,
+  },
+  rightContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1
+  },
+  rightText: {
+    fontSize: 15,
+    color: '#000000',
+    flex: 1,
+    textAlign: 'right',
+    padding: 0,
+  },
+  rightArrowIcon: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain'
+  },
+  rightDeleteIcon: {
+    width: 15,
+    height: 15,
+    resizeMode: 'contain',
+    marginLeft: 15,
+  },
+  horizontalLine: {
+    backgroundColor: '#000000',
+    opacity: 0.1,
+    height: 1 / PixelRatio.get(),
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    marginLeft: 15
+  },
+  btn: {
+    width: 320,
+    height: 44,
+    backgroundColor: '#049bff',
+    alignItems: "center",
+    justifyContent: 'center',
+    borderRadius: 50,
+    marginTop: 40
+  },
+  btnBlur: {
+    backgroundColor: '#DADADA',
+  }
+});

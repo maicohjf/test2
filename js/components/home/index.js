@@ -17,7 +17,7 @@ class HomeComponent extends React.Component {
             tabBarPosition="bottom"
             renderTabBar={() => <TabBar />}
         >
-          <Borrower tabLabel="我要借款" tabIcon=""/>
+          <Borrower tabLabel="我要借款"/>
           <Investor tabLabel="我要投资"/>
           <Profile tabLabel="个人中心"/>
         </ScrollableTabView>
