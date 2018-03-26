@@ -5,7 +5,7 @@
 "use strict";
 
 import React, {Component} from "react";
-import {View, StyleSheet, Text, TextInput, Image, TouchableOpacity, Alert, PixelRatio} from 'react-native';
+import {View, StyleSheet, Text, TextInput, Image, TouchableOpacity, Alert, PixelRatio, Platform} from 'react-native';
 import {Button} from 'native-base'
 
 export default class PublishBorrowInfoComponent extends React.Component {
@@ -35,7 +35,8 @@ export default class PublishBorrowInfoComponent extends React.Component {
             <TouchableOpacity style={styles.rightContainer} activeOpacity={1} onPress={() => {
               Alert.alert('选择身份')
             }}>
-              <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.identity}/>
+              <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.identity}
+                         underlineColorAndroid={'transparent'}/>
               <Image source={require('./img/arrownext_icon.png')} style={styles.rightArrowIcon}/>
             </TouchableOpacity>
             <View style={styles.horizontalLine}/>
@@ -46,7 +47,7 @@ export default class PublishBorrowInfoComponent extends React.Component {
             <View style={styles.rightContainer}>
               <TextInput placeholder={'1000-20万'} style={styles.rightText} maxLength={6} value={this.state.amount}
                          onChangeText={text => this.setState({amount: text})} keyboardType='numeric'
-                         underlineColorAndroid='transparent'/>
+                         underlineColorAndroid={'transparent'} />
               {this.state.amount ? <TouchableOpacity activeOpacity={1} onPress={() => this.setState({amount: ''})}>
                 <Image source={require('./img/delete.png')} style={styles.rightDeleteIcon}/>
               </TouchableOpacity> : null}
@@ -59,7 +60,7 @@ export default class PublishBorrowInfoComponent extends React.Component {
             <View style={styles.rightContainer}>
               <TextInput placeholder={'1-24个月'} style={styles.rightText} maxLength={2} value={this.state.deadline}
                          onChangeText={text => this.setState({deadline: text})} keyboardType='numeric'
-                         underlineColorAndroid='transparent'/>
+                         underlineColorAndroid={'transparent'}/>
               {this.state.deadline ? <TouchableOpacity activeOpacity={1} onPress={() => this.setState({deadline: ''})}>
                 <Image source={require('./img/delete.png')} style={styles.rightDeleteIcon}/>
               </TouchableOpacity> : null}
@@ -74,8 +75,8 @@ export default class PublishBorrowInfoComponent extends React.Component {
                          onChangeText={text => this.setState({rate: text})} keyboardType='numeric'
                          onBlur={() => this.setState({isRateFocus: false})}
                          onFocus={() => this.setState({isRateFocus: true})}
-                         underlineColorAndroid='transparent'/>
-              <Text style={{color: this.state.isRateFocus ? '#000' : '#CCC', marginLeft: 2}}>%</Text>
+                         underlineColorAndroid={'transparent'}/>
+              <Text style={{color: this.state.rate || this.state.isRateFocus ? '#000' : '#CCC', marginLeft: 2}}>%</Text>
             </View>
             <View style={styles.horizontalLine}/>
           </View>
@@ -85,7 +86,8 @@ export default class PublishBorrowInfoComponent extends React.Component {
             <TouchableOpacity style={styles.rightContainer} activeOpacity={1} onPress={() => {
               Alert.alert('选择放款时间')
             }}>
-              <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.loanTime}/>
+              <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.loanTime}
+                         underlineColorAndroid={'transparent'}/>
               <Image source={require('./img/arrownext_icon.png')} style={styles.rightArrowIcon}/>
             </TouchableOpacity>
             <View style={styles.horizontalLine}/>
@@ -96,7 +98,8 @@ export default class PublishBorrowInfoComponent extends React.Component {
             <TouchableOpacity style={styles.rightContainer} activeOpacity={1} onPress={() => {
               Alert.alert('选择贷款用途')
             }}>
-              <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.loanPurpose}/>
+              <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.loanPurpose}
+                         underlineColorAndroid={'transparent'}/>
               <Image source={require('./img/arrownext_icon.png')} style={styles.rightArrowIcon}/>
             </TouchableOpacity>
             <View style={styles.horizontalLine}/>
@@ -107,7 +110,8 @@ export default class PublishBorrowInfoComponent extends React.Component {
             <TouchableOpacity style={styles.rightContainer} activeOpacity={1} onPress={() => {
               Alert.alert('选择贷款城市')
             }}>
-              <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.loanCity}/>
+              <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.loanCity}
+                         underlineColorAndroid={'transparent'}/>
               <Image source={require('./img/arrownext_icon.png')} style={styles.rightArrowIcon}/>
             </TouchableOpacity>
             <View style={styles.horizontalLine}/>
