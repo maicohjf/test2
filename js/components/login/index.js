@@ -149,7 +149,7 @@ class LoginComponent extends React.Component {
             keyboardType="numeric"
             placeholder="请输入手机号码"
           />
-          {
+          {/* {
             this.state.phone &&
             <TouchableOpacity onPress={() => {
               this.handleClearPhone();
@@ -159,7 +159,7 @@ class LoginComponent extends React.Component {
                 style={styles.deleteIcon}
               />
             </TouchableOpacity>
-          }
+          } */}
         </View>
         <View style={styles.smsCodeRow}>
           <View style={[styles.smsCode, styles.loginBorder]}>
@@ -174,7 +174,7 @@ class LoginComponent extends React.Component {
               maxLength={6}
               placeholder="请输入验证码"
             />
-            {
+            {/* {
               this.state.smsCode &&
               <TouchableOpacity onPress={() => {
                 this.handleClearSmsCode();
@@ -184,7 +184,7 @@ class LoginComponent extends React.Component {
                   style={styles.deleteIcon}
                 />
               </TouchableOpacity>
-            }
+            } */}
           </View>
           <TouchableOpacity onPress={() => {
             this.handleGetSmsCode();
