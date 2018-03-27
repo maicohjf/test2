@@ -148,6 +148,7 @@ class LoginComponent extends React.Component {
             maxLength={13}
             keyboardType="numeric"
             placeholder="请输入手机号码"
+            underlineColorAndroid={'transparent'}
           />
           {
             this.state.phone ?
@@ -173,6 +174,7 @@ class LoginComponent extends React.Component {
               value={this.state.smsCode}
               maxLength={6}
               placeholder="请输入验证码"
+              underlineColorAndroid={'transparent'}
             />
             {
               this.state.smsCode ?

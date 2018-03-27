@@ -6,9 +6,14 @@ import SnapCarouselComponent from './carousel'
 import CreditCardComponent from './credit'
 
 class BorrowerHomeComponent extends React.Component {
+
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     return (
-        <ScrollView style={{flex: 1}}>
+        <ScrollView contentContainerStyle={{flex: 1}}>
           <View style={styles.container}>
             <View style={styles.banner}>
               <SnapCarouselComponent />
@@ -57,7 +62,7 @@ class BorrowerHomeComponent extends React.Component {
 
             <View style={styles.bottomContainer}>
               <TouchableOpacity onPress={() => {
-                Alert.alert("我要借款")
+
               }}>
                 <View style={styles.btn}>
                   <Text style={{fontSize: 16, color: '#fff'}}>我要借款</Text>
