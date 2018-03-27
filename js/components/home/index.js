@@ -8,6 +8,7 @@ import TabBar from './tab'
 import Borrower from '../borrower';
 import Investor from '../investor';
 import Profile from '../profile';
+import Contract from '../contract'
 
 class HomeComponent extends React.Component {
 
@@ -19,7 +20,7 @@ class HomeComponent extends React.Component {
         >
           <Borrower tabLabel="我要借款"/>
           <Investor tabLabel="我要投资"/>
-          <Profile tabLabel="个人中心"/>
+          <Contract tabLabel="个人中心"/>
         </ScrollableTabView>
     );
   }
