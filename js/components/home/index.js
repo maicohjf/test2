@@ -20,7 +20,7 @@ class HomeComponent extends React.Component {
         >
           <Borrower tabLabel="我要借款"/>
           <Investor tabLabel="我要投资"/>
-          <Message tabLabel="我的消息"/>
+          <Profile tabLabel="个人中心"/>
         </ScrollableTabView>
     );
   }
