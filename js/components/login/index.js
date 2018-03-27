@@ -8,7 +8,10 @@ import { Spinner } from 'native-base';
 import { login } from '../../actions';
 import Utils from '../../utils';
 import { utils } from "redux-saga";
+import Config from 'react-native-config';
 
+const host = Config.API_URL;
+console.log(host);
 const resetAction = NavigationActions.reset({
   index: 0,
   actions: [
@@ -105,7 +108,7 @@ class LoginComponent extends React.Component {
         isCounting: true,
         countdown: this.state.countdown - 1,
       });
-      setTimeout(() => {  
+      setTimeout(() => {
         this.setTimer();
       }, 1000);
     }
@@ -145,9 +148,10 @@ class LoginComponent extends React.Component {
             maxLength={13}
             keyboardType="numeric"
             placeholder="请输入手机号码"
+            underlineColorAndroid={'transparent'}
           />
           {
-            this.state.phone &&
+            this.state.phone ?
             <TouchableOpacity onPress={() => {
               this.handleClearPhone();
             }}>
@@ -155,7 +159,7 @@ class LoginComponent extends React.Component {
                 source={require("./img/icon-delete.png") }
                 style={styles.deleteIcon}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> : null
           }
         </View>
         <View style={styles.smsCodeRow}>
@@ -170,9 +174,10 @@ class LoginComponent extends React.Component {
               value={this.state.smsCode}
               maxLength={6}
               placeholder="请输入验证码"
+              underlineColorAndroid={'transparent'}
             />
             {
-              this.state.smsCode &&
+              this.state.smsCode ?
               <TouchableOpacity onPress={() => {
                 this.handleClearSmsCode();
               }}>
@@ -180,7 +185,7 @@ class LoginComponent extends React.Component {
                   source={require("./img/icon-delete.png") }
                   style={styles.deleteIcon}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> : null
             }
           </View>
           <TouchableOpacity onPress={() => {
@@ -303,7 +308,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   }
 });
-  
+
 /* exports ================================================================== */
 function mapStateToProps({ auth, common }) {
   return {

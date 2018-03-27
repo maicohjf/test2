@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {Platform, View, Dimensions, StyleSheet, Image, TouchableOpacity, PixelRatio, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default class CreditCard extends Component {
+export default class CreditCardComponent extends Component {
 
   render() {
     return (
@@ -26,8 +26,10 @@ export default class CreditCard extends Component {
                 <Text style={styles.creditLimitMax}>200000</Text>
                 <Text style={styles.creditLimitMin}>元</Text>
               </View>
-              <View>
-
+              <View style={styles.labels}>
+                <View style={styles.labelBg}><Text style={styles.labelText}>额度高</Text></View>
+                <View style={styles.labelBg}><Text style={styles.labelText}>权益多</Text></View>
+                <View style={styles.labelBg}><Text style={styles.labelText}>定制私人借款方案</Text></View>
               </View>
             </View>
           </LinearGradient>
@@ -42,10 +44,10 @@ const colors = {
 };
 const styles = StyleSheet.create({
   creditCard: {
-    shadowOffset: {width: 0, height: 2},
-    shadowColor: '#000000',
-    shadowOpacity: 0.2,
-    elevation: 2
+    // shadowOffset: {width: 0, height: 2},
+    // shadowColor: '#000000',
+    // shadowOpacity: 0.2,
+    elevation: 2,
   },
   gradient: {
     minHeight: 189,
@@ -97,6 +99,26 @@ const styles = StyleSheet.create({
     fontSize: 44,
     color: '#222222',
     marginLeft: 3
+  },
+  labels: {
+    marginTop: 10,
+    minHeight: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  labelBg: {
+    borderRadius: 10,
+    borderColor: '#F5F9FF',
+    borderWidth: 2,
+    marginLeft: 10,
+    backgroundColor: '#E1ECFD'
+  },
+  labelText: {
+    fontSize: 11,
+    color: '#2493FF',
+    lineHeight: 20,
+    paddingLeft: 10,
+    paddingRight: 10
   }
-
 });
