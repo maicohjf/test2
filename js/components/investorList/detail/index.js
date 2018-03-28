@@ -7,7 +7,7 @@
 
 import React, {Component} from "react";
 import {View, StyleSheet, Text, Image, TouchableOpacity, Alert, PixelRatio, ScrollView} from 'react-native';
-
+import {Button} from 'antd-mobile'
 
 export default class InvestorInfo extends React.Component {
   constructor(props) {
@@ -22,6 +22,7 @@ export default class InvestorInfo extends React.Component {
         <View style={styles.baseInfoContainer}>
           <View style={styles.baseInfoOne}>
             <Text>对外称呼<Text>张先生</Text><Text>实名认证</Text></Text>
+            <Button title="nihao" />
           </View>
         </View>
     );
