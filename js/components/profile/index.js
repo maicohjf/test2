@@ -1,33 +1,38 @@
 "use strict";
 
 import React from "react";
-import { Dimensions, View, Image, Text, StyleSheet } from "react-native";
+import { connect } from 'react-redux';
+import { TouchableOpacity, Dimensions, View, Image, Text, StyleSheet } from "react-native";
+import { withNavigation } from 'react-navigation';
 
 class ProfileComponent extends React.Component {
   render() {
+    console.log(this.props);
     return (
       <View>
-          <Text>个人中心</Text>
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Login')}>
+          <Text>登录</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Contract')}>
+          <Text>合同</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
 ProfileComponent.navigationOptions = {
-  title: 'Profile Screen',
+  title: '个人中心',
 };
 
 /* StyleSheet =============================================================== */
 
 const styles = StyleSheet.create({
-    logo: {
-      alignItems: "center",
-      overflow: "hidden",
-      width: 100,
-      height: 50,
-      marginTop: 59,
-    },
-  });
+  item: {
+    marginBottom: 20,
+  }
+});
   
 /* exports ================================================================== */
-module.exports = ProfileComponent;
+export default connect()(withNavigation(ProfileComponent));
