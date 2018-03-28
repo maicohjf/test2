@@ -5,7 +5,7 @@
 "use strict";
 
 import React, {Component} from "react";
-import {View, StyleSheet, Text, TextInput, Image, TouchableOpacity, Alert, PixelRatio, Platform} from 'react-native';
+import {View, StyleSheet, Text, TextInput, Image, TouchableOpacity, Alert, PixelRatio} from 'react-native';
 import {Button} from 'native-base'
 
 export default class PublishBorrowInfoComponent extends React.Component {
@@ -19,12 +19,21 @@ export default class PublishBorrowInfoComponent extends React.Component {
       isRateFocus: false,
       loanTime: '',
       loanPurpose: '',
-      loanCity: '上海市'
+      loanCity: '上海市',
+      date:new Date()
     }
   }
 
   handleCompleted() {
     return this.state.amount
+  }
+
+  handlePublishBorrowInfo() {
+    // alert
+    Alert.alert("提示","为了您的资金安全，第一次借款时，需要进行借款人认证，完成后，即可发布此次借款。",[
+      {text: '取消', onPress: () => console.log('Cancel Pressed'), style: {color:'#999999'}},
+      {text: '确定', onPress: () => console.log('OK Pressed')},
+    ],{cancelable:false})
   }
 
   render() {
@@ -121,12 +130,14 @@ export default class PublishBorrowInfoComponent extends React.Component {
             <Button disabled={!this.handleCompleted()}
                     style={[styles.btn, !this.handleCompleted() ? styles.btnBlur : '']}
                     onPress={() => {
-                      Alert.alert("发布")
+                      this.handlePublishBorrowInfo()
                     }}><Text style={{fontSize: 16, color: '#fff'}}>发布</Text></Button>
           </View>
+
         </View>
     );
   }
+
 }
 
 
