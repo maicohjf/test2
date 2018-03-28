@@ -19,7 +19,7 @@ class HomeComponent extends React.Component {
         >
           <Borrower tabLabel="我要借款"/>
           <Investor tabLabel="我要投资"/>
-          <Profile tabLabel="个人中心"/>
+          <Profile tabLabel="个人中心" navigation={this.props.navigation}/>
         </ScrollableTabView>
     );
   }
