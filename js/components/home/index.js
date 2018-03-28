@@ -7,8 +7,7 @@ import TabBar from './tab'
 
 import Borrower from '../borrower';
 import Investor from '../investor';
-// import Profile from '../profile';
-import Profile from '../investorList/detail/';
+import Profile from '../profile';
 
 class HomeComponent extends React.Component {
 
