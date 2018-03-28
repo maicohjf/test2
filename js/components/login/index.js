@@ -4,7 +4,6 @@ import React from "react";
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import { Dimensions, View, Image, StyleSheet, TextInput, Button, Text, TouchableOpacity } from "react-native";
-import { Spinner } from 'native-base';
 import { login } from '../../actions';
 import Utils from '../../utils';
 import { utils } from "redux-saga";
@@ -129,9 +128,6 @@ class LoginComponent extends React.Component {
     console.log(this.props.common);
     return (
       <View style={styles.loginContainer}>
-        {
-          this.props.common.isLoading && <Spinner />
-        }
         <Image
           source={require("./img/logo.png")}
           style={styles.logo}

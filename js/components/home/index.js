@@ -8,7 +8,6 @@ import TabBar from './tab'
 import Borrower from '../borrower';
 import Investor from '../investor';
 import Profile from '../profile';
-import Message from '../message';
 
 class HomeComponent extends React.Component {
 
