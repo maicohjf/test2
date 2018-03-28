@@ -8,63 +8,118 @@ class PublishComponent extends React.Component {
 		return (
 			<View style={styles.container}>
 				<View style={styles.publish}>
-					<Image
-						source={require("./img/gerenzhongxin.png")}
-						style={styles.publishIcon}
-					/>
-					<Image
-						source={require("./img/real-name-icon.png")}
-						style={styles.realName}
-					/>
-					<View style={styles.capitalContainer}>
-						<View style={styles.capital}>
-							<Text style={styles.name}>李女士</Text>
-							<Text style={[styles.publishFont, styles.time]}>03-08 09:46</Text>
-							<View style={styles.publishBtn}>
-								<Text style={{ fontSize: 13, color: '#fff' }}>抢单中</Text>
+					<View style={styles.details}>
+						<View style={styles.headshotBg}>
+							<Image
+								source={require("./img/gerenzhongxin.png")}
+								style={styles.publishIcon}
+							/>
+						</View>
+						<Image
+							source={require("./img/real-name-icon.png")}
+							style={styles.realName}
+						/>
+						<View style={styles.capitalContainer}>
+							<View style={styles.capital}>
+								<Text style={styles.name}>李女士</Text>
+								<Text style={[styles.publishFont, styles.time]}>03-08 09:46</Text>
+								<View style={styles.publishBtn}>
+									<Text style={{ fontSize: 13, color: '#fff' }}>抢单中</Text>
+								</View>
+							</View>
+							<View style={styles.capital}>
+								<Text style={[styles.address, styles.publishFont]}>北京市</Text>
+								<Text style={[styles.addressType, styles.publishFont]}>个体户</Text>
+							</View>
+							<View style={styles.capital}>
+								<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>0.8</Text>万元</Text>
+								<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>8</Text>个月还款</Text>
+								<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>12<Text style={styles.symbol}>%</Text></Text>年化率</Text>
 							</View>
 						</View>
-						<View style={styles.capital}>
-							<Text style={[styles.address, styles.publishFont]}>北京市</Text>
-							<Text style={[styles.addressType, styles.publishFont]}>个体户</Text>
-						</View>
-						<View style={styles.capital}>
-							<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>0.8</Text>万元</Text>
-							<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>8</Text>个月还款</Text>
-							<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>12<Text style={styles.symbol}>%</Text></Text>年化率</Text>
-						</View>
 					</View>
-					<View style={styles.user}>
-						<View style={styles.user}>
-						
+					<View style={styles.asset}>
+						<View style={styles.assetLine}>
+							{/* <View> */}
+							<Text style={styles.line}>
+								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />月收入0.5万元
+							</Text>
+							<Text style={styles.line}>
+								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />无公积金
+							</Text>
+							<Text style={styles.line}>
+								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />有社保
+							</Text>
+							{/* </View> */}
+						</View>
+						<View style={styles.assetLine}>
+							<Text style={styles.line}>
+								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />无信用卡
+							</Text>
+							<Text style={styles.line}>
+								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />有房产
+							</Text>
+							<Text style={styles.line}>
+								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />有车产
+							</Text>
 						</View>
 					</View>
 				</View>
 				<View style={styles.publish}>
-					<Image
-						source={require("./img/gerenzhongxin.png")}
-						style={styles.publishIcon}
-					/>
-					<Image
-						source={require("./img/real-name-icon.png")}
-						style={styles.realName}
-					/>
-					<View style={styles.capitalContainer}>
-						<View style={styles.capital}>
-							<Text style={styles.name}>李女士</Text>
-							<Text style={[styles.publishFont, styles.time]}>03-08 09:46</Text>
-							<View style={styles.publishBtn}>
-								<Text style={{ fontSize: 13, color: '#fff' }}>抢单中</Text>
+					<View style={styles.details}>
+						<View style={styles.headshotBg}>
+							<Image
+								source={require("./img/gerenzhongxin.png")}
+								style={styles.publishIcon}
+							/>
+						</View>
+						<Image
+							source={require("./img/real-name-icon.png")}
+							style={styles.realName}
+						/>
+						<View style={styles.capitalContainer}>
+							<View style={styles.capital}>
+								<Text style={styles.name}>李女士</Text>
+								<Text style={[styles.publishFont, styles.time]}>03-08 09:46</Text>
+								<View style={styles.publishBtn}>
+									<Text style={{ fontSize: 13, color: '#fff' }}>抢单中</Text>
+								</View>
+							</View>
+							<View style={styles.capital}>
+								<Text style={[styles.address, styles.publishFont]}>北京市</Text>
+								<Text style={[styles.addressType, styles.publishFont]}>个体户</Text>
+							</View>
+							<View style={styles.capital}>
+								<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>0.8</Text>万元</Text>
+								<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>8</Text>个月还款</Text>
+								<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>12<Text style={styles.symbol}>%</Text></Text>年化率</Text>
 							</View>
 						</View>
-						<View style={styles.capital}>
-							<Text style={[styles.address, styles.publishFont]}>北京市</Text>
-							<Text style={[styles.addressType, styles.publishFont]}>个体户</Text>
+					</View>
+					<View style={styles.asset}>
+						<View style={styles.assetLine}>
+							{/* <View> */}
+							<Text style={styles.line}>
+								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />月收入0.5万元
+							</Text>
+							<Text style={styles.line}>
+								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />无公积金
+							</Text>
+							<Text style={styles.line}>
+								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />有社保
+							</Text>
+							{/* </View> */}
 						</View>
-						<View style={styles.capital}>
-							<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>0.8</Text>万元</Text>
-							<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>8</Text>个月还款</Text>
-							<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>12<Text style={styles.symbol}>%</Text></Text>年化率</Text>
+						<View style={styles.assetLine}>
+							<Text style={styles.line}>
+								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />无信用卡
+							</Text>
+							<Text style={styles.line}>
+								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />有房产
+							</Text>
+							<Text style={styles.line}>
+								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />有车产
+							</Text>
 						</View>
 					</View>
 				</View>
@@ -83,32 +138,45 @@ PublishComponent.navigationOptions = {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		margin: 10,
 	},
 	publish: {
+		height: 150,
+		backgroundColor: '#fff',
+		borderRadius: 10,
+		marginBottom: 10,
+		borderWidth: 1,
+		borderColor: '#000',
+	},
+	details: {
+		height: 90,
 		position: 'relative',
-		margin: 10,
-		paddingTop: 10,
-		paddingBottom: 5,
-		paddingRight: 15,
-		paddingLeft: 15,
 		flexDirection: 'row',
 		alignItems: 'center',
-		backgroundColor: '#fff',
-		borderTopRightRadius: 10,
-		borderTopLeftRadius: 10,
+		marginLeft: 15,
+		marginRight: 15,
+		marginTop: 10,
+		// marginBottom: 5,
+		backgroundColor: 'yellow',
 	},
 	realName: {
 		width: 34,
 		height: 13,
 		position: 'absolute',
-		top: 11.5,
+		top: 11,
 		left: 52,
+	},
+	headshotBg: {
+		width: 75,
+		height: 75,
+		alignItems: 'center',
+		backgroundColor: '#f4f7f9',
+		borderRadius: 50,
 	},
 	publishIcon: {
 		width: 70,
 		height: 70,
-		// borderWidth: 1,
-		// borderColor: '#000',
+		marginTop: 2.5,
 	},
 	capitalContainer: {
 		marginLeft: 14.5,
@@ -118,14 +186,17 @@ const styles = StyleSheet.create({
 		color: '#000',
 		lineHeight: 20,
 		height: 20,
+		marginRight: 11,
 	},
 	time: {
-		lineHeight: 15,
-		marginLeft: 11.5,
-		width: 110,
+		lineHeight: 17.5,
+		width: 125,
 		marginRight: 15,
 	},
 	publishBtn: {
+		position: 'absolute',
+		top: 0,
+		right: -20,
 		width: 60,
 		height: 25,
 		backgroundColor: '#049bff',
@@ -136,31 +207,33 @@ const styles = StyleSheet.create({
 	address: {
 		height: 15,
 		lineHeight: 15,
-		marginTop: 5,
-		marginBottom: 5,
 	},
 	addressType: {
 		height: 15,
 		lineHeight: 15,
-		marginTop: 5,
-		marginBottom: 5,
 		marginLeft: 10,
 	},
 	capital: {
-		flex: 1,
 		flexDirection: 'row',
+		alignItems: 'stretch',
+		marginBottom: 5,
+		// borderWidth: 1,
+		// borderColor: '#000',
 	},
 	ammount: {
 		fontSize: 18,
 		color: '#388BED',
+		height: 20,
+		lineHeight: 20,
 	},
 	symbol: {
 		fontSize: 13,
 	},
 	nuit: {
 		marginRight: 15,
-		lineHeight: 20,
-		height: 20,
+		lineHeight: 18.5,
+		height: 18.5,
+		alignItems: 'center',
 	},
 	publishFont: {
 		fontSize: 13,
@@ -172,7 +245,28 @@ const styles = StyleSheet.create({
 		color: '#ccc',
 		alignItems: 'center',
 		justifyContent: 'center',
-	}
+	},
+	asset: {
+		backgroundColor: '#f4f7f9',
+		borderRadius: 10,
+		borderTopRightRadius: 0,
+		paddingTop: 10,
+		// box
+	},
+	assetLine: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+	},
+	line: {
+		width: 100,
+		marginLeft: 15,
+		marginBottom: 10,
+	},
+	assetIcon: {
+		width: 24,
+		height: 24,
+	},
 });
 
 /* exports ================================================================== */
