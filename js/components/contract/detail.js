@@ -1,7 +1,7 @@
 "use strict";
 
 import React, {Component} from "react";
-import {View, Text, Image, StyleSheet, TouchableOpacity, PixelRatio} from "react-native";
+import {View, Text, Image, StyleSheet, TouchableOpacity, Button} from "react-native";
 import PropTypes from 'prop-types';
 
 export default class ContractDetailComponent extends Component {
@@ -111,6 +111,13 @@ export default class ContractDetailComponent extends Component {
 
 ContractDetailComponent.navigationOptions = {
   title: '合同详情',
+  headerRight: (
+    <Button
+      onPress={() => alert('This is a Button!')}
+      title="查看合同模版"
+      color="#388bed"
+    />
+  ),
 };
 
 /* StyleSheet =============================================================== */
