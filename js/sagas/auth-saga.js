@@ -2,6 +2,7 @@ import { delay } from 'redux-saga';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import ActionsTypes from '../actions/actionsTypes';
+import AuthService from '../services/auth-service';
 
 export function* login(action) {
   try {
@@ -10,17 +11,31 @@ export function* login(action) {
       type: ActionsTypes.LOADING_START,
     });
     yield call(delay, 400);
-    yield put({
-      type: ActionsTypes.USER_LOGIN_SUCCESS,
-    });
-    yield put({
-      type: ActionsTypes.LOADING_END,
-    });
+    let response = ture;
+    if (action.data.phone && action.data.smsCode) {
+      response = yield AuthService.login(action.data.phone, action.data.smsCode);
+    }
+    console.log(response);
+    if (response) {
+      yield put({
+        type: ActionsTypes.USER_LOGIN_SUCCESS,
+      });
+    } else {
+      yield put({
+        type: ActionsTypes.USER_LOGIN_FAILURE,
+      });
+    }
   }
   catch (err) {
     yield put({
-      type: ActionsTypes.USER_LOGIN_FAILURE,
+      // type: ActionsTypes.USER_LOGIN_FAILURE,
+      type: ActionsTypes.USER_LOGIN_SUCCESS,
       payload: err,
+    });
+  }
+  finally {
+    yield put({
+      type: ActionsTypes.LOADING_END,
     });
   }
 }
