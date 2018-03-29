@@ -1,15 +1,51 @@
 "use strict";
 
 import React from "react";
-import { Dimensions, View, Image, Text, StyleSheet, Picker, TextInput } from "react-native";
-import { PickerComponent } from "./picker";
+import { Dimensions, View, Image, Text, StyleSheet, TextInput } from "react-native";
+// import { PickerComponent } from "./picker";
+import { Picker, List, WhiteSpace, InputItem, Button, Checkbox, Flex } from 'antd-mobile';
+import { district, provinceLite } from 'antd-mobile-demo-data';
+// let IndexStyle = require('antd-mobile/lib/picker/style/index.native.js');
+import PickerStyle from 'antd-mobile/lib/picker/style/index.native';
+import InputItemStyle from 'antd-mobile/lib/input-item/style/index.native';
+const AgreeItem = Checkbox.AgreeItem;
+// alert(JSON.stringify(InputItemStyle.input.fontSize))
+// IndexStyle.headerItem.height = '10';
+// var newStyle2 = {
+//   ...InputItemStyle,
+//   input: {
+//     ...InputItemStyle.input,
+//     fontSize: 30,
+//     // height: 20,
+//   }
+// }
+
+// var newStyle1 = {
+//   ...PickerStyle,
+//   title: {
+//     ...PickerStyle.title,
+//     color: '#fff',
+//   }
+// }
+
+// alert(JSON.stringify(newStyle1))
+
 class optionComponent extends React.Component {
   render() {
-    console.log('wwwww', PickerComponent)
     return (
       <View>
-        <PickerComponent></PickerComponent>
-        {/* <View style={styles.top}>
+        {/* <Picker data={district} cols={1}>
+          <List.Item arrow="horizontal">Single</List.Item>
+        </Picker> */}
+        {/* <InputItem
+            type='money'
+            placeholder="start from right"
+            clear
+            onChange={(v) => { console.log('onChange', v); }}
+            onBlur={(v) => { console.log('onBlur', v); }}
+            // styles={newStyle2} 
+        >光标在右</InputItem> */}
+        <View style={styles.top}>
           <Image
             style={styles.icon}
             source={require('./img/icon.png')}
@@ -23,10 +59,31 @@ class optionComponent extends React.Component {
               placeholder="1000-10万"
             />
           </View>
-          <View style={styles.listitem}>
-            <Text style={styles.label}>是否有公积金社保</Text>
+          <Picker data={district} cols={1}>
+            <List.Item arrow="horizontal">是否有公积金社保</List.Item>
+          </Picker>
+          <Picker data={district} cols={1}>
+            <List.Item arrow="horizontal">是否有信用卡</List.Item>
+          </Picker>
+          <Picker data={district} cols={1}>
+            <List.Item arrow="horizontal">名下房产情况</List.Item>
+          </Picker>
+          <Picker data={district} cols={1}>
+            <List.Item arrow="horizontal">名下车产情况</List.Item>
+          </Picker>
+          <View style={styles.surebtn}>
+            <Button type="primary" disabled>确认</Button>
           </View>
-        </View> */}
+          <View style={styles.agree}>
+            <AgreeItem data-seed="logId" onChange={e => console.log('checkbox', e)}>
+              我阅读并且同意 《***协议》
+            </AgreeItem>
+          </View>
+          {/* <View style={styles.agree}>
+              <Text>www</Text>
+          </View> */}
+
+        </View>
       </View>  
     );
   }
@@ -73,6 +130,19 @@ const styles = StyleSheet.create({
     label: {
       fontSize: 15,
       color: '#666'
+    },
+    surebtn: {
+      paddingLeft: 27.5,
+      paddingRight: 27.5,
+      marginTop: 40,
+    },
+    agree: {
+      // backgroundColor: 'red',
+      marginTop: 10,
+      // textAlign: 'center',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
     }
   });
   
