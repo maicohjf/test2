@@ -43,4 +43,7 @@ const styles = StyleSheet.create({
 });
   
 /* exports ================================================================== */
-export default connect()(withNavigation(ProfileComponent));
+const mapStateToProps = state => ({
+});
+
+export default connect(mapStateToProps)(withNavigation(ProfileComponent));

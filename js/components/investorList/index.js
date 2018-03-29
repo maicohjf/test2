@@ -6,7 +6,7 @@
 
 import React, {Component} from 'react';
 import {View, Image, Text, StyleSheet, Alert, PixelRatio} from 'react-native';
-import {Button} from 'native-base';
+import {Button} from 'antd-mobile';
 import LinearGradient from 'react-native-linear-gradient';
 
 export default class investListComponent extends React.Component {
@@ -23,7 +23,7 @@ export default class investListComponent extends React.Component {
                           endPoint={{x: 0, y: 1}}
                           style={styles.investItem}>
             <View style={styles.investLeft}>
-              <Image source={require('./img/default_avatar.png')} style={styles.avatarIcon}/>
+              <Image source={require('./img/default_avatar@3x.png')} style={styles.avatarIcon}/>
               <Image source={require('./img/icon_real_name.png')} style={styles.realNameIcon}/>
             </View>
             <View style={styles.investMiddle}>
@@ -31,14 +31,14 @@ export default class investListComponent extends React.Component {
               <Text style={[styles.investTime, styles.potential]}>他是您的潜在投资人</Text>
             </View>
             <View>
-              <Button onPress={() => Alert.alert("查看投资人信息")} style={styles.checkInfo}>
+              <Button onClick={() => Alert.alert("查看投资人信息")} style={styles.checkInfo}>
                 <Text style={styles.btnText}>查看资料</Text>
               </Button>
             </View>
           </LinearGradient>
           <View style={styles.investItem}>
             <View style={styles.investLeft}>
-              <Image source={require('./img/default_avatar.png')} style={styles.avatarIcon}/>
+              <Image source={require('./img/default_avatar@3x.png')} style={styles.avatarIcon}/>
               <Image source={require('./img/icon_real_name.png')} style={styles.realNameIcon}/>
             </View>
             <View style={styles.investMiddle}>
@@ -46,14 +46,14 @@ export default class investListComponent extends React.Component {
               <Text style={styles.investTime}>最近投资时间：02-09</Text>
             </View>
             <View>
-              <Button onPress={() => Alert.alert("查看投资人信息")} style={styles.checkInfo}>
+              <Button onClick={() => Alert.alert("查看投资人信息")} style={styles.checkInfo}>
                 <Text style={styles.btnText}>查看资料</Text>
               </Button>
             </View>
           </View>
           <View style={styles.investItem}>
             <View style={styles.investLeft}>
-              <Image source={require('./img/default_avatar.png')} style={styles.avatarIcon}/>
+              <Image source={require('./img/default_avatar@3x.png')} style={styles.avatarIcon}/>
               <Image source={require('./img/icon_real_name.png')} style={styles.realNameIcon}/>
             </View>
             <View style={styles.investMiddle}>
@@ -61,7 +61,7 @@ export default class investListComponent extends React.Component {
               <Text style={styles.investTime}>最近投资时间：02-09</Text>
             </View>
             <View>
-              <Button onPress={() => Alert.alert("查看投资人信息")} style={styles.checkInfo}>
+              <Button onClick={() => Alert.alert("查看投资人信息")} style={styles.checkInfo}>
                 <Text style={styles.btnText}>查看资料</Text>
               </Button>
             </View>

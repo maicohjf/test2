@@ -19,10 +19,14 @@ export default class ContractListComponent extends Component {
     };
   }
 
+  routeToDetail() {
+    this.props.navigation.navigate('ContractDetail');
+  }
+
   renderRow() {
     return (
     <View>
-      <ContractListItem />
+      <ContractListItem onDetail={() => {this.props.navigation.navigate('ContractDetail')}} />
     </View>
     );
   }
@@ -58,11 +62,12 @@ export default class ContractListComponent extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <View style={styles.contractListContainer}>
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow}
+          renderRow={() => this.renderRow()}
           refreshControl={
             <RefreshControl
               refreshing={this.state.isRefreshing}
