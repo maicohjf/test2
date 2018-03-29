@@ -9,6 +9,8 @@ import InvestorScreen from '../components/investor';
 import ProfileScreen from '../components/profile';
 import ContractScreen from '../components/contract';
 import ContractDetailScreen from '../components/contract/detail';
+import PublishScreen from '../components/publish';
+import MessageScreen from '../components/message';
 import { addListener } from '../utils/redux';
 
 export const AppNavigator = StackNavigator({
@@ -17,6 +19,8 @@ export const AppNavigator = StackNavigator({
   Profile: { screen: ProfileScreen },
   Contract: { screen: ContractScreen },
   ContractDetail: { screen: ContractDetailScreen },
+  Publish: { screen: PublishScreen },
+  Message: { screen: MessageScreen }
 },{
   initialRouteName: 'Home',
 });
