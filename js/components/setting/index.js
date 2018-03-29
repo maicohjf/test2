@@ -1,7 +1,7 @@
 "use strict";
 
 import React from "react";
-import { Dimensions, AppRegistry, View, Text, StyleSheet, Image, Button, Switch} from "react-native";
+import { Dimensions, AppRegistry, View, Text, StyleSheet, Image, Switch, TouchableOpacity } from "react-native";
 
 class SettingComponent extends React.Component {
 
@@ -20,13 +20,19 @@ class SettingComponent extends React.Component {
                 <View style={styles.closeNeed}>
                     <Text style={styles.settingInfo}>关闭投资需求</Text>
                     <View style={styles.switchButton}>
-                        <Switch  onTintColor='#43A4FF' thumbTintColor='#fff' value={this.state.value} 
-                            onValueChange={(value)=>{
+                        <Switch onTintColor='#43A4FF' thumbTintColor='#fff' value={this.state.value}
+                            onValueChange={(value) => {
                                 this.setState({
-                                    value:value,
-                                });}} >
+                                    value: value,
+                                });
+                            }} >
                         </Switch>
                     </View>
+                </View>
+                <View style={styles.logOut}>
+                    <TouchableOpacity style={styles.logBtn}>
+                        <Text>安全退出</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -34,7 +40,7 @@ class SettingComponent extends React.Component {
 }
 
 SettingComponent.navigationOptions = {
-    title: 'Setting Screen',
+    title: '设置',
 };
 
 /* StyleSheet ===============================================================*/
@@ -45,8 +51,8 @@ const styles = StyleSheet.create({
         marginTop: 21,
         flexDirection: 'row',
         alignItems: 'center',
-        paddingLeft:15,
-        paddingRight:15,
+        paddingLeft: 15,
+        paddingRight: 15,
         justifyContent: 'space-between',
     },
     closeNeed: {
@@ -54,24 +60,28 @@ const styles = StyleSheet.create({
         marginTop: 21,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft:15,
-        paddingRight:15,
+        paddingLeft: 15,
+        paddingRight: 15,
         alignItems: 'center',
     },
     settingInfo: {
-        // width: 300,
         height: 44,
         lineHeight: 44,
         color: '#666',
         fontSize: 15,
     },
     switchButton: {
-       width: 44,
-       height: 25,
+        width: 44,
+        height: 25,
+    },
+    logOut: {
+        height: 44,
+        backgroundColor: '#fff',
+        marginTop: 300,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });
-
-AppRegistry.registerComponent('AwesomeProject', () => FixedDimensionsBasics);
 
 /* exports ================================================================== */
 module.exports = SettingComponent;

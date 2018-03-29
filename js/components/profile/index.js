@@ -17,6 +17,10 @@ class ProfileComponent extends React.Component {
         <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Contract')}>
           <Text>合同</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Setting')}>
+          <Text>设置</Text>
+        </TouchableOpacity>
       </View>
     );
   }
