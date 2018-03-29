@@ -8,6 +8,8 @@ import TabBar from './tab'
 import Borrower from '../borrower';
 import Investor from '../investor';
 import Profile from '../profile';
+import Message from '../message';
+import Publish from '../publish';
 
 class HomeComponent extends React.Component {
 
@@ -19,7 +21,7 @@ class HomeComponent extends React.Component {
         >
           <Borrower tabLabel="我要借款"/>
           <Investor tabLabel="我要投资"/>
-          <Profile tabLabel="个人中心"/>
+          <Profile tabLabel="个人中心" navigation={this.props.navigation}/>
         </ScrollableTabView>
     );
   }

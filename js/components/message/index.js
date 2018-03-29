@@ -3,13 +3,13 @@
 import React from "react";
 import { Dimensions, View, Image, Text, StyleSheet } from "react-native";
 
-class ProfileComponent extends React.Component {
+class MessageComponent extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
 				<View style={styles.message}>
 					<Image
-						source={require("./img/activity-1-3x.png")}
+						source={require("./img/activity1.png")}
 						style={styles.messageIcon}
 					/>
 					<View style={styles.reward}>
@@ -20,7 +20,7 @@ class ProfileComponent extends React.Component {
 				</View>
 				<View style={styles.message}>
 						<Image
-							source={require("./img/activity-2-3x.png")}
+							source={require("./img/activity2.png")}
 							style={styles.messageIcon}
 						/>
 					<View style={styles.reward}>
@@ -29,13 +29,14 @@ class ProfileComponent extends React.Component {
 						<Text style={styles.rewardTime}>02-16 16:42</Text>
 					</View>
 				</View>
+				<Text style={styles.noList}>没有更多了</Text>
 			</View>
 		);
 	}
 }
 
-ProfileComponent.navigationOptions = {
-	title: 'Profile Screen',
+MessageComponent.navigationOptions = {
+	title: '我的消息',
 };
 
 /* StyleSheet =============================================================== */
@@ -79,7 +80,14 @@ const styles = StyleSheet.create({
 		lineHeight: 25,
 		height: 25,
 	},
+	noList: {
+    flex: 1,
+		fontSize: 13,
+		color: '#ccc',
+    alignItems: 'center',
+    justifyContent: 'center',
+	}
 });
 
 /* exports ================================================================== */
-module.exports = ProfileComponent;
+module.exports = MessageComponent;

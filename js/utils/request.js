@@ -1,4 +1,6 @@
 import Config from 'react-native-config';
+import Utils from './';
+import DeviceStorage from '../utils/deviceStorage';
 
 const host = Config.API_URL;
 
@@ -38,7 +40,7 @@ export function request(url, options) {
   }
 
   const headers = {
-    'Content-Type': 'x-www-form-urlencoded',
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
     ...config.headers,
   };
 
@@ -47,45 +49,38 @@ export function request(url, options) {
     method: config.method,
   };
 
-  if (params.method !== 'GET') {
-    params.body = JSON.stringify(config.payload);
+  if (params.method !== 'GET' && config.payload) {
+    params.body = Utils.jsonToQueryString(config.payload);
   }
 
   const api = `${host}${url}`;
-  console.log(api);
-  console.log(params);
-  return fetch(api, params)
-  .then(async (response) => {
-    console.log(response);
-    if (response.status > 299) {
-      const error = new ServerError(response.statusText);
-      const contentType = response.headers.get('content-type');
-
-      if (contentType && contentType.includes('x-www-form-urlencoded')) {
-        error.response = {
-          status: response.status,
-          data: await response.json(),
-        };
-      }
-      else {
-        error.response = {
-          status: response.status,
-          data: await response.text(),
-        };
-      }
-
-      throw error;
-    }
-    else {
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('x-www-form-urlencoded')) {
-        return response.json();
-      }
-
-      return response.text();
-    }
-  })
-  .catch(err => {
-    console.log(err);
+  return DeviceStorage.get('authtokenq').then(authtokenq => {
+    params.headers.authtokenq = authtokenq;
+    return fetch(api, params)
+      .then(async (response) => {
+        if (response.status > 299) {
+          const error = new ServerError(response.statusText);
+          const contentType = response.headers.get('content-type');
+    
+          if (contentType && contentType.includes('x-www-form-urlencoded')) {
+            error.response = {
+              status: response.status,
+              data: await response.json(),
+            };
+          }
+          else {
+            error.response = {
+              status: response.status,
+              data: await response.text(),
+            };
+          }
+          throw error;
+        } else {
+          return response.json();
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
 }
