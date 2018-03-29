@@ -9,7 +9,7 @@ class MessageComponent extends React.Component {
 			<View style={styles.container}>
 				<View style={styles.message}>
 					<Image
-						source={require("./img/activity-1-3x.png")}
+						source={require("./img/activity1.png")}
 						style={styles.messageIcon}
 					/>
 					<View style={styles.reward}>
@@ -20,7 +20,7 @@ class MessageComponent extends React.Component {
 				</View>
 				<View style={styles.message}>
 						<Image
-							source={require("./img/activity-2-3x.png")}
+							source={require("./img/activity2.png")}
 							style={styles.messageIcon}
 						/>
 					<View style={styles.reward}>

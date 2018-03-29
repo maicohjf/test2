@@ -141,23 +141,20 @@ const styles = StyleSheet.create({
 		margin: 10,
 	},
 	publish: {
-		height: 150,
+		// height: 150,
 		backgroundColor: '#fff',
 		borderRadius: 10,
 		marginBottom: 10,
-		borderWidth: 1,
-		borderColor: '#000',
 	},
 	details: {
-		height: 90,
+		// height: 90,
 		position: 'relative',
 		flexDirection: 'row',
 		alignItems: 'center',
 		marginLeft: 15,
 		marginRight: 15,
-		marginTop: 10,
-		// marginBottom: 5,
-		backgroundColor: 'yellow',
+		marginTop: 5,
+		marginBottom: 5,
 	},
 	realName: {
 		width: 34,
@@ -190,8 +187,6 @@ const styles = StyleSheet.create({
 	},
 	time: {
 		lineHeight: 17.5,
-		width: 125,
-		marginRight: 15,
 	},
 	publishBtn: {
 		position: 'absolute',
