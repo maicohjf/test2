@@ -16,7 +16,7 @@ class BorrowerHomeComponent extends React.Component {
 
   render() {
     return (
-        <ScrollView style={{flex: 1}}>
+        <ScrollView style={{flex: 1}} contentContainerStyle={{flex:1}}>
           <View style={styles.contentContainer}>
             <View style={styles.banner}>
               <SnapCarouselComponent />

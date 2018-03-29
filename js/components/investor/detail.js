@@ -93,7 +93,7 @@ class InvestorInfo extends React.Component {
 
   render() {
     return (
-        <ScrollView style={{flex: 1}}>
+        <ScrollView style={{flex: 1}} contentContainerStyle={{flex:1}}>
           <View style={styles.investorInfoContainer}>
             <View style={styles.investorInfoHeader}>
               <View style={styles.investorContactContainer}>
