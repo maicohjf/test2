@@ -4,14 +4,10 @@ import React from "react";
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import { Dimensions, View, Image, StyleSheet, TextInput, Button, Text, TouchableOpacity } from "react-native";
-import { Spinner } from 'native-base';
+import { ActivityIndicator, Toast } from 'antd-mobile'
 import { login } from '../../actions';
 import Utils from '../../utils';
-import { utils } from "redux-saga";
-import Config from 'react-native-config';
 
-const host = Config.API_URL;
-console.log(host);
 const resetAction = NavigationActions.reset({
   index: 0,
   actions: [
@@ -49,6 +45,9 @@ class LoginComponent extends React.Component {
       //     this.props.navigation.dispatch(resetAction);
       //   });
       this.props.navigation.dispatch(resetAction);
+    }
+    if (auth && auth.errMsg) {
+      Toast.info(auth.errMsg, 2);
     }
   }
 
@@ -125,17 +124,25 @@ class LoginComponent extends React.Component {
     return value;
   }
 
+  routeToHome() {
+    this.props.navigation.dispatch(resetAction);
+  }
+
   render() {
     console.log(this.props.common);
     return (
       <View style={styles.loginContainer}>
         {
-          this.props.common.isLoading && <Spinner />
+          this.props.common.isLoading && <ActivityIndicator />
         }
-        <Image
-          source={require("./img/logo.png")}
-          style={styles.logo}
-        />
+        <TouchableOpacity onPress={() => {
+          this.routeToHome();
+        }}>
+          <Image
+            source={require("./img/logo.png")}
+            style={styles.logo}
+          />
+        </TouchableOpacity>
         <View style={[styles.phoneRow, styles.loginBorder]}>
           <Image
             source={!this.state.phone ? require("./img/icon-phone.png") : require("./img/icon-phone-active.png") }

@@ -13,12 +13,16 @@ export default class ContractComponent extends Component {
       <ScrollableTabView
           tabBarPosition="top"
       >
-        <ContractList tabLabel="待签署"/>
-        <ContractList tabLabel="已签署"/>
+        <ContractList tabLabel="待签署" navigation={this.props.navigation} />
+        <ContractList tabLabel="已签署" navigation={this.props.navigation} />
       </ScrollableTabView>
     );
   }
 }
+
+ContractComponent.navigationOptions = {
+  title: '我的合同',
+};
 
 /* StyleSheet =============================================================== */
 

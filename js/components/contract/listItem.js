@@ -27,6 +27,7 @@ export default class ContractListItemComponent extends Component {
         <TouchableOpacity
           style={styles.btnDetailContainer}
           onPress={() => {
+            this.props.onDetail();
         }}>
           <View style={styles.btnDetail}>
             <Text style={{fontSize:15, color:'#2493ff'}}>查看详情</Text>
