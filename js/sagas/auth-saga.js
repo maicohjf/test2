@@ -3,7 +3,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import ActionsTypes from '../actions/actionsTypes';
 import AuthService from '../services/auth-service';
-
+import DeviceStorage from '../utils/deviceStorage';
 import Errors from '../constants/errors';
 
 export function* login(action) {
@@ -15,7 +15,11 @@ export function* login(action) {
     if (action.data.phone && action.data.smsCode) {
       response = yield AuthService.login(action.data.phone, action.data.smsCode);
     }
+    console.log(response);
     if (response && response.code === 0) {
+      if (response.data && response.data.token) {
+        DeviceStorage.save('authtokenq', response.data.token);
+      }
       yield put({
         type: ActionsTypes.USER_LOGIN_SUCCESS,
       });

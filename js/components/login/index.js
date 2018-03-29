@@ -4,8 +4,8 @@ import React from "react";
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import { Dimensions, View, Image, StyleSheet, TextInput, Button, Text, TouchableOpacity } from "react-native";
-import { ActivityIndicator, Toast } from 'antd-mobile'
-import { login } from '../../actions';
+import { ActivityIndicator, Toast } from 'antd-mobile';
+import { login, sendSmsCode } from '../../actions';
 import Utils from '../../utils';
 
 const resetAction = NavigationActions.reset({
@@ -93,6 +93,10 @@ class LoginComponent extends React.Component {
   handleGetSmsCode() {
     if (Utils.isPhoneNumValid(this.state.phone) && !this.state.isCounting) {
       this.setTimer();
+      const { dispatch } = this.props;
+      dispatch(sendSmsCode({
+        phone: this.state.phone,
+      }));
     }
   }
 
