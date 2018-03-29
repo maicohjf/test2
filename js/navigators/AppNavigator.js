@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import {connect} from 'react-redux';
+import {addNavigationHelpers, StackNavigator} from 'react-navigation';
 
 import LoginScreen from '../components/login';
 import HomeScreen from '../components/home';
@@ -12,7 +12,10 @@ import ContractDetailScreen from '../components/contract/detail';
 import PublishScreen from '../components/publish';
 import MessageScreen from '../components/message';
 import OptionScreen from '../components/optioninfo';
-import { addListener } from '../utils/redux';
+import PublishBorrowInfoScreen from '../components/borrower/publish';
+import InvestorListScreen from '../components/investor/list/list';
+import InvestorDetailScreen from '../components/investor/detail';
+import {addListener} from '../utils/redux';
 
 export const AppNavigator = StackNavigator({
   Login: { screen: LoginScreen },
@@ -23,7 +26,10 @@ export const AppNavigator = StackNavigator({
   Publish: { screen: PublishScreen },
   Message: { screen: MessageScreen },
   Option: { screen: OptionScreen },
-},{
+  PublishBorrowInfo: {screen: PublishBorrowInfoScreen},
+  InvestorDetail: {screen: InvestorDetailScreen},
+  InvestorList: {screen: InvestorListScreen},
+}, {
   initialRouteName: 'Home',
 });
 
@@ -34,15 +40,15 @@ class AppWithNavigationState extends React.Component {
   };
 
   render() {
-    const { dispatch, nav } = this.props;
+    const {dispatch, nav} = this.props;
     return (
-      <AppNavigator
-        navigation={addNavigationHelpers({
-          dispatch,
-          state: nav,
-          addListener,
-        })}
-      />
+        <AppNavigator
+            navigation={addNavigationHelpers({
+              dispatch,
+              state: nav,
+              addListener,
+            })}
+        />
     );
   }
 }

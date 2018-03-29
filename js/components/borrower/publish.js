@@ -32,7 +32,7 @@ export default class PublishBorrowInfoComponent extends React.Component {
     // alert
     Alert.alert("提示", "为了您的资金安全，第一次借款时，需要进行借款人认证，完成后，即可发布此次借款。", [
       {text: '取消', onPress: () => console.log('Cancel Pressed'), style: {color: '#999999'}},
-      {text: '确定', onPress: () => console.log('OK Pressed')},
+      {text: '确定', onPress: () => this.props.navigation.navigate("InvestorList")},
     ], {cancelable: false})
   }
 
@@ -126,20 +126,16 @@ export default class PublishBorrowInfoComponent extends React.Component {
             <View style={styles.horizontalLine}/>
           </View>
 
-          <View>
-            <Button disabled={!this.handleCompleted()}
-                    style={[styles.btn, !this.handleCompleted() ? styles.btnBlur : '']}
-                    onClick={() => {
-                      this.handlePublishBorrowInfo()
-                    }}><Text style={{fontSize: 16, color: '#fff'}}>发布</Text></Button>
-          </View>
-
+          <Button disabled={!this.handleCompleted()}
+                  style={[styles.btn, !this.handleCompleted() ? styles.btnBlur : '']}
+                  onClick={() => {
+                    this.handlePublishBorrowInfo()
+                  }}><Text style={{fontSize: 16, color: '#fff'}}>发布</Text></Button>
         </View>
     );
   }
 
 }
-
 
 PublishBorrowInfoComponent.navigationOptions = {
   title: '借款信息',
@@ -150,8 +146,6 @@ const styles = StyleSheet.create({
   borrowInfoContainer: {
     flex: 1,
     backgroundColor: '#F4F7F9',
-    flexDirection: 'column',
-    alignItems: 'center'
   },
   infoRow: {
     minHeight: 44,
@@ -200,13 +194,14 @@ const styles = StyleSheet.create({
     marginLeft: 15
   },
   btn: {
-    width: 320,
-    height: 44,
-    backgroundColor: '#049bff',
     alignItems: "center",
     justifyContent: 'center',
+    height: 44,
+    backgroundColor: '#049bff',
     borderRadius: 50,
-    marginTop: 40
+    marginTop: 40,
+    marginLeft: 28,
+    marginRight: 28,
   },
   btnBlur: {
     backgroundColor: '#DADADA',

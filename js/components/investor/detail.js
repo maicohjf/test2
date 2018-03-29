@@ -6,11 +6,13 @@
 "use strict";
 
 import React, {Component} from "react";
+import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 import {View, StyleSheet, Text, Image, TouchableOpacity, Alert, PixelRatio, ScrollView} from 'react-native';
-import colors from '../../../constants/colors';
+import colors from '../../constants/colors';
 import {Button} from 'antd-mobile';
 
-export default class InvestorInfo extends React.Component {
+class InvestorInfo extends React.Component {
   static defaultProps = {
     investDemand: ["不介意借款人身份", "有社保有公积金", "2年以上营业执照", "无车产也可", "无房产也可"],
     investCity: ["阿克苏", "呼和浩特", "哈尔冰", "深圳", "上海"],
@@ -91,13 +93,13 @@ export default class InvestorInfo extends React.Component {
 
   render() {
     return (
-        <ScrollView contentContainerStyle={{height:600}}>
+        <ScrollView style={{flex: 1}}>
           <View style={styles.investorInfoContainer}>
             <View style={styles.investorInfoHeader}>
               <View style={styles.investorContactContainer}>
                 <View style={styles.investHeaderLeft}>
-                  <Image source={require('../img/default_avatar.png')} style={styles.avatarIcon}/>
-                  <Image source={require('../img/icon_real_name.png')} style={styles.realNameIcon}/>
+                  <Image source={require('./img/default_avatar.png')} style={styles.avatarIcon}/>
+                  <Image source={require('./img/icon_real_name.png')} style={styles.realNameIcon}/>
                 </View>
                 <View style={styles.investHeaderMiddle}>
                   <Text style={styles.contactWay}>175 **** 5066</Text>
@@ -144,6 +146,10 @@ export default class InvestorInfo extends React.Component {
     );
   }
 }
+
+InvestorInfo.navigationOptions = {
+  title: '投资人信息',
+};
 
 const styles = StyleSheet.create({
   investorInfoContainer: {
@@ -329,7 +335,10 @@ const styles = StyleSheet.create({
     marginLeft: 27,
     marginRight: 27,
     marginTop: 40,
+    marginBottom: 20,
     backgroundColor: colors.blue_very_light,
     borderRadius: 50,
   }
 });
+
+export default connect()(withNavigation(InvestorInfo));

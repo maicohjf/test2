@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
       marginLeft: 20,
       fontSize: 13,
       color: '#999',
-      marginLeft: 5,
     },
     listitem: {
       height: 40,

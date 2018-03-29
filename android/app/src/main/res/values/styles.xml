@@ -3,6 +3,16 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <!-- 设置默认 activity切换动画 -->
+        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
+    </style>
+
+
+    <style name="ActivityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/in_to_left</item>
+        <item name="android:activityOpenExitAnimation">@anim/out_to_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/in_to_right</item>
+        <item name="android:activityCloseExitAnimation">@anim/out_to_right</item>
     </style>
 
 </resources>
