@@ -91,6 +91,6 @@ export const AppNavigator = StackNavigator({
     screenInterpolator: CardStackStyleInterpolator.forHorizontal,
   })),
   cardStyle:({
-    // backgroundColor:'#F4F7F9', //统一定义界面背景颜色
+    backgroundColor:'#F4F7F9', //统一定义界面背景颜色
   }),
 });
