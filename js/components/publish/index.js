@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-start',
 	},
 	line: {
-		width: 100,
+		flex: 1,
 		marginLeft: 15,
 		marginBottom: 10,
 	},
