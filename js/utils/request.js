@@ -1,5 +1,6 @@
 import Config from 'react-native-config';
 import Utils from './';
+import DeviceStorage from '../utils/deviceStorage';
 
 const host = Config.API_URL;
 
@@ -53,30 +54,33 @@ export function request(url, options) {
   }
 
   const api = `${host}${url}`;
-  return fetch(api, params)
-  .then(async (response) => {
-    if (response.status > 299) {
-      const error = new ServerError(response.statusText);
-      const contentType = response.headers.get('content-type');
-
-      if (contentType && contentType.includes('x-www-form-urlencoded')) {
-        error.response = {
-          status: response.status,
-          data: await response.json(),
-        };
-      }
-      else {
-        error.response = {
-          status: response.status,
-          data: await response.text(),
-        };
-      }
-      throw error;
-    } else {
-      return response.json();
-    }
-  })
-  .catch(err => {
-    console.log(err);
+  return DeviceStorage.get('authtokenq').then(authtokenq => {
+    params.headers.authtokenq = authtokenq;
+    return fetch(api, params)
+      .then(async (response) => {
+        if (response.status > 299) {
+          const error = new ServerError(response.statusText);
+          const contentType = response.headers.get('content-type');
+    
+          if (contentType && contentType.includes('x-www-form-urlencoded')) {
+            error.response = {
+              status: response.status,
+              data: await response.json(),
+            };
+          }
+          else {
+            error.response = {
+              status: response.status,
+              data: await response.text(),
+            };
+          }
+          throw error;
+        } else {
+          return response.json();
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
 }
