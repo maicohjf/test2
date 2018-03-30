@@ -34,7 +34,7 @@ export default class index extends Component<{}> {
             <EditInput addIconClick={()=>console.log("等到")} title="手机号"
                        hintTitle="请选择手机联系人" titleMarginRight={46}/>
 
-            <IButton title={'确定'} onClick={() => this.showDialog()}/>
+            <IButton title={'确定'} onClick={() => this.props.navigation.navigate('VerifySucceed')}/>
 
             <View style={[styles.contactRow, styles.clientTxtMargin]}>
                 <Text style={styles.clientTxt}>如有疑问，您可</Text>

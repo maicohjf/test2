@@ -50,7 +50,7 @@ export default class App extends Component<{}> {
 
             />
 
-            <IButton title={'确定'} onClick={() => this.showDialog()}/>
+            <IButton title={'确定'} onClick={() => this.props.navigation.navigate('Contacts')}/>
 
             <View style={[styles.contactRow, styles.clientTxtMargin]}>
                 <Text style={styles.clientTxt}>如有疑问，您可</Text>
