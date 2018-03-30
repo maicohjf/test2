@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
   borrowInfoContainer: {
     flex: 1,
     backgroundColor: '#F4F7F9',
+    paddingTop: 10,
   },
   infoRow: {
     minHeight: 44,

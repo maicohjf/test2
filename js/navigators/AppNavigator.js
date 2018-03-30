@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {View,Text} from 'react-native'
 import {connect} from 'react-redux';
 import {addNavigationHelpers, StackNavigator} from 'react-navigation';
+import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 
 import LoginScreen from '../components/login';
 import HomeScreen from '../components/home';
@@ -72,31 +74,52 @@ export const AppNavigator = StackNavigator({
         })
     },
 }, {
-    initialRouteName: 'Home',
+  initialRouteName: 'Home',
+  /* The header share config  */
+  navigationOptions: {
+    gesturesEnabled: true,
+    headerStyle:{
+      backgroundColor:'white',
+      elevation:1,
+    },
+    headerTitleStyle:{
+      color: "#222",
+      fontSize: 18,
+    }
+  },
+  headerMode: 'float',
+  transitionConfig: (() => ({
+    //因为ios 的导航动画默认是从左到右，所以，这里配置一下动画，使用react-navigation已经实现的从左到右的动画，
+    //适配Android，不过，需要导入动画
+    screenInterpolator: CardStackStyleInterpolator.forHorizontal,
+  })),
+  cardStyle:({
+    // backgroundColor:'#F4F7F9', //统一定义界面背景颜色
+  }),
 });
 
 class AppWithNavigationState extends React.Component {
-    static propTypes = {
-        dispatch: PropTypes.func.isRequired,
-        nav: PropTypes.object.isRequired,
-    };
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    nav: PropTypes.object.isRequired,
+  };
 
-    render() {
-        const {dispatch, nav} = this.props;
-        return (
-            <AppNavigator
-                navigation={addNavigationHelpers({
-                    dispatch,
-                    state: nav,
-                    addListener,
-                })}
-            />
-        );
-    }
+  render() {
+    const {dispatch, nav} = this.props;
+    return (
+        <AppNavigator
+            navigation={addNavigationHelpers({
+              dispatch,
+              state: nav,
+              addListener,
+            })}
+        />
+    );
+  }
 }
 
 const mapStateToProps = state => ({
-    nav: state.nav,
+  nav: state.nav,
 });
 
 export default connect(mapStateToProps)(AppWithNavigationState);
