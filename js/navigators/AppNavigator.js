@@ -19,6 +19,7 @@ import VerifysucceedScreen from '../components/verify/verifysucced';
 import ContractScreen from '../components/contract';
 import ContractDetailScreen from '../components/contract/detail';
 import PublishScreen from '../components/publish';
+import SettingScreen from '../components/setting';
 import MessageScreen from '../components/message';
 import OptionScreen from '../components/optioninfo';
 import PublishBorrowInfoScreen from '../components/borrower/publish';
@@ -33,6 +34,7 @@ export const AppNavigator = StackNavigator({
     Contract: {screen: ContractScreen},
     ContractDetail: {screen: ContractDetailScreen},
     Publish: {screen: PublishScreen},
+  Setting: { screen: SettingScreen },
     Message: {screen: MessageScreen},
     Option: {screen: OptionScreen},
     PublishBorrowInfo: {screen: PublishBorrowInfoScreen},
