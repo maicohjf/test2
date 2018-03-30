@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Dimensions, View, Image, Text, StyleSheet } from "react-native";
+import { Card, WingBlank, WhiteSpace } from 'antd-mobile';
 
 class PublishComponent extends React.Component {
 	render() {
@@ -167,6 +168,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		margin: 10,
+		backgroundColor: '#f4f7f9',
 	},
 	publish: {
 		position: 'relative',
@@ -273,7 +275,7 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		borderTopRightRadius: 0,
 		paddingTop: 10,
-		// box
+		elevation: 1.3,
 	},
 	assetLine: {
 		flexDirection: 'row',
