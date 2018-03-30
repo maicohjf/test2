@@ -31,16 +31,16 @@ class PublishComponent extends React.Component {
 							<View style={styles.capital}>
 								<View style={styles.capitalLine}>
 									<Text style={styles.ammount}>0.8</Text>
-									<Text style={[styles.nuit, styles.publishFont]}>万元</Text>
+									<Text style={styles.publishFont}>万元</Text>
 								</View>
 								<View style={styles.capitalLine}>
 									<Text style={styles.ammount}>8</Text>
-									<Text style={[styles.nuit, styles.publishFont]}>个月还款</Text>
+									<Text style={styles.publishFont}>个月还款</Text>
 								</View>
 								<View style={styles.capitalLine}>
 									<Text style={styles.ammount}>12</Text>
 									<Text style={styles.symbol}>%</Text>
-									<Text style={[styles.nuit, styles.publishFont]}>年化率</Text>
+									<Text style={styles.publishFont}>年化率</Text>
 								</View>
 							</View>
 						</View>
@@ -103,16 +103,16 @@ class PublishComponent extends React.Component {
 							<View style={styles.capital}>
 								<View style={styles.capitalLine}>
 									<Text style={styles.ammount}>0.8</Text>
-									<Text style={[styles.nuit, styles.publishFont]}>万元</Text>
+									<Text style={styles.publishFont}>万元</Text>
 								</View>
 								<View style={styles.capitalLine}>
 									<Text style={styles.ammount}>8</Text>
-									<Text style={[styles.nuit, styles.publishFont]}>个月还款</Text>
+									<Text style={styles.publishFont}>个月还款</Text>
 								</View>
 								<View style={styles.capitalLine}>
 									<Text style={styles.ammount}>12</Text>
 									<Text style={styles.symbol}>%</Text>
-									<Text style={[styles.nuit, styles.publishFont]}>年化率</Text>
+									<Text style={styles.publishFont}>年化率</Text>
 								</View>
 							</View>
 						</View>
@@ -174,15 +174,14 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		borderRadius: 10,
 		marginBottom: 10,
-		// borderWidth: 1,
-		// borderColor: '#000',
 	},
 	details: {
-		height: 90,
+		height: 75,
 		flexDirection: 'row',
-		alignItems: 'center',
+		marginTop: 10,
 		marginLeft: 15,
 		marginRight: 15,
+		marginBottom: 5,
 	},
 	realName: {
 		width: 34,
@@ -256,11 +255,6 @@ const styles = StyleSheet.create({
 	symbol: {
 		fontSize: 13,
 		color: '#388BED',
-	},
-	nuit: {
-		// lineHeight: 18.5,
-		// height: 18.5,
-		// alignItems: 'center',
 	},
 	publishFont: {
 		fontSize: 13,
