@@ -22,9 +22,22 @@ class ProfileComponent extends React.Component {
           <Text>我的发布</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Setting')}>
+          <Text>设置</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Message')}>
           <Text>我的消息</Text>
         </TouchableOpacity>
+      
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Option')}>
+          <Text>选填信息</Text>
+        </TouchableOpacity>
+
+          <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Verify')}>
+              <Text>基本验证</Text>
+          </TouchableOpacity>
+
       </View>
     );
   }

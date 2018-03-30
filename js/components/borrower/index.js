@@ -1,9 +1,12 @@
 "use strict";
 
 import React from "react";
-import {View, Image, Text, StyleSheet, TouchableOpacity, Alert, ScrollView} from "react-native";
+import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
+import {View, Image, Text, StyleSheet, TouchableOpacity, Alert, ScrollView, PixelRatio, Dimensions} from "react-native";
 import SnapCarouselComponent from './carousel'
 import CreditCardComponent from './credit'
+import {Button} from "antd-mobile";
 
 class BorrowerHomeComponent extends React.Component {
 
@@ -13,8 +16,8 @@ class BorrowerHomeComponent extends React.Component {
 
   render() {
     return (
-        <ScrollView contentContainerStyle={{flex: 1}}>
-          <View style={styles.container}>
+        <ScrollView style={{flex: 1}} contentContainerStyle={{flex:1}}>
+          <View style={styles.contentContainer}>
             <View style={styles.banner}>
               <SnapCarouselComponent />
             </View>
@@ -60,15 +63,9 @@ class BorrowerHomeComponent extends React.Component {
 
             <CreditCardComponent/>
 
-            <View style={styles.bottomContainer}>
-              <TouchableOpacity onPress={() => {
-
-              }}>
-                <View style={styles.btn}>
-                  <Text style={{fontSize: 16, color: '#fff'}}>我要借款</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
+            <Button type="primary" style={styles.btn} onClick={() => this.props.navigation.navigate('PublishBorrowInfo')}>
+              <Text style={{fontSize: 16, color: '#fff'}}>我要借款</Text>
+            </Button>
           </View>
         </ScrollView>
     );
@@ -82,7 +79,7 @@ BorrowerHomeComponent.navigationOptions = {
 /* StyleSheet =============================================================== */
 
 const styles = StyleSheet.create({
-  container: {
+  contentContainer: {
     flex: 1,
     backgroundColor: '#F4F7F9'
   },
@@ -158,14 +155,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btn: {
-    width: 320,
     height: 44,
     backgroundColor: '#049bff',
     alignItems: "center",
     justifyContent: 'center',
     borderRadius: 50,
+    marginTop: 20,
+    marginBottom: 20,
+    marginLeft: 28,
+    marginRight: 28
   }
 });
 
 /* exports ================================================================== */
-module.exports = BorrowerHomeComponent;
+export default connect()(withNavigation(BorrowerHomeComponent));

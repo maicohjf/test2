@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry} from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
