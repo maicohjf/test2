@@ -22,6 +22,7 @@ export function parseError(error) {
 }
 
 export function request(url, options) {
+  console.log(`request is ${url}`);
   const config = {
     ...options,
   };
@@ -30,11 +31,9 @@ export function request(url, options) {
   if (!url) {
     errors.push('url');
   }
-
-  if (!config.payload && (config.method !== 'GET' && config.method !== 'DELETE')) {
+  if (!config.payload && (config.method && config.method !== 'get' && config.method !== 'delete')) {
     errors.push('payload');
   }
-
   if (errors.length) {
     throw new Error(`Error! You must pass \`${errors.join('`, `')}\``);
   }
@@ -54,10 +53,13 @@ export function request(url, options) {
   }
 
   const api = `${host}${url}`;
+
   return DeviceStorage.get('authtokenq').then(authtokenq => {
     params.headers.authtokenq = authtokenq;
+    console.log(`authtokenq is ${authtokenq}`)
     return fetch(api, params)
       .then(async (response) => {
+        console.log(response);
         if (response.status > 299) {
           const error = new ServerError(response.statusText);
           const contentType = response.headers.get('content-type');

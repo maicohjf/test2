@@ -7,7 +7,7 @@ import CommonService from '../services/common-service';
 import api from '../constants/api';
 import { request } from '../utils/request';
 
-export function* send(action) {
+export function* sendSmsCode(action) {
   try {
     const res = yield call(request, api.sendSmsCode, {
       method: 'post',
@@ -29,8 +29,29 @@ export function* send(action) {
   }
 }
 
+export function* fetchDict() {
+  try {
+    console.log(api.dict);
+    const res = yield call(request, api.dict, {
+      method: 'get',
+    });
+    console.log(res);
+    yield put({
+      type: ActionsTypes.DICT_FETCH_SUCCESS,
+      dict: res.data.dict,
+    });
+  }
+  catch (err) {
+    yield put({
+      type: ActionsTypes.DICT_FETCH_FAILURE,
+      payload: err,
+    });
+  }
+}
+
 export default function* root() {
   yield all([
-    takeLatest(ActionsTypes.SMSCODE_SEND_REQUEST, send),
+    takeLatest(ActionsTypes.SMSCODE_SEND_REQUEST, sendSmsCode),
+    takeLatest(ActionsTypes.DICT_FETCH_REQUEST, fetchDict),
   ]);
 }

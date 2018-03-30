@@ -7,3 +7,9 @@ export function sendSmsCode(data) {
     data,
   };
 }
+
+export function fetchDict() {
+  return {
+    type: ActionsTypes.DICT_FETCH_REQUEST,
+  };
+}
