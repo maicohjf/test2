@@ -37,7 +37,7 @@ export default class App extends Component<{}> {
                 2.动作不要太快{"\n"}
                 3.光线不要太暗
             </Text>
-            <TouchableHighlight  style={styles.btnView} underlayColor={"#a5a5a5"} onPress={()=>this.setState({filldataVisible:true})}>
+            <TouchableHighlight  style={styles.btnView} underlayColor={"#a5a5a5"} onPress={()=>this.props.navigation.navigate('BindingCard')}>
                 <View style={styles.btnWidth}>
                 <Image resizeMode={'center'} style={{width:25,height:25,}} source={require('../img/icon_camera_2.png')}/>
                 <Text style={{color:'#FFFFFF',fontSize:15,marginLeft:9,}}>开始认证</Text>

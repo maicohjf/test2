@@ -98,12 +98,9 @@ export default class App extends Component<{}> {
 
             </View>
 
-            <TouchableHighlight
-                style={styles.btnWidth}
-                underlayColor="#a5a5a5"
-                onPress={() => this.showModal()}>
-                <Text style={styles.btnColor}>确认无误并提交</Text>
-            </TouchableHighlight>
+
+            <IButton title={'确认无误并提交'} onClick={()=>this.props.navigation.navigate('FaceRecognition')} />
+
 
             <View style={[styles.nameRow, styles.yingsiTxtMargin]}>
                 <Image style={styles.smallIcon} source={require('../img/yingsi_icon.png')}/>

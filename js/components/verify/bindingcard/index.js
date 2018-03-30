@@ -52,7 +52,7 @@ export default class App extends Component<{}> {
                 <Image source={require('../img/icon_catalog.png')} style={{width:25,height:25,marginRight:15,}}/>
                 <Text style={styles.cardNameTxt}>建设银行 储蓄卡</Text>
             </View>
-            <IButton onClick={() => this.showModal()}  title="下一步"/>
+            <IButton onClick={() => this.props.navigation.navigate('BindingPhone')}  title="下一步"/>
 
             <View style={[styles.contactRow, styles.clientTxtMargin]}>
                 <Text style={styles.clientTxt}>如有疑问，您可</Text>
