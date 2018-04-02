@@ -4,11 +4,22 @@ import React from "react";
 import { Dimensions, View, Image, Text, StyleSheet, TextInput } from "react-native";
 // import { PickerComponent } from "./picker";
 import { Picker, List, WhiteSpace, InputItem, Button, Checkbox, Flex } from 'antd-mobile';
-import { district, provinceLite } from 'antd-mobile-demo-data';
-let IndexStyle = require('antd-mobile/lib/picker/style/index.native.js');
+// import { district, provinceLite } from 'antd-mobile-demo-data';
+// let IndexStyle = require('antd-mobile/lib/picker/style/index.native.js');
 import PickerStyle from 'antd-mobile/lib/picker/style/index.native';
 import InputItemStyle from 'antd-mobile/lib/input-item/style/index.native';
 const AgreeItem = Checkbox.AgreeItem;
+// console.log('district是是是是是是', district)
+const district = [
+  {
+    label: '是',
+    value: '1',
+  },
+  {
+    label: '否',
+    value: '0',
+  }
+];
 // alert(JSON.stringify(InputItemStyle.input.fontSize))
 // IndexStyle.headerItem.height = '10';
 // var newStyle2 = {

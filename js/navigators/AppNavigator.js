@@ -12,13 +12,11 @@ class AppWithNavigationState extends React.Component {
     dispatch: PropTypes.func.isRequired,
     nav: PropTypes.object.isRequired,
   };
-
   componentWillMount() {
     console.log('----');
     const { dispatch } = this.props;
     dispatch(fetchDict());
   }
-
   render() {
     const {dispatch, nav} = this.props;
     return (
@@ -63,5 +61,4 @@ const mapStateToProps = state => ({
   nav: state.nav,
   common: state.common,
 });
-
 export default connect(mapStateToProps)(AppWithNavigationState);

@@ -56,7 +56,6 @@ export function request(url, options) {
 
   return DeviceStorage.get('authtokenq').then(authtokenq => {
     params.headers.authtokenq = authtokenq;
-    console.log(`authtokenq is ${authtokenq}`)
     return fetch(api, params)
       .then(async (response) => {
         console.log(response);

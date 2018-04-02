@@ -4,7 +4,7 @@
  */
 "use strict";
 
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {View, StyleSheet, FlatList, Text} from 'react-native';
 import InvestorItem from './listitem';
 import LoadMore from '../../common/loadmore';
