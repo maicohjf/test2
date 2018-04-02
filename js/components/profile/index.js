@@ -34,10 +34,18 @@ class ProfileComponent extends React.Component {
           <Text>选填信息</Text>
         </TouchableOpacity>
 
-          <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Verify')}>
-              <Text>基本验证</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Verify')}>
+          <Text>基本验证</Text>
+        </TouchableOpacity>
 
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('BuyBorrower')}>
+          <Text>借款人-我的购买</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Investorinfo')}>
+          <Text>投资人信息</Text>
+        </TouchableOpacity>
+        
       </View>
     );
   }
