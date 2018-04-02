@@ -117,7 +117,7 @@ export default class PublishBorrowInfoComponent extends React.Component {
           <View style={styles.infoRow}>
             <Text style={styles.leftTextName}>贷款城市</Text>
             <TouchableOpacity style={styles.rightContainer} activeOpacity={1} onPress={() => {
-              Alert.alert('选择贷款城市')
+              this.props.navigation.navigate("CitySelector")
             }}>
               <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.loanCity}
                          underlineColorAndroid={'transparent'}/>
