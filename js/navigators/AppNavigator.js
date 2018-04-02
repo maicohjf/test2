@@ -22,6 +22,9 @@ import PublishScreen from '../components/publish';
 import SettingScreen from '../components/setting';
 import MessageScreen from '../components/message';
 import OptionScreen from '../components/optioninfo';
+import BuyBorrowerScreen from '../components/buyBorrower';
+import InvestorinfoScreen from '../components/investorinfo';
+
 import PublishBorrowInfoScreen from '../components/borrower/publish';
 import InvestorListScreen from '../components/investor/list/list';
 import InvestorDetailScreen from '../components/investor/detail';
@@ -34,9 +37,12 @@ export const AppNavigator = StackNavigator({
     Contract: {screen: ContractScreen},
     ContractDetail: {screen: ContractDetailScreen},
     Publish: {screen: PublishScreen},
-  Setting: { screen: SettingScreen },
+    Setting: { screen: SettingScreen },
     Message: {screen: MessageScreen},
     Option: {screen: OptionScreen},
+    BuyBorrower: {screen: BuyBorrowerScreen},
+    Investorinfo: {screen: InvestorinfoScreen},    
+    
     PublishBorrowInfo: {screen: PublishBorrowInfoScreen},
     InvestorDetail: {screen: InvestorDetailScreen},
     InvestorList: {screen: InvestorListScreen},
