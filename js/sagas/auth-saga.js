@@ -71,8 +71,13 @@ export function* login(action) {
 
 export function* logout() {
   try {
-    yield call(delay, 200);
-
+    const response = yield call(request, api.logout, {
+      method: 'get',
+    });
+    console.log(response);
+    if (response && response.code === 0) {
+      DeviceStorage.delete('authtokenq');
+    }
     yield put({
       type: ActionsTypes.USER_LOGOUT_SUCCESS,
     });
@@ -89,6 +94,6 @@ export default function* root() {
   yield all([
     takeLatest(ActionsTypes.SMSCODE_SEND_REQUEST, sendSmsCode),
     takeLatest(ActionsTypes.USER_LOGIN_REQUEST, withLoading(login)),
-    takeLatest(ActionsTypes.USER_LOGOUT_REQUEST, logout),
+    takeLatest(ActionsTypes.USER_LOGOUT_REQUEST, withLoading(logout)),
   ]);
 }

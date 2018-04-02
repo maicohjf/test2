@@ -14,9 +14,12 @@ export const auth = (state = initialAuthState, action) => {
         isLoggedIn: false,
         errMsg: action.errMsg,
       };
-    case 'Logout':
+    case ActionsTypes.USER_LOGOUT_SUCCESS:
       console.log(state);
-      return { ...state, isLoggedIn: false };
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
     default:
       return state;
   }
