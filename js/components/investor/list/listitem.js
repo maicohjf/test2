@@ -3,7 +3,7 @@
  */
 "use strict";
 
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {View, Image, Text, StyleSheet, PixelRatio} from 'react-native';
 import {Button} from 'antd-mobile';
 import LinearGradient from 'react-native-linear-gradient';

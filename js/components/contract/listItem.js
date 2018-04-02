@@ -2,7 +2,6 @@
 
 import React, {Component} from "react";
 import {View, Text, Image, StyleSheet, TouchableOpacity, PixelRatio} from "react-native";
-import PropTypes from 'prop-types';
 
 export default class ContractListItemComponent extends Component {
   render() {

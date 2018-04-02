@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View,Text} from 'react-native'
 import {connect} from 'react-redux';
-import {addNavigationHelpers, StackNavigator} from 'react-navigation';
-import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
+import {addNavigationHelpers} from 'react-navigation';
 
 import {addListener} from '../utils/redux';
 import { AppNavigator } from '../navigators/config';
