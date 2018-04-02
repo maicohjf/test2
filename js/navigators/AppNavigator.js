@@ -26,6 +26,7 @@ import PublishBorrowInfoScreen from '../components/borrower/publish';
 import InvestorListScreen from '../components/investor/list/list';
 import InvestorDetailScreen from '../components/investor/detail';
 import {addListener} from '../utils/redux';
+import BankCardScreen from '../components/bankCard';
 
 export const AppNavigator = StackNavigator({
     Login: {screen: LoginScreen},
@@ -34,7 +35,8 @@ export const AppNavigator = StackNavigator({
     Contract: {screen: ContractScreen},
     ContractDetail: {screen: ContractDetailScreen},
     Publish: {screen: PublishScreen},
-  Setting: { screen: SettingScreen },
+    Setting: { screen: SettingScreen },
+    BankCard: { screen: BankCardScreen },
     Message: {screen: MessageScreen},
     Option: {screen: OptionScreen},
     PublishBorrowInfo: {screen: PublishBorrowInfoScreen},

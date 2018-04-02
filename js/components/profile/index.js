@@ -38,6 +38,10 @@ class ProfileComponent extends React.Component {
               <Text>基本验证</Text>
           </TouchableOpacity>
 
+          <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('BankCard')}>
+              <Text>我的银行卡</Text>
+          </TouchableOpacity>
+
       </View>
     );
   }
