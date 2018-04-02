@@ -137,9 +137,6 @@ class LoginComponent extends React.Component {
     console.log(this.props.common);
     return (
       <View style={styles.loginContainer}>
-        {
-          this.props.common.isLoading && <ActivityIndicator />
-        }
         <TouchableOpacity onPress={() => {
           this.routeToHome();
         }}>
