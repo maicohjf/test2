@@ -154,6 +154,7 @@ android {
 }
 
 dependencies {
+    compile project(':realm')
     implementation project(':react-native-config')
     implementation project(':react-native-linear-gradient')
     implementation fileTree(dir: "libs", include: ["*.jar"])

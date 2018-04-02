@@ -3,5 +3,5 @@ export default {
   logout: 'api/v1/user/logout',
   sendSmsCode: '/api/v1/sms/send_valid_code',
   dict: '/api/v1/system/dict',
-  cityList: 'api/v1/area/city/list',
+  area: '/api/v1/area/all',
 }

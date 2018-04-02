@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {addNavigationHelpers} from 'react-navigation';
 import {addListener} from '../utils/redux';
 import { AppNavigator } from '../navigators/config';
-import { fetchDict } from '../actions';
+import { fetchDict, fetchCommon } from '../actions';
 
 class AppWithNavigationState extends React.Component {
   static propTypes = {

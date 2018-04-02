@@ -2,7 +2,6 @@ import { delay } from 'redux-saga';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import ActionsTypes from '../actions/actionsTypes';
-import AuthService from '../services/auth-service';
 import DeviceStorage from '../utils/deviceStorage';
 import Errors from '../constants/errors';
 import { withLoading } from './saga-helper';
