@@ -1,4 +1,5 @@
-const Realm = require('realm');
+// const Realm = require('realm');
+import { Realm } from 'realm';
 import { AreaSchema, CitySchema, ProvinceSchema} from '../models/area';
 
 export default {
