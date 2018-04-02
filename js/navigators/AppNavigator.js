@@ -1,32 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View,Text} from 'react-native'
 import {connect} from 'react-redux';
-import {addNavigationHelpers, StackNavigator} from 'react-navigation';
-import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
+import {addNavigationHelpers} from 'react-navigation';
 
-import LoginScreen from '../components/login';
-import HomeScreen from '../components/home';
-import InvestorScreen from '../components/investor';
-import ProfileScreen from '../components/profile';
-import VerifyScreenScreen from '../components/verify/realname';
-import FaceRecognitionScreen from '../components/verify/realname/faceRecognition';
-import BindingCardScreen from '../components/verify/bindingcard';
-import BindingPhoneScreen from '../components/verify/bindingcard/bindingPhone';
-import BanksScreen from '../components/verify/bindingcard/banks';
-import ContactsScreen from '../components/verify/contacts';
-import VerifysucceedScreen from '../components/verify/verifysucced';
-import ContractScreen from '../components/contract';
-import ContractDetailScreen from '../components/contract/detail';
-import PublishScreen from '../components/publish';
-import SettingScreen from '../components/setting';
-import MessageScreen from '../components/message';
-import OptionScreen from '../components/optioninfo';
-import PublishBorrowInfoScreen from '../components/borrower/publish';
-import InvestorListScreen from '../components/investor/list/list';
-import InvestorDetailScreen from '../components/investor/detail';
 import {addListener} from '../utils/redux';
+import { AppNavigator } from '../navigators/config';
 import BankCardScreen from '../components/bankCard';
+import { fetchDict } from '../actions';
 
 export const AppNavigator = StackNavigator({
     Login: {screen: LoginScreen},
@@ -44,37 +24,37 @@ export const AppNavigator = StackNavigator({
     InvestorList: {screen: InvestorListScreen},
     VerifySucceed: {
         screen: VerifysucceedScreen, navigationOptions: ({
-            title: 'ç«‹å³å€Ÿæ¬¾',
+            title: 'Á¢¼´½è¿î',
         })
     },
     Contacts: {
         screen: ContactsScreen, navigationOptions: ({
-            title: 'ç´§æ€¥è”ç³»äºº',
+            title: '½ô¼±ÁªÏµÈË',
         })
     },
     BindingPhone: {
         screen: BindingPhoneScreen, navigationOptions: ({
-            title: 'ç»‘å®šé“¶è¡Œå¡',
+            title: '°ó¶¨ÒøĞĞ¿¨',
         })
     },
     Banks: {
         screen: BanksScreen, navigationOptions: ({
-            title: 'æ”¯æŒé“¶è¡Œ',
+            title: 'Ö§³ÖÒøĞĞ',
         })
     },
     BindingCard: {
         screen: BindingCardScreen, navigationOptions: ({
-            title: 'ç»‘å®šé“¶è¡Œå¡',
+            title: '°ó¶¨ÒøĞĞ¿¨',
         })
     },
     FaceRecognition: {
         screen: FaceRecognitionScreen, navigationOptions: ({
-            title: 'äººè„¸è¯†åˆ«',
+            title: 'ÈËÁ³Ê¶±ğ',
         })
     },
     Verify: {
         screen: VerifyScreenScreen, navigationOptions: ({
-            title: 'å®åè®¤è¯',
+            title: 'ÊµÃûÈÏÖ¤',
         })
     },
 }, {
@@ -93,12 +73,12 @@ export const AppNavigator = StackNavigator({
   },
   headerMode: 'float',
   transitionConfig: (() => ({
-    //å› ä¸ºios çš„å¯¼èˆªåŠ¨ç”»é»˜è®¤æ˜¯ä»å·¦åˆ°å³ï¼Œæ‰€ä»¥ï¼Œè¿™é‡Œé…ç½®ä¸€ä¸‹åŠ¨ç”»ï¼Œä½¿ç”¨react-navigationå·²ç»å®ç°çš„ä»å·¦åˆ°å³çš„åŠ¨ç”»ï¼Œ
-    //é€‚é…Androidï¼Œä¸è¿‡ï¼Œéœ€è¦å¯¼å…¥åŠ¨ç”»
+    //ÒòÎªios µÄµ¼º½¶¯»­Ä¬ÈÏÊÇ´Ó×óµ½ÓÒ£¬ËùÒÔ£¬ÕâÀïÅäÖÃÒ»ÏÂ¶¯»­£¬Ê¹ÓÃreact-navigationÒÑ¾­ÊµÏÖµÄ´Ó×óµ½ÓÒµÄ¶¯»­£¬
+    //ÊÊÅäAndroid£¬²»¹ı£¬ĞèÒªµ¼Èë¶¯»­
     screenInterpolator: CardStackStyleInterpolator.forHorizontal,
   })),
   cardStyle:({
-    // backgroundColor:'#F4F7F9', //ç»Ÿä¸€å®šä¹‰ç•Œé¢èƒŒæ™¯é¢œè‰²
+    // backgroundColor:'#F4F7F9', //Í³Ò»¶¨Òå½çÃæ±³¾°ÑÕÉ«
   }),
 });
 
@@ -107,6 +87,12 @@ class AppWithNavigationState extends React.Component {
     dispatch: PropTypes.func.isRequired,
     nav: PropTypes.object.isRequired,
   };
+
+  componentWillMount() {
+    console.log('----');
+    const { dispatch } = this.props;
+    dispatch(fetchDict());
+  }
 
   render() {
     const {dispatch, nav} = this.props;

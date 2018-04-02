@@ -7,6 +7,7 @@ import { Dimensions, View, Image, StyleSheet, TextInput, Button, Text, Touchable
 import { ActivityIndicator, Toast } from 'antd-mobile';
 import { login, sendSmsCode } from '../../actions';
 import Utils from '../../utils';
+import Colors from '../../constants/colors';
 
 const resetAction = NavigationActions.reset({
   index: 0,
@@ -205,7 +206,7 @@ class LoginComponent extends React.Component {
             <View style={(Utils.isPhoneNumValid(this.state.phone) && !this.state.isCounting)
                 ? [styles.smsCodeBtn, styles.smsCodeBtnActive]
                 : styles.smsCodeBtn}>
-              <Text style={{fontSize:12, color:'#fff'}}>
+              <Text style={styles.smsCodeBtnText}>
                 { this.state.isCounting ? `倒计时${this.state.countdown}秒` : "获取验证码" }
               </Text>
             </View>
@@ -215,7 +216,7 @@ class LoginComponent extends React.Component {
             this.handleLogin();
           }}>
           <View style={styles.btn}>
-            <Text style={{fontSize:16, color:'#fff'}}>登录</Text>
+            <Text style={styles.btnText}>登录</Text>
           </View>
         </TouchableOpacity>
         <Text style={styles.notice}>新用户登录即同意<Text style={styles.noticeStrong}>《钱家用户注册协议》</Text></Text>
@@ -234,16 +235,11 @@ const styles = StyleSheet.create({
   loginContainer: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#fff",
-  },
-  loginRow: {
-    alignSelf: 'stretch',
-    flexDirection:"row",
-    alignItems: "center",
+    backgroundColor: Colors.white,
   },
   loginBorder: {
     borderBottomWidth: 1,
-    borderBottomColor: "#e5e5e5"
+    borderBottomColor: Colors.gray_strong,
   },
   phoneRow: {
     width: Dimensions.get('window').width,
@@ -295,28 +291,36 @@ const styles = StyleSheet.create({
     marginRight: 15,
     alignItems: "center",
     justifyContent: 'center',
-    backgroundColor: '#ccc',
+    backgroundColor: Colors.gray_light,
     borderRadius: 4,
     alignSelf: 'flex-end',
   },
   smsCodeBtnActive: {
-    backgroundColor: '#049bff',
+    backgroundColor: Colors.blue_very_light,
+  },
+  smsCodeBtnText: {
+    fontSize: 12,
+    color: Colors.white,
   },
   notice: {
     marginTop: 15,
-    color: '#999',
+    color: Colors.black_very_light,
     fontSize: 13,
   },
   noticeStrong: {
-    color: '#388BED'
+    color: Colors.blue,
   },
   btn: {
     width: 320,
     height: 44,
-    backgroundColor: '#049bff',
+    backgroundColor: Colors.blue_very_light,
     alignItems: "center",
     justifyContent: 'center',
     borderRadius: 50,
+  },
+  btnText: {
+    fontSize: 16,
+    color: Colors.white,
   }
 });
 
