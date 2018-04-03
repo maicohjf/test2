@@ -26,3 +26,10 @@ export const AreaSchema = {
     id: 'int',
   }
 };
+
+export const LocationVersionSchema = {
+  name: 'LocationVersion',
+  properties: {
+    version: 'int',
+  }
+}
