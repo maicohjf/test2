@@ -21,6 +21,7 @@ import OptionScreen from '../components/optioninfo';
 import PublishBorrowInfoScreen from '../components/borrower/publish';
 import InvestorListScreen from '../components/investor/list/list';
 import InvestorDetailScreen from '../components/investor/detail';
+import CitySelectorScreen from '../components/city';
 
 export const AppNavigator = StackNavigator({
   Login: {screen: LoginScreen},
@@ -35,6 +36,7 @@ export const AppNavigator = StackNavigator({
   PublishBorrowInfo: {screen: PublishBorrowInfoScreen},
   InvestorDetail: {screen: InvestorDetailScreen},
   InvestorList: {screen: InvestorListScreen},
+  CitySelector: {screen: CitySelectorScreen},
   VerifySucceed: {
       screen: VerifysucceedScreen, navigationOptions: ({
           title: '立即借款',
@@ -82,6 +84,10 @@ export const AppNavigator = StackNavigator({
     headerTitleStyle:{
       color: "#222",
       fontSize: 18,
+      // position:'absolute',
+      // left:0,
+      // right:0,
+      // textAlign:'center',
     }
   },
   headerMode: 'float',
