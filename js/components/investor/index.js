@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   });
   
 /* exports ================================================================== */
-module.exports = InvestorHomeComponent;
+export default InvestorHomeComponent;

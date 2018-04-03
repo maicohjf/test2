@@ -3,25 +3,26 @@
  */
 "use strict";
 
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {View, Image, Text, StyleSheet, PixelRatio} from 'react-native';
 import {Button} from 'antd-mobile';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default class investListComponent extends React.Component {
+export default class investListComponent extends React.PureComponent {
 
   render() {
+    const {index, item} = this.props;
     return (
-        <LinearGradient colors={[colors.startColor, this.props.index === 0 ? colors.endColor : colors.startColor]}
+        <LinearGradient colors={[colors.startColor, index === 0 ? colors.endColor : colors.startColor]}
                         startPoint={{x: 1, y: 0}}
                         endPoint={{x: 0, y: 1}}
-                        style={styles.investItem}>
+                        style={[styles.investItem, index === 0 ? {marginTop: 10} : '']}>
           <View style={styles.investLeft}>
             <Image source={require('../img/default_avatar.png')} style={styles.avatarIcon}/>
             <Image source={require('../img/icon_real_name.png')} style={styles.realNameIcon}/>
           </View>
           <View style={styles.investMiddle}>
-            <Text style={styles.investor}>洪先生</Text>
+            <Text style={styles.investor}>{item.name}</Text>
             <Text
                 style={[styles.investTime, this.props.index === 0 ? styles.potential : '']}>{this.props.index === 0 ? '他是您的潜在投资人' : '最近投资时间：02-09'}</Text>
           </View>
@@ -55,7 +56,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     backgroundColor: '#FFF',
-    marginTop: 10
   },
   investLeft: {
     minHeight: 70,

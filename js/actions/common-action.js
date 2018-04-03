@@ -7,3 +7,21 @@ export function sendSmsCode(data) {
     data,
   };
 }
+
+export function fetchDict() {
+  return {
+    type: ActionsTypes.DICT_FETCH_REQUEST,
+  };
+}
+
+export function fetchArea() {
+  return {
+    type: ActionsTypes.AREA_FETCH_REQUEST,
+  };
+}
+
+export function fetchCommon() {
+  return {
+    type: ActionsTypes.COMMON_FETCH_REQUEST,
+  };
+}

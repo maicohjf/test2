@@ -1,130 +1,94 @@
 "use strict";
 
 import React from "react";
-import { Dimensions, View, Image, Text, StyleSheet } from "react-native";
+import { Dimensions, View, Image, Text, StyleSheet, FlatList } from "react-native";
+import LinearGradient from 'react-native-linear-gradient';
+import LoadMore from '../common/loadmore';
+import { Toast } from 'antd-mobile';
+
+import PublishItem from './publishItem';
 
 class PublishComponent extends React.Component {
+	static defaultProps = {
+		_messageData: [{id: '1', rewardTypeId: '1', name: '李女士', publishFont: '北京市', publishHk: '个体户', time: '02-16 16:42', ammount: '0.8', mouth: '8', wage: '0.8' },
+		{id: '2', rewardTypeId: '0', name: '张小姐', publishFont: '上海市', publishHk: '个体户', time: '02-18 16:42', ammount: '0.6', mouth: '6', wage: '0.8'},
+		{id: '3', rewardTypeId: '1', name: '王女士', publishFont: '武汉市', publishHk: '个体户', time: '02-20 16:42', ammount: '1.2', mouth: '9', wage: '0.8'},
+		{id: '4', rewardTypeId: '0', name: '赵小姐', publishFont: '深圳市', publishHk: '个体户', time: '02-24 16:42', ammount: '0.9', mouth: '7', wage: '0.8'},]
+	  };
+	
+	  constructor(props) {
+		super(props);
+		this.state = {
+		  page: 0,
+		  loading: false,
+		  refreshing: false,
+		}
+	  }
+	
+	  _keyExtractor = (item, index) => item.id;
+	
+	  _onPressItem = () => {
+		this.props.navigation.navigate("Message")
+	  };
+	
+	  _renderItem = ({item, index}) => {
+		return (<PublishItem index={index} item={item} onDateil={this._onPressItem}/>);
+	  };
+	  
+	  _renderSeparator = () => {
+		return (
+			<View style={{height: 10, flex: 1}}/>
+		);
+	  };
+	
+	  _renderFooter = () => {
+		return (<LoadMore loading={this.state.loading}/>);
+	  };
+	
+	  _handleRefresh = () => {
+		//下拉刷新
+		this.setState({
+		  loading: false,
+		  refreshing: true
+		});
+		setTimeout(() => {
+		  this.setState({
+			loading: false,
+			refreshing: false
+		  });
+		  Toast.show("下拉刷新完成")
+		}, 1000);
+	  };
+	
+	  _handleLoadMore = () => {
+		console.log("触发底部加载更多");
+		//加载更多
+		this.setState({
+		  loading: true,
+		  refreshing: false
+		});
+		setTimeout(() => {
+		  this.setState({
+			loading: false,
+		  });
+		  Toast.show("上拉加载更多完成")
+		}, 1000);
+	  };
 	render() {
 		return (
-			<View style={styles.container}>
-				<View style={styles.publish}>
-					<View style={styles.details}>
-						<View style={styles.headshotBg}>
-							<Image
-								source={require("./img/gerenzhongxin.png")}
-								style={styles.publishIcon}
-							/>
-						</View>
-						<Image
-							source={require("./img/real-name-icon.png")}
-							style={styles.realName}
-						/>
-						<View style={styles.capitalContainer}>
-							<View style={styles.capital}>
-								<Text style={styles.name}>李女士</Text>
-								<Text style={[styles.publishFont, styles.time]}>03-08 09:46</Text>
-								<View style={styles.publishBtn}>
-									<Text style={{ fontSize: 13, color: '#fff' }}>抢单中</Text>
-								</View>
-							</View>
-							<View style={styles.capital}>
-								<Text style={[styles.address, styles.publishFont]}>北京市</Text>
-								<Text style={[styles.addressType, styles.publishFont]}>个体户</Text>
-							</View>
-							<View style={styles.capital}>
-								<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>0.8</Text>万元</Text>
-								<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>8</Text>个月还款</Text>
-								<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>12<Text style={styles.symbol}>%</Text></Text>年化率</Text>
-							</View>
-						</View>
-					</View>
-					<View style={styles.asset}>
-						<View style={styles.assetLine}>
-							{/* <View> */}
-							<Text style={styles.line}>
-								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />月收入0.5万元
-							</Text>
-							<Text style={styles.line}>
-								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />无公积金
-							</Text>
-							<Text style={styles.line}>
-								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />有社保
-							</Text>
-							{/* </View> */}
-						</View>
-						<View style={styles.assetLine}>
-							<Text style={styles.line}>
-								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />无信用卡
-							</Text>
-							<Text style={styles.line}>
-								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />有房产
-							</Text>
-							<Text style={styles.line}>
-								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />有车产
-							</Text>
-						</View>
-					</View>
-				</View>
-				<View style={styles.publish}>
-					<View style={styles.details}>
-						<View style={styles.headshotBg}>
-							<Image
-								source={require("./img/gerenzhongxin.png")}
-								style={styles.publishIcon}
-							/>
-						</View>
-						<Image
-							source={require("./img/real-name-icon.png")}
-							style={styles.realName}
-						/>
-						<View style={styles.capitalContainer}>
-							<View style={styles.capital}>
-								<Text style={styles.name}>李女士</Text>
-								<Text style={[styles.publishFont, styles.time]}>03-08 09:46</Text>
-								<View style={styles.publishBtn}>
-									<Text style={{ fontSize: 13, color: '#fff' }}>抢单中</Text>
-								</View>
-							</View>
-							<View style={styles.capital}>
-								<Text style={[styles.address, styles.publishFont]}>北京市</Text>
-								<Text style={[styles.addressType, styles.publishFont]}>个体户</Text>
-							</View>
-							<View style={styles.capital}>
-								<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>0.8</Text>万元</Text>
-								<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>8</Text>个月还款</Text>
-								<Text style={[styles.nuit, styles.publishFont]}><Text style={styles.ammount}>12<Text style={styles.symbol}>%</Text></Text>年化率</Text>
-							</View>
-						</View>
-					</View>
-					<View style={styles.asset}>
-						<View style={styles.assetLine}>
-							{/* <View> */}
-							<Text style={styles.line}>
-								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />月收入0.5万元
-							</Text>
-							<Text style={styles.line}>
-								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />无公积金
-							</Text>
-							<Text style={styles.line}>
-								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />有社保
-							</Text>
-							{/* </View> */}
-						</View>
-						<View style={styles.assetLine}>
-							<Text style={styles.line}>
-								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />无信用卡
-							</Text>
-							<Text style={styles.line}>
-								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />有房产
-							</Text>
-							<Text style={styles.line}>
-								<Image source={require("./img/wodefabu-icon.png")} style={styles.assetIcon} />有车产
-							</Text>
-						</View>
-					</View>
-				</View>
-				<Text style={styles.noList}>没有更多了</Text>
-			</View>
+			<FlatList
+				data={this.props._messageData}
+				extraData={this.state}
+				keyExtractor={this._keyExtractor}
+				renderItem={this._renderItem}
+				refreshing={this.state.refreshing}
+				onRefresh={this._handleRefresh}
+				onEndReached={this._handleLoadMore}
+				onEndReachedThreshold={0}
+				ItemSeparatorComponent={this._renderSeparator}
+				ListFooterComponent={this._renderFooter}
+				style={styles.container}
+			/>
 		);
 	}
 }
@@ -132,135 +96,12 @@ class PublishComponent extends React.Component {
 PublishComponent.navigationOptions = {
 	title: '我的发布',
 };
-
-/* StyleSheet =============================================================== */
-
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		margin: 10,
-	},
-	publish: {
-		// height: 150,
-		backgroundColor: '#fff',
-		borderRadius: 10,
-		marginBottom: 10,
-	},
-	details: {
-		// height: 90,
-		position: 'relative',
-		flexDirection: 'row',
-		alignItems: 'center',
-		marginLeft: 15,
-		marginRight: 15,
-		marginTop: 5,
-		marginBottom: 5,
-	},
-	realName: {
-		width: 34,
-		height: 13,
-		position: 'absolute',
-		top: 11,
-		left: 52,
-	},
-	headshotBg: {
-		width: 75,
-		height: 75,
-		alignItems: 'center',
-		backgroundColor: '#f4f7f9',
-		borderRadius: 50,
-	},
-	publishIcon: {
-		width: 70,
-		height: 70,
-		marginTop: 2.5,
-	},
-	capitalContainer: {
-		marginLeft: 14.5,
-	},
-	name: {
-		fontSize: 15,
-		color: '#000',
-		lineHeight: 20,
-		height: 20,
-		marginRight: 11,
-	},
-	time: {
-		lineHeight: 17.5,
-	},
-	publishBtn: {
-		position: 'absolute',
-		top: 0,
-		right: -20,
-		width: 60,
-		height: 25,
-		backgroundColor: '#049bff',
-		alignItems: "center",
-		justifyContent: 'center',
-		borderRadius: 50,
-	},
-	address: {
-		height: 15,
-		lineHeight: 15,
-	},
-	addressType: {
-		height: 15,
-		lineHeight: 15,
-		marginLeft: 10,
-	},
-	capital: {
-		flexDirection: 'row',
-		alignItems: 'stretch',
-		marginBottom: 5,
-		// borderWidth: 1,
-		// borderColor: '#000',
-	},
-	ammount: {
-		fontSize: 18,
-		color: '#388BED',
-		height: 20,
-		lineHeight: 20,
-	},
-	symbol: {
-		fontSize: 13,
-	},
-	nuit: {
-		marginRight: 15,
-		lineHeight: 18.5,
-		height: 18.5,
-		alignItems: 'center',
-	},
-	publishFont: {
-		fontSize: 13,
-		color: '#ccc',
-	},
-	noList: {
-		flex: 1,
-		fontSize: 13,
-		color: '#ccc',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	asset: {
-		backgroundColor: '#f4f7f9',
-		borderRadius: 10,
-		borderTopRightRadius: 0,
-		paddingTop: 10,
-		// box
-	},
-	assetLine: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'flex-start',
-	},
-	line: {
-		width: 100,
-		marginLeft: 15,
-		marginBottom: 10,
-	},
-	assetIcon: {
-		width: 24,
-		height: 24,
+    container: {
+        flex: 1,
+        backgroundColor: '#f4f7f9',
+        marginLeft: 10,
+        marginRight: 10,
 	},
 });
 
