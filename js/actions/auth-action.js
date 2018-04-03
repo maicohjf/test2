@@ -11,6 +11,5 @@ export function login(data) {
 export function logout() {
   return {
     type: ActionsTypes.USER_LOGOUT_REQUEST,
-    payload: {},
   };
 }

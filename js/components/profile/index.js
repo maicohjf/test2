@@ -9,6 +9,7 @@ class ProfileComponent extends React.Component {
   render() {
     console.log(this.props);
     return (
+<<<<<<< HEAD
      
        <ScrollView style={{flex: 1,backgroundColor: '#e5e5e5',paddingBottom:10,}}>
          <View style={{height: 174,backgroundColor: '#fff',alignItems: 'stretch',paddingBottom: 10}}>
@@ -107,6 +108,46 @@ class ProfileComponent extends React.Component {
            <Image  source={require('./img/arrownext_icon.png')}/>
          </TouchableOpacity>
         </ScrollView>
+=======
+      <View>
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Login')}>
+          <Text>登录</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Contract')}>
+          <Text>合同</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Publish')}>
+          <Text>我的发布</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Setting')}>
+          <Text>设置</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Message')}>
+          <Text>我的消息</Text>
+        </TouchableOpacity>
+      
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Option')}>
+          <Text>选填信息</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Verify')}>
+          <Text>基本验证</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('BuyBorrower')}>
+          <Text>借款人-我的购买</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Investorinfo')}>
+          <Text>投资人信息</Text>
+        </TouchableOpacity>
+        
+      </View>
+>>>>>>> 042b449c951f854e3810166f2f21d58bed9f7635
     );
   }
 }

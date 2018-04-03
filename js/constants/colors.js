@@ -11,5 +11,5 @@ export default {
   black_light: '#666666',
   black_very_light: '#999999',
   gray_light: '#CCCCCC',
-
+  gray_strong: '#E5E5E5',
 }
