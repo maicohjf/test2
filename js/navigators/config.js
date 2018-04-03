@@ -21,6 +21,9 @@ import OptionScreen from '../components/optioninfo';
 import PublishBorrowInfoScreen from '../components/borrower/publish';
 import InvestorListScreen from '../components/investor/list/list';
 import InvestorDetailScreen from '../components/investor/detail';
+import BuyBorrowerScreen from '../components/buyBorrower';
+import InvestorinfoScreen from '../components/investorinfo';
+
 
 export const AppNavigator = StackNavigator({
   Login: {screen: LoginScreen},
@@ -35,6 +38,10 @@ export const AppNavigator = StackNavigator({
   PublishBorrowInfo: {screen: PublishBorrowInfoScreen},
   InvestorDetail: {screen: InvestorDetailScreen},
   InvestorList: {screen: InvestorListScreen},
+  BuyBorrower: {screen: BuyBorrowerScreen},
+  Investorinfo: {screen: InvestorinfoScreen},
+    
+
   VerifySucceed: {
       screen: VerifysucceedScreen, navigationOptions: ({
           title: '立即借款',

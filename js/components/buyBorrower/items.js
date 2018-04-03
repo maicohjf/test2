@@ -1,71 +1,57 @@
+/**
+ * Created by phr on 4/3/18.
+ */
 "use strict";
 
-import React from "react";
-import { Dimensions, View, Image, Text, StyleSheet, TextInput, FlatList } from "react-native";
-import { Picker, List, WhiteSpace, InputItem, Button, Checkbox, Flex, Toast } from 'antd-mobile';
-import Items from "./items";
-import LoadMore from '../common/loadmore';
-class buyBorrowerComponent extends React.Component {
-  static defaultProps = {
-    _data: [
-      {id: '1', name: '洪先生'}, {id: '2', name: '李先生'}, {id: '3', name: '留先生'}
-    ]
-  }
-  
+import React, {PureComponent} from 'react';
+import {View, Image, Text, StyleSheet, PixelRatio} from 'react-native';
+import {Button} from 'antd-mobile';
+import LinearGradient from 'react-native-linear-gradient';
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-      refreshing: false,
-    }
-  }
-
-  _renderItem = ({item, index}) => {
-    return (<Items index={index} item={item}/>);
-  }
-
-  _renderFooter = () => {
-    return (<LoadMore loading={this.state.loading}/>);
-  }
-
-  _handleRefresh = () => {
-    //下拉刷新
-    this.setState({
-      loading: false,
-      refreshing: true
-    });
-    setTimeout(() => {
-      this.setState({
-        loading: false,
-        refreshing: false
-      });
-      Toast.show("下拉刷新完成")
-    }, 3000);
-  };
+export default class investListComponent extends React.PureComponent {
 
   render() {
+    const {index, item} = this.props;
+    console.log('hhhhhhh', index, item)
     return (
-      
-
-        <FlatList
-          data = {this.props._data}
-          renderItem={this._renderItem}
-          ListFooterComponent={this._renderFooter}
-          onRefresh={this._handleRefresh}
-          refreshing={this.state.refreshing}
-        />
-
-        
-
-      
+        <LinearGradient colors={[colors.startColor, index === 0 ? colors.endColor : colors.startColor]}
+                        startPoint={{x: 1, y: 0}}
+                        endPoint={{x: 0, y: 1}}
+                        style={{marginTop: 10}}>
+          <View style={styles.item}>
+            <View>
+              <Image
+                style={styles.icon}
+                source={require('./img/touxiang.png')}
+              >
+              </Image>
+              <View style={ item.id === '3'? styles.realnameclo : styles.realname }>
+                <Text style={ item.id === '3' ? styles.realnametextclo : styles.realnametext }>已实名</Text>
+              </View>
+            </View>
+            <View style={styles.itemCenter}>
+              <Text style={styles.name}>洪先生</Text>
+              {index===0 ? <Text style={styles.nameinfo}>他是您的潜在投资人</Text> : <Text style={styles.nametime}>最近投资时间：02-09</Text>}
+            </View>
+            {item.id === '3' ? 
+                <View style={styles.seeInfoclo}>
+                  <Text style={styles.seeInfotextclo}>已关闭</Text>
+                </View>   
+              : <View style={styles.seeInfo}>
+                  <Text style={styles.seeInfotext}>查看资料</Text>
+                </View>}
+            
+          </View>
+        </LinearGradient>
     );
   }
 }
 
-buyBorrowerComponent.navigationOptions = {
-  title: '借款人-我的购买',
+const colors = {
+  startColor: "#FFFFFF",
+  endColor: "#F6FAFD"
 };
+
 
 /* StyleSheet =============================================================== */
 
@@ -73,7 +59,7 @@ const styles = StyleSheet.create({
     item: {
       marginTop: 10,
       height: 80,
-      backgroundColor: '#fff',
+      // backgroundColor: '#fff',
       flexDirection: 'row',
       alignItems: 'center', 
       paddingLeft: 15,
@@ -171,6 +157,3 @@ const styles = StyleSheet.create({
       color: '#CCCCCC'
     }
 });
-  
-/* exports ================================================================== */
-module.exports = buyBorrowerComponent;
