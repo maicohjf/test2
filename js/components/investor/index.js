@@ -1,13 +1,30 @@
 "use strict";
 
 import React from "react";
-import { Dimensions, View, Image, Text, StyleSheet } from "react-native";
+import { Dimensions, View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Menu, ActivityIndicator, NavBar } from 'antd-mobile';
+import FlatListDemo from './investorlist/InvestorListComponent'
 
 class InvestorHomeComponent extends React.Component {
   render() {
+    const { height } = Dimensions.get('window');
     return (
-      <View>
-          <Text>home</Text>
+      <View style = {{flex: 1}}>
+        <View style = {{backgroundColor: 'white', height: 44, flexDirection: 'row'}}>
+          <TouchableOpacity style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}} >
+              <Text>默认 </Text>
+              <Image source = {require('./img/Triangle-2-icon.png')}/>
+            </TouchableOpacity>
+            <TouchableOpacity style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+              <Text>按利率 </Text>
+              <Image source = {require('./img/Triangle-4-icon.png')}/>
+            </TouchableOpacity>
+            <TouchableOpacity style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+              <Text>按期限 </Text>
+              <Image source = {require('./img/Triangle-4-icon.png')}/>
+            </TouchableOpacity>
+        </View>
+        <FlatListDemo/>
       </View>
     );
   }
@@ -30,4 +47,4 @@ const styles = StyleSheet.create({
   });
   
 /* exports ================================================================== */
-module.exports = InvestorHomeComponent;
+export default InvestorHomeComponent;

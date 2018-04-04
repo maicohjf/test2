@@ -14,7 +14,7 @@ import ContactsScreen from '../components/verify/contacts';
 import VerifysucceedScreen from '../components/verify/verifysucced';
 import ContractScreen from '../components/contract';
 import ContractDetailScreen from '../components/contract/detail';
-import PublishScreen from '../components/publish';
+import PublishScreen from '../components/publish/list/index';
 import SettingScreen from '../components/setting';
 import MessageScreen from '../components/message';
 import OptionScreen from '../components/optioninfo';
@@ -24,6 +24,8 @@ import InvestorDetailScreen from '../components/investor/detail';
 import BuyBorrowerScreen from '../components/buyBorrower';
 import InvestorinfoScreen from '../components/investorinfo';
 
+import CitySelectorScreen from '../components/city';
+import PublishDetailScreen from '../components/publish/detail/detail';
 
 export const AppNavigator = StackNavigator({
   Login: {screen: LoginScreen},
@@ -42,6 +44,8 @@ export const AppNavigator = StackNavigator({
   Investorinfo: {screen: InvestorinfoScreen},
     
 
+  CitySelector: {screen: CitySelectorScreen},
+  PublishDetail: { screen: PublishDetailScreen },
   VerifySucceed: {
       screen: VerifysucceedScreen, navigationOptions: ({
           title: '立即借款',
@@ -89,6 +93,10 @@ export const AppNavigator = StackNavigator({
     headerTitleStyle:{
       color: "#222",
       fontSize: 18,
+      // position:'absolute',
+      // left:0,
+      // right:0,
+      // textAlign:'center',
     }
   },
   headerMode: 'float',
