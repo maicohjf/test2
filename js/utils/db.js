@@ -1,5 +1,6 @@
 import Realm from 'realm';
 import { AreaSchema, CitySchema, ProvinceSchema, LocationVersionSchema } from '../models/area';
+import { DictSchema } from '../models/dict';
 
 const saveProvince = (realm, province) => {
   try {
@@ -94,8 +95,53 @@ const saveAll = (realm, data) => {
 };
 
 let locationRealm;
+let dictRealm;
+
+const getLocationRealm = (callback) => {
+  if (!locationRealm) {
+    Realm.open({
+      schema: [ProvinceSchema, CitySchema, AreaSchema, LocationVersionSchema]
+    })
+    .then(realm => {
+      locationRealm = realm;
+      callback(realm);
+    })
+  } else {
+    callback(locationRealm);
+  }
+};
+
+const getDictRealm = (callback) => {
+  if (!dictRealm) {
+    Realm.open({
+      schema: [DictSchema]
+    })
+    .then(realm => {
+      dictRealm = realm;
+      callback(realm);
+    })
+  } else {
+    callback(dictRealm);
+  }
+};
 
 export default {
+  writeDict: (data) => {
+    getLocationRealm((realm) => {
+      console.log(realm.path);
+      // saveAll(locationRealm, data);
+    });
+  },
+  readDict: (item, callback) => {
+    getDictRealm((realm) => {
+      const dicts = realm.objects('Dict').filtered('name == $0', item);
+      let dict;
+      if (dicts.length > 0) {
+        dict = dicts[0];
+      }
+      callback(dict);
+    });
+  },
   readLocation: (callback) => {
     if (!locationRealm) {
       Realm.open({
@@ -113,19 +159,39 @@ export default {
       callback(cities);
     }
   },
+  readCities: (callback) => {
+    getLocationRealm((realm) => {
+      const cities = locationRealm.objects('City').sorted('pinyin');
+      const formatedCities = {};
+      cities.forEach(city => {
+        if (city.pinyin && city.name) {
+          const py = city.pinyin.trim();
+          if (py) {
+            const frist = py[0].toUpperCase();
+            if (!formatedCities[frist]) {
+              formatedCities[frist] = [];
+            }
+            formatedCities[frist].push({
+              name: city.name,
+              id: city.id,
+            });
+          }
+        }
+      });
+      const allCities = [];
+      Object.keys(formatedCities).forEach(key => {
+        allCities.push({
+          title: key,
+          value: formatedCities[key],
+        });
+      })
+      callback(allCities);
+    });
+  },
   writeLocation: (data) => {
-    if (!locationRealm) {
-      Realm.open({
-        schema: [ProvinceSchema, CitySchema, AreaSchema, LocationVersionSchema]
-      })
-      .then(realm => {
-        locationRealm = realm;
-        console.log(realm.path);
-        saveAll(realm, data);
-      })
-    } else {
+    getLocationRealm((realm) => {
       console.log(realm.path);
       saveAll(locationRealm, data);
-    }
+    });
   },
 }
