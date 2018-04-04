@@ -21,7 +21,6 @@ export default class FlatListDemo extends Component {
         };
     }
     _renderItem = ({ item, index }) => {
-        console.log(item)
         const txt = '第' + index + '个' + ' title=' + item.title;
         const bgColor = item.index % 2 == 0 ? 'red' : 'blue';
         return <Text style={[{flex:1,height:ITEM_HEIGHT,backgroundColor:bgColor},styles.txt]}>{txt}</Text>

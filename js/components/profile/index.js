@@ -9,12 +9,14 @@ class ProfileComponent extends React.Component {
   render() {
     console.log(this.props);
     return (
-       <ScrollView style={{flex: 1,backgroundColor: '#e5e5e5',paddingBottom:10,}}>
+       <ScrollView style={{flex: 1,paddingBottom:10,}}>
          <View style={{height: 174,backgroundColor: '#fff',alignItems: 'stretch',paddingBottom: 10}}>
           <View style={{height:60,alignItems: 'stretch',flexDirection: 'row'}}>
-            <View style={{height:60,width: 60,marginLeft: 15,backgroundColor: '#f00',borderRadius: 30}}>
-              <Text>上传头像</Text>
-            </View>
+            <TouchableOpacity onPress={()=>alert('上传头像')}>
+                <Image style={{height:60,width: 60,marginLeft: 15,backgroundColor: '#f00',borderRadius: 30}}
+                   source={require('./img/default_avatar.png')} />
+            </TouchableOpacity>
+
             <View style={{flex: 1}}>
               <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
                <Text style={{fontSize: 18,fontWeight: 'bold',color: '#222',marginTop: 2,marginLeft: 15}}>点击登录</Text>
@@ -24,8 +26,8 @@ class ProfileComponent extends React.Component {
           </View>
           <View style={{height: 55,alignItems:'flex-end',flexDirection:'row'}}>
               <Text style={{marginLeft: 15,marginBottom: 0,fontSize:16,color:'#666'}}>查看券:</Text>
-              <Text style={{fontSize:36,color:'#222',marginLeft:15,marginBottom:0,fontWeight:'bold'}}>0</Text>
-              <Text style={{fontSize:24,color:'#222',marginLeft:0,marginBottom:0,fontWeight:'bold'}}>张</Text>
+              <Text style={{fontSize:36,color:'#222',marginLeft:15,fontWeight:'bold'}}>0</Text>
+              <Text style={{fontSize:24,color:'#222',marginLeft:0,fontWeight:'bold'}}>张</Text>
               <TouchableHighlight onPress={()=>alert('去购买')} 
               style={{borderRadius: 12.5,width: 60,height:25,backgroundColor: '#049bff',
                       position: 'absolute',bottom:0,right:25,alignItems:'center',justifyContent:'center'}}>
@@ -51,7 +53,6 @@ class ProfileComponent extends React.Component {
             <Text style={styles.secTitle}>我是借款人</Text>
           </View>
           <View style={styles.trContainer}>
-            /*我的发布**/
             <TouchableOpacity style={styles.trItem} onPress={() => this.props.navigation.navigate('Publish')}>
               <Image style={styles.itemImg} source={require('./img/jk-wodefabu-icon.png')} />
               <Text>我的发布</Text>
@@ -76,7 +77,7 @@ class ProfileComponent extends React.Component {
               <Image style={styles.itemImg} source={require('./img/tz-jrtoudi-icon.png')} />
               <Text>借款人投递</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.trItem} onPress={()=>alert('去我是投资人的购买')}>
+            <TouchableOpacity style={styles.trItem} onPress={() => this.props.navigation.navigate('BuyBorrower')}>
               <Image style={styles.itemImg} source={require('./img/tz-wodegoumai-icon.png')} />
               <Text>我的购买</Text>
             </TouchableOpacity>

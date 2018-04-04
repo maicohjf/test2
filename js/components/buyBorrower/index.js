@@ -1,83 +1,64 @@
 "use strict";
 
 import React from "react";
-import { Dimensions, View, Image, Text, StyleSheet, TextInput } from "react-native";
-import { Picker, List, WhiteSpace, InputItem, Button, Checkbox, Flex } from 'antd-mobile';
-
-
-
+import { Dimensions, View, Image, Text, StyleSheet, TextInput, FlatList } from "react-native";
+import { Picker, List, WhiteSpace, InputItem, Button, Checkbox, Flex, Toast } from 'antd-mobile';
+import Items from "./items";
+import LoadMore from '../common/loadmore';
 class buyBorrowerComponent extends React.Component {
+  static defaultProps = {
+    _data: [
+      {id: '1', name: '洪先生'}, {id: '2', name: '李先生'}, {id: '3', name: '留先生'}
+    ]
+  }
+  
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+      refreshing: false,
+    }
+  }
+
+  _renderItem = ({item, index}) => {
+    return (<Items index={index} item={item}/>);
+  }
+
+  _renderFooter = () => {
+    return (<LoadMore loading={this.state.loading}/>);
+  }
+
+  _handleRefresh = () => {
+    //下拉刷新
+    this.setState({
+      loading: false,
+      refreshing: true
+    });
+    setTimeout(() => {
+      this.setState({
+        loading: false,
+        refreshing: false
+      });
+      Toast.show("下拉刷新完成")
+    }, 3000);
+  };
+
   render() {
     return (
-      <View>
-        <View style={styles.item}>
-          <View>
-            <Image
-              style={styles.icon}
-              source={require('./img/touxiang.png')}
-            >
-            </Image>
-            <View style={styles.realname}>
-              <Text style={styles.realnametext}>已实名</Text>
-            </View>
-          </View>
-          
-          <View style={styles.itemCenter}>
-            <Text style={styles.name}>洪先生</Text>
-            <Text style={styles.nameinfo}>他是您的潜在投资人</Text>
-          </View>
-          <View style={styles.seeInfo}>
-            <Text style={styles.seeInfotext}>查看资料</Text>
-          </View>
-        </View>
+      
 
-        <View style={styles.item}>
-          <View>
-            <Image
-              style={styles.icon}
-              source={require('./img/touxiang.png')}
-            >
-            </Image>
-            <View style={styles.realname}>
-              <Text style={styles.realnametext}>已实名</Text>
-            </View>
-          </View>
-          
-          <View style={styles.itemCenter}>
-            <Text style={styles.name}>洪先生</Text>
-            <Text style={styles.nametime}>最近投资时间：02-09</Text>
-          </View>
-          <View style={styles.seeInfo}>
-            <Text style={styles.seeInfotext}>查看资料</Text>
-          </View>
-        </View>
+        <FlatList
+          data = {this.props._data}
+          renderItem={this._renderItem}
+          ListFooterComponent={this._renderFooter}
+          onRefresh={this._handleRefresh}
+          refreshing={this.state.refreshing}
+        />
 
+        
 
-        <View style={styles.item}>
-          <View>
-            <Image
-              style={styles.icon}
-              source={require('./img/touxiang.png')}
-            >
-            </Image>
-            <View style={styles.realnameclo}>
-              <Text style={styles.realnametextclo}>已实名</Text>
-            </View>
-          </View>
-          
-          <View style={styles.itemCenter}>
-            <Text style={styles.name}>洪先生</Text>
-            <Text style={styles.nametime}>最近投资时间：02-09</Text>
-          </View>
-          <View style={styles.seeInfoclo}>
-            <Text style={styles.seeInfotextclo}>已关闭</Text>
-          </View>
-        </View>
-
-        <View style={styles.nomore}>
-          <Text style={styles.nomoretext}>没有更多了</Text>
-        </View>
-      </View>  
+      
     );
   }
 }

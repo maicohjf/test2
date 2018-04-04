@@ -14,6 +14,17 @@ class BorrowerHomeComponent extends React.Component {
     super(props)
   }
 
+  componentWillMount(){
+    fetch('https://api1.jirongbao.com/api/v1/area/all')
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log(responseJson)
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+  }
+
   render() {
     return (
         <ScrollView style={{flex: 1}}>
