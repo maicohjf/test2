@@ -1,10 +1,19 @@
 "use strict";
 
 import React from "react";
-import { Dimensions, View, Image, Text, StyleSheet } from "react-native";
+import { connect } from 'react-redux';
+import { Dimensions, View, Image, Text, StyleSheet, TouchableOpacity} from "react-native";
+import { withNavigation } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
+import { Button } from "antd-mobile";
+import Color from '../../../constants/colors'
 
 class PublishComponent extends React.Component {
+
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         const { index, item } = this.props;
         return (
@@ -16,11 +25,11 @@ class PublishComponent extends React.Component {
                     <View style={styles.details}>
                         <View style={styles.headshotBg}>
                             <Image
-                                source={require("./img/image-2.png")}
+                                source={require("../img/image-2.png")}
                                 style={styles.publishIcon}
                             />
                             <Image
-                                source={require("./img/real-name-icon.png")}
+                                source={require("../img/real-name-icon.png")}
                                 style={styles.realName}
                             />
                         </View>
@@ -50,35 +59,35 @@ class PublishComponent extends React.Component {
                             </View>
                         </View>
                     </View>
-                    <View style={styles.publishBtn}>
-                        <Text style={{ fontSize: 13, color: '#fff' }}>抢单中</Text>
-                    </View>
+                    <Button type="primary" style={styles.publishBtn} onClick={() => this.props.navigation.navigate('PublishDetail')}>
+                        <Text style={styles.btnValue}>抢单中</Text>
+                    </Button>
                     <View style={styles.asset}>
                         <View style={styles.assetLine}>
                             <View style={styles.line}>
-                                <Image source={require("./img/yueshouru-icon.png")} style={styles.assetIcon} />
+                                <Image source={require("../img/yueshouru-icon.png")} style={styles.assetIcon} />
                                 <Text style={styles.lineValue}>月收入{item.wage}万元</Text>
                             </View>
                             <View style={styles.line}>
-                                <Image source={require("./img/gongjijin-icon.png")} style={styles.assetIcon} />
+                                <Image source={require("../img/gongjijin-icon.png")} style={styles.assetIcon} />
                                 <Text style={styles.lineValue}>无公积金</Text>
                             </View>
                             <View style={styles.line}>
-                                <Image source={require("./img/insurance-icon.png")} style={styles.assetIcon} />
+                                <Image source={require("../img/insurance-icon.png")} style={styles.assetIcon} />
                                 <Text style={styles.lineValue}>有社保</Text>
                             </View>
                         </View>
                         <View style={styles.assetLine}>
                             <View style={styles.line}>
-                                <Image source={require("./img/credit-card-icon.png")} style={styles.assetIcon} />
+                                <Image source={require("../img/credit-card-icon.png")} style={styles.assetIcon} />
                                 <Text style={styles.lineValue}>无信用卡</Text>
                             </View>
                             <View style={styles.line}>
-                                <Image source={require("./img/house-icon.png")} style={styles.assetIcon} />
+                                <Image source={require("../img/house-icon.png")} style={styles.assetIcon} />
                                 <Text style={styles.lineValue}>有房产</Text>
                             </View>
                             <View style={styles.line}>
-                                <Image source={require("./img/car-icon.png")} style={styles.assetIcon} />
+                                <Image source={require("../img/car-icon.png")} style={styles.assetIcon} />
                                 <Text style={styles.lineValue}>有车产</Text>
                             </View>
                         </View>
@@ -96,15 +105,16 @@ PublishComponent.navigationOptions = {
 /* StyleSheet =============================================================== */
 const colors = {
     startColor: "#FFFFFF",
-    endColor: "#F6FAFD"
+    endColor: "#F6FAFD",
+    bgColor: '#f4f7f9'
 };
 const styles = StyleSheet.create({
     publish: {
         position: 'relative',
         height: 150,
-        backgroundColor: '#fff',
+        backgroundColor: Color.white,
         shadowOffset: { width: 0, height: 2 },
-        shadowColor: '#000',
+        shadowColor: Color.black,
         shadowOpacity: 0.1,
         elevation: 1,
         borderRadius: 10,
@@ -129,7 +139,7 @@ const styles = StyleSheet.create({
         width: 75,
         height: 75,
         alignItems: 'center',
-        backgroundColor: '#f4f7f9',
+        backgroundColor: colors.bgColor,
         borderRadius: 50,
     },
     publishIcon: {
@@ -142,7 +152,7 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 15,
-        color: '#000',
+        color: Color.black,
         lineHeight: 20,
         height: 20,
         marginRight: 11,
@@ -154,12 +164,16 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 10,
         right: 15,
-        width: 60,
+        // width: 60,
         height: 25,
-        backgroundColor: '#049bff',
+        // backgroundColor: Color.blue_very_light,
         alignItems: "center",
         justifyContent: 'center',
         borderRadius: 50,
+    },
+    btnValue: {
+        fontSize: 13,
+        color: Color.white,
     },
     address: {
         height: 15,
@@ -182,33 +196,26 @@ const styles = StyleSheet.create({
     },
     ammount: {
         fontSize: 18,
-        color: '#388BED',
+        color: Color.blue,
         height: 20,
         lineHeight: 20,
     },
     symbol: {
         fontSize: 13,
-        color: '#388BED',
+        color: Color.blue,
     },
     publishFont: {
         fontSize: 13,
-        color: '#ccc',
-    },
-    noList: {
-        flex: 1,
-        fontSize: 13,
-        color: '#ccc',
-        alignItems: 'center',
-        justifyContent: 'center',
+        color: Color.gray_light,
     },
     asset: {
         height: 60,
-        backgroundColor: '#f4f7f9',
+        backgroundColor: colors.bgColor,
         borderRadius: 10,
         borderTopRightRadius: 0,
         paddingTop: 10,
         shadowOffset: { width: 0, height: 2 },
-        shadowColor: '#000',
+        shadowColor: Color.black,
         shadowOpacity: 0.1,
         elevation: 1,
     },
@@ -224,7 +231,7 @@ const styles = StyleSheet.create({
     },
     lineValue: {
         fontSize: 12,
-        color: '#666',
+        color: Color.black_light,
     },
     assetIcon: {
         width: 12,
@@ -234,4 +241,4 @@ const styles = StyleSheet.create({
 });
 
 /* exports ================================================================== */
-module.exports = PublishComponent;
+module.exports = connect()(withNavigation(PublishComponent));
