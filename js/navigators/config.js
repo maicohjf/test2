@@ -14,13 +14,14 @@ import ContactsScreen from '../components/verify/contacts';
 import VerifysucceedScreen from '../components/verify/verifysucced';
 import ContractScreen from '../components/contract';
 import ContractDetailScreen from '../components/contract/detail';
-import PublishScreen from '../components/publish';
+import PublishScreen from '../components/publish/list/index';
 import SettingScreen from '../components/setting';
 import MessageScreen from '../components/message';
 import OptionScreen from '../components/optioninfo';
 import PublishBorrowInfoScreen from '../components/borrower/publish';
 import InvestorListScreen from '../components/investor/list/list';
 import InvestorDetailScreen from '../components/investor/detail';
+import PublishDetailScreen from '../components/publish/detail/detail';
 
 export const AppNavigator = StackNavigator({
   Login: {screen: LoginScreen},
@@ -35,6 +36,7 @@ export const AppNavigator = StackNavigator({
   PublishBorrowInfo: {screen: PublishBorrowInfoScreen},
   InvestorDetail: {screen: InvestorDetailScreen},
   InvestorList: {screen: InvestorListScreen},
+  PublishDetail: { screen: PublishDetailScreen },
   VerifySucceed: {
       screen: VerifysucceedScreen, navigationOptions: ({
           title: '立即借款',

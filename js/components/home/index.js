@@ -10,7 +10,6 @@ import Borrower from '../borrower';
 import Investor from '../investor';
 import Profile from '../profile';
 import Message from '../message';
-import Publish from '../publish';
 
 class HomeComponent extends React.Component {
 

@@ -19,6 +19,7 @@
     "react-navigation": "^1.5.8",
     "react-navigation-redux-helpers": "^1.0.3",
     "react-redux": "^5.0.7",
+    "react-sticky": "^6.0.2",
     "realm": "^2.2.8",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
