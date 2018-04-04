@@ -3,7 +3,7 @@
 import React from "react";
 import { Dimensions, View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Menu, ActivityIndicator, NavBar } from 'antd-mobile';
-import FlatListDemo from './investorlist/InvestorListComponent'
+import InvestorListComponent from './investorlist/InvestorListComponent'
 
 class InvestorHomeComponent extends React.Component {
   render() {
@@ -24,7 +24,7 @@ class InvestorHomeComponent extends React.Component {
               <Image source = {require('./img/Triangle-4-icon.png')}/>
             </TouchableOpacity>
         </View>
-        <FlatListDemo/>
+        <InvestorListComponent/>
       </View>
     );
   }

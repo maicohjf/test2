@@ -29,7 +29,8 @@ export default class CitySelector extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: (new Map(): Map<string, boolean>)
+      selected: (new Map(): Map<string, boolean>),
+      curId:''
     }
   }
 
