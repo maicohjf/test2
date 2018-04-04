@@ -4,11 +4,13 @@
 "use strict";
 
 import React, {PureComponent} from 'react';
-import {View, Image, Text, StyleSheet, PixelRatio} from 'react-native';
+import { connect } from 'react-redux';
+import {View, Image, Text, StyleSheet, PixelRatio, TouchableOpacity } from 'react-native';
 import {Button} from 'antd-mobile';
 import LinearGradient from 'react-native-linear-gradient';
+import { withNavigation } from 'react-navigation';
 
-export default class investListComponent extends React.PureComponent {
+class investListComponent extends React.PureComponent {
 
   render() {
     const {index, item} = this.props;
@@ -37,9 +39,17 @@ export default class investListComponent extends React.PureComponent {
                 <View style={styles.seeInfoclo}>
                   <Text style={styles.seeInfotextclo}>已关闭</Text>
                 </View>   
-              : <View style={styles.seeInfo}>
-                  <Text style={styles.seeInfotext}>查看资料</Text>
-                </View>}
+                : <View style={styles.seeInfo} >
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Investorinfo')}>
+                      <Text style={styles.seeInfotext} >查看资料</Text>
+                    </TouchableOpacity>  
+                  </View>
+                    
+            }
+                  
+                
+              
+              
             
           </View>
         </LinearGradient>
@@ -157,3 +167,9 @@ const styles = StyleSheet.create({
       color: '#CCCCCC'
     }
 });
+
+/* exports ================================================================== */
+const mapStateToProps = state => ({
+});
+
+export default connect(mapStateToProps)(withNavigation(investListComponent));
