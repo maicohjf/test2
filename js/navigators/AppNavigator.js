@@ -15,7 +15,7 @@ class AppWithNavigationState extends React.Component {
   componentWillMount() {
     console.log('----');
     const { dispatch } = this.props;
-    dispatch(fetchDict());
+    dispatch(fetchCommon());
   }
   render() {
     const {dispatch, nav} = this.props;

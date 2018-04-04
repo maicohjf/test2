@@ -21,6 +21,7 @@ import OptionScreen from '../components/optioninfo';
 import PublishBorrowInfoScreen from '../components/borrower/publish';
 import InvestorListScreen from '../components/investor/list/list';
 import InvestorDetailScreen from '../components/investor/detail';
+import CitySelectorScreen from '../components/city';
 import PublishDetailScreen from '../components/publish/detail/detail';
 
 export const AppNavigator = StackNavigator({
@@ -36,6 +37,7 @@ export const AppNavigator = StackNavigator({
   PublishBorrowInfo: {screen: PublishBorrowInfoScreen},
   InvestorDetail: {screen: InvestorDetailScreen},
   InvestorList: {screen: InvestorListScreen},
+  CitySelector: {screen: CitySelectorScreen},
   PublishDetail: { screen: PublishDetailScreen },
   VerifySucceed: {
       screen: VerifysucceedScreen, navigationOptions: ({
@@ -84,6 +86,10 @@ export const AppNavigator = StackNavigator({
     headerTitleStyle:{
       color: "#222",
       fontSize: 18,
+      // position:'absolute',
+      // left:0,
+      // right:0,
+      // textAlign:'center',
     }
   },
   headerMode: 'float',
