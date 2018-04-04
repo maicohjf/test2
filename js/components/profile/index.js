@@ -53,7 +53,6 @@ class ProfileComponent extends React.Component {
             <Text style={styles.secTitle}>我是借款人</Text>
           </View>
           <View style={styles.trContainer}>
-            /*我的发布**/
             <TouchableOpacity style={styles.trItem} onPress={() => this.props.navigation.navigate('Publish')}>
               <Image style={styles.itemImg} source={require('./img/jk-wodefabu-icon.png')} />
               <Text>我的发布</Text>
