@@ -8,8 +8,9 @@ import {
     Text,
     Button,
 } from 'react-native';
-
+import { Picker, List, WhiteSpace, InputItem, Checkbox, Flex, Toast } from 'antd-mobile';
 import InvestorListItem from './InvestorListItem'
+import LoadMore from '../../common/loadmore'
 
 var ITEM_HEIGHT = 100;
 
@@ -36,17 +37,30 @@ export default class InvestorListComponent extends Component {
     _renderItem = ({ item, index }) => {
         return <InvestorListItem index = {index} item = {item}/>
     }
-
-
-
-    _renderItem = ({ item, index }) => {
-        return <InvestorListItem index = {index} item = {item} />
-    }
  
-    _separator = () => {
-        return <View style={{height: 10, flex: 1}}/>;
+    // _separator = () => {
+    //     return <View style={{height: 10, flex: 1}}/>;
+    // }
+
+    _renderFooter = () => {
+        return (<LoadMore loading={this.state.loading}/>);
     }
 
+    _handleRefresh = () => {
+        //下拉刷新
+        this.setState({
+          loading: false,
+          refreshing: true
+        });
+        setTimeout(() => {
+          this.setState({
+            loading: false,
+            refreshing: false
+          });
+          Toast.show("下拉刷新完成")
+        }, 3000);
+      };
+    
     _keyExtractor = (item, index) => index.toString();
 
 
@@ -55,11 +69,15 @@ export default class InvestorListComponent extends Component {
             <View style={{flex:1}}>
                 <View style={{flex:1}}>
                     <FlatList
-                        ref={(flatList)=>this._flatList = flatList}
-                        ItemSeparatorComponent={this._separator}
-                        renderItem={this._renderItem}
+                        ref= {(flatList)=>this._flatList = flatList}
+                        ListFooterComponent = {this._renderFooter}
+                        onRefresh = {this._handleRefresh}
+                        refreshing = {this.state.refreshing}
+                        // ItemSeparatorComponent={this._separator}
+                        renderItem = {this._renderItem}
                         keyExtractor = {this._keyExtractor}
-                        data={this.props._messageData}>
+                        data = {this.props._messageData}>
+                        
                     </FlatList>
                 </View>
 

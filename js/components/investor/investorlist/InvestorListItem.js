@@ -117,7 +117,8 @@ const styles = StyleSheet.create({
         elevation: 1,
         borderRadius: 10,
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
+        marginBottom: 10,
     },
     details: {
         height: 75,
