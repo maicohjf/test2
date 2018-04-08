@@ -21,6 +21,7 @@ import OptionScreen from '../components/optioninfo';
 import PublishBorrowInfoScreen from '../components/borrower/publish';
 import InvestorListScreen from '../components/investor/list/list';
 import InvestorDetailScreen from '../components/investor/detail';
+import BankCardScreen from '../components/bankCard';
 
 export const AppNavigator = StackNavigator({
   Login: {screen: LoginScreen},
@@ -34,6 +35,7 @@ export const AppNavigator = StackNavigator({
   Option: {screen: OptionScreen},
   PublishBorrowInfo: {screen: PublishBorrowInfoScreen},
   InvestorDetail: {screen: InvestorDetailScreen},
+  BankCard: {screen: BankCardScreen},
   InvestorList: {screen: InvestorListScreen},
   VerifySucceed: {
       screen: VerifysucceedScreen, navigationOptions: ({
