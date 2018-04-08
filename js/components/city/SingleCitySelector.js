@@ -74,7 +74,7 @@ export default class CitySelector extends React.Component {
       sectionIndex: index,
       viewPosition: 0,
       viewOffset: ITEM_HEIGHT
-    })
+    });
   };
 
   _onSectionUp = () => {

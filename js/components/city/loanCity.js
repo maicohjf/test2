@@ -5,29 +5,24 @@
 
 "use strict";
 import React, {Component}  from 'react';
+import {connect} from 'react-redux';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import SingleCitySelector from './SingleCitySelector';
-import DB from '../../utils/db';
+import {fetchDict, fetchAllCities} from '../../actions';
 
-export default class LoanCityComponent extends React.Component {
+class LoanCityComponent extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       id: '',
       curCity: '请选择',
-      cities: [],
-      sections: []
     }
   }
 
-  componentWillMount() {
-    DB.readCities(({cities, sections}) => {
-      this.setState({
-        cities: cities,
-        sections: sections
-      });
-    });
+  componentDidMount() {
+    const {dispatch} = this.props;
+    dispatch(fetchAllCities());
   }
 
   _onPressCityItem = (id, curCity) => {
@@ -38,6 +33,7 @@ export default class LoanCityComponent extends React.Component {
   };
 
   render() {
+    const {cities, sections} = this.props.city;
     return (
         <View style={{flex: 1}}>
           <Text style={styles.curName}>当前</Text>
@@ -45,8 +41,8 @@ export default class LoanCityComponent extends React.Component {
             <Text style={styles.textStyle}>{this.state.curCity}</Text>
             {this.state.id ? <Image source={require('./img/ds-icon.png')} style={styles.selectedIcon}/> : null}
           </View>
-          <SingleCitySelector curCityId={this.state.id} cities={this.state.cities}
-                              sections={this.state.sections} onPressItem={this._onPressCityItem}/>
+          <SingleCitySelector curCityId={this.state.id} cities={cities}
+                              sections={sections} onPressItem={this._onPressCityItem}/>
         </View>
     );
   }
@@ -76,3 +72,10 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapStateToProps = ({common}) => {
+  return {
+    city: common.city,
+  }
+};
+
+export default connect(mapStateToProps)(LoanCityComponent);

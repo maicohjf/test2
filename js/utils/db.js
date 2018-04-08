@@ -186,34 +186,36 @@ export default {
     }
   },
   readCities: (callback) => {
-    getRealm((realm) => {
-      const cities = currentRealm.objects('City').sorted('pinyin');
-      const formatedCities = {};
-      cities.forEach(city => {
-        if (city.pinyin && city.name) {
-          const py = city.pinyin.trim();
-          if (py) {
-            const frist = py[0].toUpperCase();
-            if (!formatedCities[frist]) {
-              formatedCities[frist] = [];
+    return new Promise((resolve, reject) => {
+      getLocationRealm((realm) => {
+        const cities = locationRealm.objects('City').sorted('pinyin');
+        const formatedCities = {};
+        cities.forEach(city => {
+          if (city.pinyin && city.name) {
+            const py = city.pinyin.trim();
+            if (py) {
+              const frist = py[0].toUpperCase();
+              if (!formatedCities[frist]) {
+                formatedCities[frist] = [];
+              }
+              formatedCities[frist].push({
+                name: city.name,
+                id: city.id,
+              });
             }
-            formatedCities[frist].push({
-              name: city.name,
-              id: city.id,
-            });
           }
-        }
-      });
-      const allCities = [];
-      const sections = Object.keys(formatedCities);
-      sections.forEach(key => {
-        allCities.push({
-          title: key,
-          data: formatedCities[key],
         });
+        const allCities = [];
+        const sections = Object.keys(formatedCities);
+        sections.forEach(key => {
+          allCities.push({
+            title: key,
+            data: formatedCities[key],
+          });
+        });
+        resolve({cities: allCities, sections: sections});
       });
-      callback({cities: allCities, sections: sections});
-    });
+    })
   },
   writeLocation: (data) => {
     getRealm((realm) => {

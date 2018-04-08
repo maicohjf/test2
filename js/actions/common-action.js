@@ -25,3 +25,9 @@ export function fetchCommon() {
     type: ActionsTypes.COMMON_FETCH_REQUEST,
   };
 }
+
+export function fetchAllCities() {
+  return {
+    type: ActionsTypes.ALL_CITIES_FETCH_REQUEST,
+  }
+}
