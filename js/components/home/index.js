@@ -51,6 +51,7 @@ class HomeComponent extends React.Component {
 
   render() {
     console.log(this.props.navigation);
+    console.log(this.props);
     return (
         <ScrollableTabView
             locked={true}

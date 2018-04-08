@@ -1,6 +1,6 @@
 import Realm from 'realm';
-import { AreaSchema, CitySchema, ProvinceSchema, LocationVersionSchema } from '../models/area';
-import { DictSchema } from '../models/dict';
+import {AreaSchema, CitySchema, ProvinceSchema, LocationVersionSchema} from '../models/area';
+import {DictSchema} from '../models/dict';
 
 const saveProvince = (realm, province) => {
   try {
@@ -102,10 +102,10 @@ const getLocationRealm = (callback) => {
     Realm.open({
       schema: [ProvinceSchema, CitySchema, AreaSchema, LocationVersionSchema]
     })
-    .then(realm => {
-      locationRealm = realm;
-      callback(realm);
-    })
+        .then(realm => {
+          locationRealm = realm;
+          callback(realm);
+        })
   } else {
     callback(locationRealm);
   }
@@ -116,10 +116,10 @@ const getDictRealm = (callback) => {
     Realm.open({
       schema: [DictSchema]
     })
-    .then(realm => {
-      dictRealm = realm;
-      callback(realm);
-    })
+        .then(realm => {
+          dictRealm = realm;
+          callback(realm);
+        })
   } else {
     callback(dictRealm);
   }
@@ -147,12 +147,12 @@ export default {
       Realm.open({
         schema: [ProvinceSchema, CitySchema, AreaSchema, LocationVersionSchema]
       })
-      .then(realm => {
-        locationRealm = realm;
-        const cities = realm.objects('City');
-        console.log(cities.length);
-        callback(cities);
-      })
+          .then(realm => {
+            locationRealm = realm;
+            const cities = realm.objects('City');
+            console.log(cities.length);
+            callback(cities);
+          })
     } else {
       const cities = locationRealm.objects('City');
       console.log(cities.length);
@@ -160,33 +160,36 @@ export default {
     }
   },
   readCities: (callback) => {
-    getLocationRealm((realm) => {
-      const cities = locationRealm.objects('City').sorted('pinyin');
-      const formatedCities = {};
-      cities.forEach(city => {
-        if (city.pinyin && city.name) {
-          const py = city.pinyin.trim();
-          if (py) {
-            const frist = py[0].toUpperCase();
-            if (!formatedCities[frist]) {
-              formatedCities[frist] = [];
+    return new Promise((resolve, reject) => {
+      getLocationRealm((realm) => {
+        const cities = locationRealm.objects('City').sorted('pinyin');
+        const formatedCities = {};
+        cities.forEach(city => {
+          if (city.pinyin && city.name) {
+            const py = city.pinyin.trim();
+            if (py) {
+              const frist = py[0].toUpperCase();
+              if (!formatedCities[frist]) {
+                formatedCities[frist] = [];
+              }
+              formatedCities[frist].push({
+                name: city.name,
+                id: city.id,
+              });
             }
-            formatedCities[frist].push({
-              name: city.name,
-              id: city.id,
-            });
           }
-        }
-      });
-      const allCities = [];
-      Object.keys(formatedCities).forEach(key => {
-        allCities.push({
-          title: key,
-          value: formatedCities[key],
         });
-      })
-      callback(allCities);
-    });
+        const allCities = [];
+        const sections = Object.keys(formatedCities);
+        sections.forEach(key => {
+          allCities.push({
+            title: key,
+            data: formatedCities[key],
+          });
+        });
+        resolve({cities: allCities, sections: sections});
+      });
+    })
   },
   writeLocation: (data) => {
     getLocationRealm((realm) => {
