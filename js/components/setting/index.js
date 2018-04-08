@@ -1,13 +1,37 @@
 "use strict";
 
 import React from "react";
-import { Dimensions, View, Text, StyleSheet, Image, Switch, TouchableOpacity } from "react-native";
+import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
+import { Dimensions, AppRegistry, View, Text, StyleSheet, Image, Switch, TouchableOpacity } from "react-native";
+
+import { logout } from '../../actions';
+
+const resetAction = NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({ routeName: 'Profile' })
+    ]
+});
 
 class SettingComponent extends React.Component {
 
     state = {
         value: false,
         disabled: false,
+    }
+
+    handleLogout() {
+        const { dispatch } = this.props;
+        dispatch(logout());
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { auth } = nextProps;
+    
+        if (auth && !auth.isLoggedIn) {
+          this.props.navigation.dispatch(resetAction);
+        }
     }
 
     render() {
@@ -34,7 +58,9 @@ class SettingComponent extends React.Component {
                     </View>
                 </View>
                 <View style={styles.logOut}>
-                    <TouchableOpacity style={styles.logBtn}>
+                    <TouchableOpacity style={styles.logBtn} onPress={() => {
+                        this.handleLogout();
+                    }}>
                         <Text>安全退出</Text>
                     </TouchableOpacity>
                 </View>
@@ -86,4 +112,10 @@ const styles = StyleSheet.create({
 });
 
 /* exports ================================================================== */
-module.exports = SettingComponent;
+function mapStateToProps({ auth }) {
+    return {
+      auth,
+    };
+}
+  
+export default connect(mapStateToProps)(SettingComponent);

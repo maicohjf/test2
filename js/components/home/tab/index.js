@@ -18,7 +18,8 @@ export default class TabBar extends Component {
 
   renderTab(name, page, isTabActive, onPressHandler) {
     return (
-        <TouchableOpacity activeOpacity={1} onPress={() => onPressHandler(page)} style={styles.tabInnerContainer} key={page}>
+        <TouchableOpacity activeOpacity={1} onPress={() => onPressHandler(page)} style={styles.tabInnerContainer}
+                          key={page}>
           <View style={styles.tab}>
             <Image source={isTabActive ? icons[page % 3].selected : icons[page % 3].normal}
                    style={isTabActive ? styles.tabIconSelected : styles.tabIcon}/>

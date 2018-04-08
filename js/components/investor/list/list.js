@@ -81,7 +81,6 @@ export default class investListComponent extends React.PureComponent {
   };
 
   render() {
-    console.log(this.state);
     return (
         <FlatList
             data={this.props._data}

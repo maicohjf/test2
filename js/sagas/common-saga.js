@@ -2,40 +2,17 @@ import { delay } from 'redux-saga';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import ActionsTypes from '../actions/actionsTypes';
-import CommonService from '../services/common-service';
 
 import api from '../constants/api';
 import { request } from '../utils/request';
-
-export function* sendSmsCode(action) {
-  try {
-    const res = yield call(request, api.sendSmsCode, {
-      method: 'post',
-      payload: {
-        phone: action.data.phone,
-        op: 'REGISTER'
-      }
-    });
-    console.log(res);
-    yield put({
-      type: ActionsTypes.SMSCODE_SEND_SUCCESS,
-    });
-  }
-  catch (err) {
-    yield put({
-      type: ActionsTypes.SMSCODE_SEND_FAILURE,
-      payload: err,
-    });
-  }
-}
+import { withLoading } from './saga-helper';
+import dbUtil from '../utils/db';
 
 export function* fetchDict() {
   try {
-    console.log(api.dict);
     const res = yield call(request, api.dict, {
       method: 'get',
     });
-    console.log(res);
     yield put({
       type: ActionsTypes.DICT_FETCH_SUCCESS,
       dict: res.data.dict,
@@ -49,9 +26,55 @@ export function* fetchDict() {
   }
 }
 
+export function* fetchArea() {
+  try {
+    const res = yield call(request, api.area, {
+      method: 'get',
+    });
+    yield put({
+      type: ActionsTypes.AREA_FETCH_SUCCESS,
+      dict: res.data.dict,
+    });
+  }
+  catch (err) {
+    yield put({
+      type: ActionsTypes.AREA_FETCH_FAILURE,
+      payload: err,
+    });
+  }
+}
+
+export function* fetchCommon() {
+  try {
+    const [resDict, resArea] = yield [
+      call(request, api.dict, {
+        method: 'get',
+      }),
+      call(request, api.area, {
+        method: 'get',
+      })
+    ];
+    console.log(resArea);
+    console.log(resDict);
+    yield put({
+      type: ActionsTypes.DICT_FETCH_SUCCESS,
+      dict: resDict.data.dict,
+    });
+    if (resArea && resArea.data && resArea.data.list && resArea.data.version != null && resArea.data.list.address) {
+      dbUtil.writeLocation(resArea.data);
+    }
+  }
+  catch (err) {
+    yield put({
+      type: ActionsTypes.DICT_FETCH_FAILURE,
+      payload: err,
+    });
+  }
+}
+
 export default function* root() {
   yield all([
-    takeLatest(ActionsTypes.SMSCODE_SEND_REQUEST, sendSmsCode),
-    takeLatest(ActionsTypes.DICT_FETCH_REQUEST, fetchDict),
+    takeLatest(ActionsTypes.DICT_FETCH_REQUEST, withLoading(fetchDict)),
+    takeLatest(ActionsTypes.COMMON_FETCH_REQUEST, withLoading(fetchCommon)),
   ]);
 }
