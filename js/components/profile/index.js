@@ -108,6 +108,12 @@ class ProfileComponent extends React.Component {
          </TouchableOpacity>
         </ScrollView>
 
+
+          <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('BankCard')}>
+              <Text>我的银行卡</Text>
+          </TouchableOpacity>
+
+      </View>
     );
   }
 }
