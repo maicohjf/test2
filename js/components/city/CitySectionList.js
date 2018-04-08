@@ -5,8 +5,9 @@
 
 'use strict';
 import React, {PureComponent} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Platform} from 'react-native';
 import PropTypes from 'prop-types';
+import adaptSmallScreen from '../../utils/adaptSmallScreen';
 
 const returnTrue = () => true;
 
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     right: 0,
     top: 0,
-    width: 23,
+    width: Platform.OS === 'ios' ? adaptSmallScreen.adjustComponentSizeInSmallScreen(23) : 23,
   },
   sectionView: {
     justifyContent: 'center',
@@ -156,11 +157,11 @@ const styles = StyleSheet.create({
     flex: 1
   },
   letterStyle: {
-    height: 18,
-    fontSize: 13,
+    height: Platform.OS === 'ios' ? adaptSmallScreen.adjustComponentSizeInSmallScreen(18) : 18,
+    fontSize: Platform.OS === 'ios' ? adaptSmallScreen.adjustFontSizeInSmallScreen(13) : 13,
     color: '#388bed',
-    lineHeight: 18,
-    width: 23,
+    lineHeight: Platform.OS === 'ios' ? adaptSmallScreen.adjustComponentSizeInSmallScreen(18) : 13,
+    width: Platform.OS === 'ios' ? adaptSmallScreen.adjustComponentSizeInSmallScreen(23) : 23,
     textAlign: 'center',
   },
 
@@ -180,13 +181,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#666',
-    width: 80,
-    height: 80,
+    width: 60,
+    height: 60,
     borderRadius: 3
   },
 
   textShow: {
-    fontSize: 50,
+    fontSize: 44,
     color: '#fff',
   },
 });
