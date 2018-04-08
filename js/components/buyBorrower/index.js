@@ -173,4 +173,4 @@ const styles = StyleSheet.create({
 });
   
 /* exports ================================================================== */
-module.exports = buyBorrowerComponent;
+export default buyBorrowerComponent;

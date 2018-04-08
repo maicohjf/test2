@@ -175,4 +175,4 @@ const styles = StyleSheet.create({
 });
 
 /* exports ================================================================== */
-module.exports = PublishDetailComponent;
+export default PublishDetailComponent;

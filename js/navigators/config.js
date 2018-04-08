@@ -1,4 +1,4 @@
-import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import {addNavigationHelpers, StackNavigator} from 'react-navigation';
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 
 import LoginScreen from '../components/login';
@@ -24,7 +24,7 @@ import InvestorDetailScreen from '../components/investor/detail';
 import BuyBorrowerScreen from '../components/buyBorrower';
 import InvestorinfoScreen from '../components/investorinfo';
 
-import CitySelectorScreen from '../components/city';
+import LoanCityScreen from '../components/city/loanCity';
 import PublishDetailScreen from '../components/publish/detail/detail';
 
 export const AppNavigator = StackNavigator({
@@ -42,55 +42,53 @@ export const AppNavigator = StackNavigator({
   InvestorList: {screen: InvestorListScreen},
   BuyBorrower: {screen: BuyBorrowerScreen},
   Investorinfo: {screen: InvestorinfoScreen},
-    
-
-  CitySelector: {screen: CitySelectorScreen},
-  PublishDetail: { screen: PublishDetailScreen },
+  LoanCity: {screen: LoanCityScreen},
+  PublishDetail: {screen: PublishDetailScreen},
   VerifySucceed: {
-      screen: VerifysucceedScreen, navigationOptions: ({
-          title: '立即借款',
-      })
+    screen: VerifysucceedScreen, navigationOptions: ({
+      title: '立即借款',
+    })
   },
   Contacts: {
-      screen: ContactsScreen, navigationOptions: ({
-          title: '紧急联系人',
-      })
+    screen: ContactsScreen, navigationOptions: ({
+      title: '紧急联系人',
+    })
   },
   BindingPhone: {
-      screen: BindingPhoneScreen, navigationOptions: ({
-          title: '绑定银行卡',
-      })
+    screen: BindingPhoneScreen, navigationOptions: ({
+      title: '绑定银行卡',
+    })
   },
   Banks: {
-      screen: BanksScreen, navigationOptions: ({
-          title: '支持银行',
-      })
+    screen: BanksScreen, navigationOptions: ({
+      title: '支持银行',
+    })
   },
   BindingCard: {
-      screen: BindingCardScreen, navigationOptions: ({
-          title: '绑定银行卡',
-      })
+    screen: BindingCardScreen, navigationOptions: ({
+      title: '绑定银行卡',
+    })
   },
   FaceRecognition: {
-      screen: FaceRecognitionScreen, navigationOptions: ({
-          title: '人脸识别',
-      })
+    screen: FaceRecognitionScreen, navigationOptions: ({
+      title: '人脸识别',
+    })
   },
   Verify: {
-      screen: VerifyScreenScreen, navigationOptions: ({
-          title: '实名认证',
-      })
+    screen: VerifyScreenScreen, navigationOptions: ({
+      title: '实名认证',
+    })
   },
 }, {
   initialRouteName: 'Home',
   /* The header share config  */
   navigationOptions: {
     gesturesEnabled: true,
-    headerStyle:{
-      backgroundColor:'white',
-      elevation:1,
+    headerStyle: {
+      backgroundColor: 'white',
+      elevation: 1,
     },
-    headerTitleStyle:{
+    headerTitleStyle: {
       color: "#222",
       fontSize: 18,
       // position:'absolute',
@@ -105,7 +103,7 @@ export const AppNavigator = StackNavigator({
     //适配Android，不过，需要导入动画
     screenInterpolator: CardStackStyleInterpolator.forHorizontal,
   })),
-  cardStyle:({
-    backgroundColor:'#F4F7F9', //统一定义界面背景颜色
+  cardStyle: ({
+    backgroundColor: '#F4F7F9', //统一定义界面背景颜色
   }),
 });
