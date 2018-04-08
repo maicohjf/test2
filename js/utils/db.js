@@ -187,8 +187,8 @@ export default {
   },
   readCities: (callback) => {
     return new Promise((resolve, reject) => {
-      getLocationRealm((realm) => {
-        const cities = locationRealm.objects('City').sorted('pinyin');
+      getRealm((realm) => {
+        const cities = currentRealm.objects('City').sorted('pinyin');
         const formatedCities = {};
         cities.forEach(city => {
           if (city.pinyin && city.name) {
