@@ -194,11 +194,11 @@ export default {
           if (city.pinyin && city.name) {
             const py = city.pinyin.trim();
             if (py) {
-              const frist = py[0].toUpperCase();
-              if (!formatedCities[frist]) {
-                formatedCities[frist] = [];
+              const first = py[0].toUpperCase();
+              if (!formatedCities[first]) {
+                formatedCities[first] = [];
               }
-              formatedCities[frist].push({
+              formatedCities[first].push({
                 name: city.name,
                 id: city.id,
               });
