@@ -1,11 +1,6 @@
 import Realm from 'realm';
-<<<<<<< HEAD
 import { AreaSchema, CitySchema, ProvinceSchema, LocationVersionSchema } from '../models/area';
 import { DictSchema, DictVersionSchema } from '../models/dict';
-=======
-import {AreaSchema, CitySchema, ProvinceSchema, LocationVersionSchema} from '../models/area';
-import {DictSchema} from '../models/dict';
->>>>>>> 2ac0855af9558cf50bf79be44247604fd5572285
 
 const saveProvince = (realm, province) => {
   realm.create('Province', {
@@ -110,7 +105,6 @@ const saveDictItem = (realm, dict) => {
   }
 };
 
-<<<<<<< HEAD
 const deleteAllDict = (realm) => {
   let allVersion = realm.objects('DictVersion');
   realm.delete(allVersion);
@@ -140,17 +134,6 @@ const saveDict = (realm, data) => {
     } catch (e) {
       console.log(e);
     }
-=======
-const getLocationRealm = (callback) => {
-  if (!locationRealm) {
-    Realm.open({
-      schema: [ProvinceSchema, CitySchema, AreaSchema, LocationVersionSchema]
-    })
-        .then(realm => {
-          locationRealm = realm;
-          callback(realm);
-        })
->>>>>>> 2ac0855af9558cf50bf79be44247604fd5572285
   } else {
     console.log(`dict data current version ${curVersion}, no need to update.`)
   }
@@ -163,17 +146,10 @@ const getRealm = (callback) => {
     Realm.open({
       schema: [ProvinceSchema, CitySchema, AreaSchema, LocationVersionSchema, DictSchema, DictVersionSchema]
     })
-<<<<<<< HEAD
     .then(realm => {
       currentRealm = realm;
       callback(realm);
     })
-=======
-        .then(realm => {
-          dictRealm = realm;
-          callback(realm);
-        })
->>>>>>> 2ac0855af9558cf50bf79be44247604fd5572285
   } else {
     callback(currentRealm);
   }
@@ -197,21 +173,12 @@ export default {
       Realm.open({
         schema: [ProvinceSchema, CitySchema, AreaSchema, LocationVersionSchema]
       })
-<<<<<<< HEAD
       .then(realm => {
         currentRealm = realm;
         const cities = realm.objects('City');
         console.log(cities.length);
         callback(cities);
       })
-=======
-          .then(realm => {
-            locationRealm = realm;
-            const cities = realm.objects('City');
-            console.log(cities.length);
-            callback(cities);
-          })
->>>>>>> 2ac0855af9558cf50bf79be44247604fd5572285
     } else {
       const cities = currentRealm.objects('City');
       console.log(cities.length);
