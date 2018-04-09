@@ -6,6 +6,8 @@ import {addNavigationHelpers} from 'react-navigation';
 import {addListener} from '../utils/redux';
 import { AppNavigator } from '../navigators/config';
 import { fetchDict, fetchCommon } from '../actions';
+import {Toast} from "antd-mobile";
+
 
 class AppWithNavigationState extends React.Component {
   static propTypes = {
@@ -13,10 +15,21 @@ class AppWithNavigationState extends React.Component {
     nav: PropTypes.object.isRequired,
   };
   componentWillMount() {
-    console.log('----');
     const { dispatch } = this.props;
     dispatch(fetchCommon());
   }
+
+  componentWillReceiveProps(nextProps){
+    const { common } = nextProps;
+    if (common && !common.isLoading &&common.errMsg) {
+      Toast.info(common.errMsg,2);
+    }
+  }
+
+  componentWillUnmount(){
+    Toast.hide();
+  }
+
   render() {
     const {dispatch, nav} = this.props;
     return (

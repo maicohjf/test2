@@ -1,6 +1,16 @@
 export const DictSchema = {
   name: 'Dict',
   properties: {
-    name: 'string',
+    usage: 'string',
+    code: 'string',
+    val: 'string',
+    module: 'string',
+  }
+};
+
+export const DictVersionSchema = {
+  name: 'DictVersion',
+  properties: {
+    version: 'int',
   }
 };

@@ -1,52 +1,31 @@
 import Realm from 'realm';
-import {AreaSchema, CitySchema, ProvinceSchema, LocationVersionSchema} from '../models/area';
-import {DictSchema} from '../models/dict';
+import { AreaSchema, CitySchema, ProvinceSchema, LocationVersionSchema } from '../models/area';
+import { DictSchema, DictVersionSchema } from '../models/dict';
 
 const saveProvince = (realm, province) => {
-  try {
-    realm.write(() => {
-      realm.create('Province', {
-        name: province.province_name,
-        id: province.id,
-        pinyin: province.pinyin,
-      });
-    });
-  } catch (e) {
-    console.log(e);
-    console.log("Error on creation Province");
-  }
+  realm.create('Province', {
+    name: province.province_name,
+    id: province.id,
+    pinyin: province.pinyin,
+  });
 };
 
 const saveCity = (realm, province, city) => {
-  try {
-    realm.write(() => {
-      realm.create('City', {
-        name: city.city_name,
-        id: city.id,
-        pinyin: city.pinyin,
-        province_id: province.id,
-      });
-    });
-  } catch (e) {
-    console.log(e);
-    console.log("Error on creation City");
-  }
+  realm.create('City', {
+    name: city.city_name,
+    id: city.id,
+    pinyin: city.pinyin,
+    province_id: province.id,
+  });
 };
 
 const saveArea = (realm, city, area) => {
-  try {
-    realm.write(() => {
-      realm.create('Area', {
-        name: area.area_name,
-        id: area.id,
-        pinyin: area.pinyin,
-        city_id: city.id,
-      });
-    });
-  } catch (e) {
-    console.log(e);
-    console.log("Error on creation Area");
-  }
+  realm.create('Area', {
+    name: area.area_name,
+    id: area.id,
+    pinyin: area.pinyin,
+    city_id: city.id,
+  });
 };
 
 const saveLocation = (realm, location) => {
@@ -67,118 +46,168 @@ const saveLocation = (realm, location) => {
   }
 };
 
+const deleteAllLocation = (realm) => {
+  let allVersion = realm.objects('LocationVersion');
+  realm.delete(allVersion);
+  let allProvince = realm.objects('Province');
+  realm.delete(allProvince);
+  let allCity = realm.objects('City');
+  realm.delete(allCity);
+  let allArea = realm.objects('Area');
+  realm.delete(allArea);
+}
+
 const saveAll = (realm, data) => {
   const curVersion = data.version;
   let preVersion = null;
   const versions = realm.objects('LocationVersion');
   if (versions && versions.length > 0) {
     preVersion = versions[versions.length - 1].version;
-    console.log(`preVersion is ${preVersion}`);
+    console.log(`location preVersion is ${preVersion}`);
   }
   if (preVersion === null || curVersion > preVersion) {
-    console.log(`begion to write to realm`);
+    console.log(`location: begion to write to realm`);
     try {
+      const address = data.list.address;
       realm.write(() => {
-        realm.deleteAll();
+        deleteAllLocation(realm);
         realm.create('LocationVersion', {
           version: data.version,
         });
+        saveLocation(realm, address);
       });
     } catch (e) {
       console.log(e);
     }
-    const address = data.list.address;
-    saveLocation(realm, address);
   } else {
     console.log(`location data current version ${curVersion}, no need to update.`)
   }
 };
 
-let locationRealm;
-let dictRealm;
-
-const getLocationRealm = (callback) => {
-  if (!locationRealm) {
-    Realm.open({
-      schema: [ProvinceSchema, CitySchema, AreaSchema, LocationVersionSchema]
-    })
-        .then(realm => {
-          locationRealm = realm;
-          callback(realm);
-        })
-  } else {
-    callback(locationRealm);
+const saveDictItem = (realm, dict) => {
+  if (dict) {
+    const keys = Object.keys(dict);
+    if (keys && keys.length > 0) {
+      keys.forEach(key => {
+        const options = dict[key];
+        if (options && options.length > 0) {
+          options.forEach(option => {
+            realm.create('Dict', {
+              module: key,
+              usage: option.module,
+              code: option.code,
+              val: option.val,
+            });
+          });
+        }
+      });
+    }
   }
 };
 
-const getDictRealm = (callback) => {
-  if (!dictRealm) {
-    Realm.open({
-      schema: [DictSchema]
-    })
-        .then(realm => {
-          dictRealm = realm;
-          callback(realm);
-        })
+const deleteAllDict = (realm) => {
+  let allVersion = realm.objects('DictVersion');
+  realm.delete(allVersion);
+  let allDict = realm.objects('Dict');
+  realm.delete(allDict);
+}
+
+const saveDict = (realm, data) => {
+  const curVersion = data.version;
+  let preVersion = null;
+  const versions = realm.objects('DictVersion');
+  if (versions && versions.length > 0) {
+    preVersion = versions[versions.length - 1].version;
+    console.log(`dict preVersion is ${preVersion}`);
+  }
+  if (preVersion === null || curVersion > preVersion) {
+    console.log(`dict: begion to write to realm`);
+    try {
+      const dict = data.dict;
+      realm.write(() => {
+        deleteAllDict(realm);
+        realm.create('DictVersion', {
+          version: data.version,
+        });
+        saveDictItem(realm, dict);
+      });
+    } catch (e) {
+      console.log(e);
+    }
   } else {
-    callback(dictRealm);
+    console.log(`dict data current version ${curVersion}, no need to update.`)
+  }
+};
+
+let currentRealm;
+
+const getRealm = (callback) => {
+  if (!currentRealm) {
+    Realm.open({
+      schema: [ProvinceSchema, CitySchema, AreaSchema, LocationVersionSchema, DictSchema, DictVersionSchema]
+    })
+    .then(realm => {
+      currentRealm = realm;
+      callback(realm);
+    })
+  } else {
+    callback(currentRealm);
   }
 };
 
 export default {
   writeDict: (data) => {
-    getLocationRealm((realm) => {
+    getRealm((realm) => {
       console.log(realm.path);
-      // saveAll(locationRealm, data);
+      saveDict(realm, data);
     });
   },
   readDict: (item, callback) => {
-    getDictRealm((realm) => {
-      const dicts = realm.objects('Dict').filtered('name == $0', item);
-      let dict;
-      if (dicts.length > 0) {
-        dict = dicts[0];
-      }
-      callback(dict);
+    getRealm((realm) => {
+      const dicts = realm.objects('Dict').filtered('module == $0', item);
+      callback(dicts);
     });
   },
   readLocation: (callback) => {
-    if (!locationRealm) {
+    if (!currentRealm) {
       Realm.open({
         schema: [ProvinceSchema, CitySchema, AreaSchema, LocationVersionSchema]
       })
-          .then(realm => {
-            locationRealm = realm;
-            const cities = realm.objects('City');
-            console.log(cities.length);
-            callback(cities);
-          })
+      .then(realm => {
+        currentRealm = realm;
+        const cities = realm.objects('City');
+        console.log(cities.length);
+        callback(cities);
+      })
     } else {
-      const cities = locationRealm.objects('City');
+      const cities = currentRealm.objects('City');
       console.log(cities.length);
       callback(cities);
     }
   },
   readCities: (callback) => {
     return new Promise((resolve, reject) => {
-      getLocationRealm((realm) => {
-        const cities = locationRealm.objects('City').sorted('pinyin');
+      getRealm((realm) => {
+        const cities = realm.objects('City').sorted('pinyin');
         const formatedCities = {};
+
         cities.forEach(city => {
-          if (city.pinyin && city.name) {
-            const py = city.pinyin.trim();
+          const { pinyin, name, id } = city;
+          if (pinyin && name) {
+            const py = pinyin.trim();
             if (py) {
-              const frist = py[0].toUpperCase();
-              if (!formatedCities[frist]) {
-                formatedCities[frist] = [];
+              const first = py[0].toUpperCase();
+              if (!formatedCities[first]) {
+                formatedCities[first] = [];
               }
-              formatedCities[frist].push({
-                name: city.name,
-                id: city.id,
+              formatedCities[first].push({
+                name,
+                id,
               });
             }
           }
         });
+
         const allCities = [];
         const sections = Object.keys(formatedCities);
         sections.forEach(key => {
@@ -187,14 +216,15 @@ export default {
             data: formatedCities[key],
           });
         });
+
         resolve({cities: allCities, sections: sections});
       });
     })
   },
   writeLocation: (data) => {
-    getLocationRealm((realm) => {
+    getRealm((realm) => {
       console.log(realm.path);
-      saveAll(locationRealm, data);
+      saveAll(currentRealm, data);
     });
   },
 }

@@ -64,6 +64,9 @@ export function* fetchCommon() {
     if (resArea && resArea.data && resArea.data.list && resArea.data.version !== null && resArea.data.list.address) {
       dbUtil.writeLocation(resArea.data);
     }
+    if (resDict && resDict.data && resDict.data.version != null) {
+      dbUtil.writeDict(resDict.data);
+    }
   }
   catch (err) {
     yield put({

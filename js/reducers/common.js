@@ -2,10 +2,11 @@ import ActionsTypes from '../actions/actionsTypes';
 
 const initialAuthState = {
   isLoading: false,
+  errMsg: null,
   dict: [],
   city: {
     cities: [],
-    sections:[]
+    sections: []
   }
 };
 
@@ -25,6 +26,11 @@ export const common = (state = initialAuthState, action) => {
       return {
         ...state,
         city: action.city,
+      };
+    case ActionsTypes.COMMON_FAILURE:
+      return {
+        ...state,
+        errMsg: action.errMsg
       };
     default:
       return state;

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, View, Dimensions, StyleSheet, Image, TouchableOpacity, PixelRatio} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import PropTypes from 'prop-types';
 
 // todo test data
 const ENTRIES1 = [
@@ -57,16 +58,19 @@ const entryBorderRadius = 5;
  * 走马灯效果组件
  */
 export default class SnapCarouselComponent extends Component {
+  static propTypes = {
+    banners: PropTypes.array,
+  };
 
   _renderItem({item, index}) {
     return (
         <TouchableOpacity activeOpacity={1} style={styles.slideInnerContainer} onPress={() => {
-          alert(`You've clicked '${item.title}'`);
+          alert(`You've clicked '${item.id}'`);
         }}>
           <View style={styles.imageContainer}>
             <Image
                 style={styles.image}
-                source={{uri: item.illustration}}
+                source={{uri: 'https://i.imgur.com/UYiroysl.jpg'}}
             />
           </View>
         </TouchableOpacity>
@@ -74,9 +78,10 @@ export default class SnapCarouselComponent extends Component {
   }
 
   render() {
+    const {banners} = this.props;
     return (
         <Carousel layout={'default'}
-                  data={ENTRIES1}
+                  data={banners}
                   renderItem={this._renderItem}
                   itemWidth={itemWidth}
                   sliderWidth={sliderWidth}

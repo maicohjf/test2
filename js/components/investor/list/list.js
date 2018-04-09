@@ -65,6 +65,9 @@ export default class investListComponent extends React.PureComponent {
   };
 
   _handleLoadMore = () => {
+    if (this.state.loading || this.state.refreshing) {
+      return;
+    }
     console.log("触发底部加载更多");
     //加载更多
     this.setState({

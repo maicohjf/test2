@@ -4,8 +4,12 @@
 import React, {Component} from 'react';
 import {Platform, View, Dimensions, StyleSheet, Image, TouchableOpacity, PixelRatio, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import PropTypes from 'prop-types';
 
 export default class CreditCardComponent extends Component {
+  static propTypes = {
+    limitAmount: PropTypes.number,
+  };
 
   render() {
     return (
@@ -23,7 +27,7 @@ export default class CreditCardComponent extends Component {
               <Text style={styles.creditTitle}>信用额度</Text>
               <View style={styles.creditLimit}>
                 <Text style={styles.creditLimitMin}>最高可达</Text>
-                <Text style={styles.creditLimitMax}>200000</Text>
+                <Text style={styles.creditLimitMax}>{this.props.limitAmount}</Text>
                 <Text style={styles.creditLimitMin}>元</Text>
               </View>
               <View style={styles.labels}>

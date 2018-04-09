@@ -19,8 +19,7 @@ export default class PublishBorrowInfoComponent extends React.Component {
       isRateFocus: false,
       loanTime: '',
       loanPurpose: '',
-      loanCity: '上海市',
-      date: new Date()
+      loanCity: '上海市'
     }
   }
 
@@ -35,6 +34,13 @@ export default class PublishBorrowInfoComponent extends React.Component {
       {text: '确定', onPress: () => this.props.navigation.navigate("InvestorList")},
     ], {cancelable: false})
   }
+
+  _callBack = (id,data) => {
+    console.log(data);
+    this.setState({
+      loanCity: data,
+    });
+  };
 
   render() {
     return (
@@ -117,7 +123,7 @@ export default class PublishBorrowInfoComponent extends React.Component {
           <View style={styles.infoRow}>
             <Text style={styles.leftTextName}>贷款城市</Text>
             <TouchableOpacity style={styles.rightContainer} activeOpacity={1} onPress={() => {
-              this.props.navigation.navigate("LoanCity")
+              this.props.navigation.navigate("LoanCity", {callBack: this._callBack})
             }}>
               <TextInput placeholder={'请选择'} editable={false} style={styles.rightText} value={this.state.loanCity}
                          underlineColorAndroid={'transparent'}/>
@@ -134,7 +140,6 @@ export default class PublishBorrowInfoComponent extends React.Component {
         </View>
     );
   }
-
 }
 
 PublishBorrowInfoComponent.navigationOptions = {
