@@ -1,11 +1,12 @@
-import { delay } from 'redux-saga';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import {delay} from 'redux-saga';
+import {all, call, put, takeLatest} from 'redux-saga/effects';
+import DB from '../utils/db';
 
 import ActionsTypes from '../actions/actionsTypes';
 
 import api from '../constants/api';
-import { request } from '../utils/request';
-import { withLoading } from './saga-helper';
+import {request} from '../utils/request';
+import {withLoading} from './saga-helper';
 import dbUtil from '../utils/db';
 
 export function* fetchDict() {
@@ -60,8 +61,11 @@ export function* fetchCommon() {
       type: ActionsTypes.DICT_FETCH_SUCCESS,
       dict: resDict.data.dict,
     });
-    if (resArea && resArea.data && resArea.data.list && resArea.data.version != null && resArea.data.list.address) {
+    if (resArea && resArea.data && resArea.data.list && resArea.data.version !== null && resArea.data.list.address) {
       dbUtil.writeLocation(resArea.data);
+    }
+    if (resDict && resDict.data && resDict.data.version != null) {
+      dbUtil.writeDict(resDict.data);
     }
   }
   catch (err) {
@@ -72,9 +76,18 @@ export function* fetchCommon() {
   }
 }
 
+export function* fetchDBCity() {
+  const val = yield dbUtil.readCities();
+  yield put({
+    type: ActionsTypes.ALL_CITIES_FETCH_SUCCESS,
+    city: val,
+  });
+}
+
 export default function* root() {
   yield all([
     takeLatest(ActionsTypes.DICT_FETCH_REQUEST, withLoading(fetchDict)),
     takeLatest(ActionsTypes.COMMON_FETCH_REQUEST, withLoading(fetchCommon)),
+    takeLatest(ActionsTypes.ALL_CITIES_FETCH_REQUEST, fetchDBCity),
   ]);
 }
