@@ -5,35 +5,36 @@
 
 'use strict';
 import React, {PureComponent} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Platform} from 'react-native';
 import PropTypes from 'prop-types';
+import adaptSmallScreen from '../../utils/adaptSmallScreen';
 
 const returnTrue = () => true;
 
-export  default class CitySectionList extends React.PureComponent {
+const defaultSections = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#'];
 
+export  default class CitySectionList extends React.PureComponent {
   static propTypes = {
     //这边是需要显示的数据信息
     sections: PropTypes.array,
     //点击拖动选择时候的回调
     onSectionSelect: PropTypes.func,
     //手指抬起的时候的回调
-    onSectionUp: PropTypes.func
+    onSectionUp: PropTypes.func,
+    curSectionIndex: PropTypes.number
   };
 
   constructor(props) {
     super(props);
     this.lastSelectedIndex = null;
     this.state = {
-      text: '无',
-      isShow: false
+      text: null
     }
   }
 
   componentDidMount() {
     //它们的高度都是一样的，所以这边只需要测量一个就好了
     const sectionItem = this.refs.sectionItem0;
-
     this.measureTimer = setTimeout(() => {
       sectionItem.measure((x, y, width, height, pageX, pageY) => {
         this.measure = {
@@ -88,7 +89,7 @@ export  default class CitySectionList extends React.PureComponent {
     if (this.lastSelectedIndex !== index && index < this.props.sections.length) {
       this.lastSelectedIndex = index;
       this.onSectionSelect(this.props.sections[index], index, true);
-      this.setState({text: this.props.sections[index], isShow: true});
+      this.setState({text: this.props.sections[index]});
     }
   };
 
@@ -99,7 +100,7 @@ export  default class CitySectionList extends React.PureComponent {
         backgroundColor: 'white'
       }
     });
-    this.setState({isShow: false});
+    this.setState({text: null});
     this.lastSelectedIndex = null;
     this.props.onSectionUp && this.props.onSectionUp();
   };
@@ -113,11 +114,15 @@ export  default class CitySectionList extends React.PureComponent {
   }
 
   render() {
+    let {sections} = this.props;
+    if (!sections || sections.length === 0) {
+      sections = Object.assign(sections, defaultSections);
+    }
     return (
         <View
             pointerEvents='box-none'
             style={styles.topView}>
-          {this.state.isShow ? this._renderModelView() : null}
+          {this.state.text ? this._renderModelView() : null}
           <View
               style={styles.indicatorContainer}
               ref='view'
@@ -148,7 +153,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     right: 0,
     top: 0,
-    width: 23,
+    width: Platform.OS === 'ios' ? adaptSmallScreen.adjustComponentSizeInSmallScreen(23) : 23,
   },
   sectionView: {
     justifyContent: 'center',
@@ -156,11 +161,11 @@ const styles = StyleSheet.create({
     flex: 1
   },
   letterStyle: {
-    height: 18,
-    fontSize: 13,
+    height: Platform.OS === 'ios' ? adaptSmallScreen.adjustComponentSizeInSmallScreen(18) : 18,
+    fontSize: Platform.OS === 'ios' ? adaptSmallScreen.adjustFontSizeInSmallScreen(13) : 13,
     color: '#388bed',
-    lineHeight: 18,
-    width: 23,
+    lineHeight: Platform.OS === 'ios' ? adaptSmallScreen.adjustComponentSizeInSmallScreen(18) : 13,
+    width: Platform.OS === 'ios' ? adaptSmallScreen.adjustComponentSizeInSmallScreen(23) : 23,
     textAlign: 'center',
   },
 
@@ -180,13 +185,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#666',
-    width: 80,
-    height: 80,
+    width: 60,
+    height: 60,
     borderRadius: 3
   },
 
   textShow: {
-    fontSize: 50,
+    fontSize: 40,
     color: '#fff',
   },
 });

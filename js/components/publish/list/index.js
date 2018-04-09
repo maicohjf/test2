@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#f4f7f9',
 		marginLeft: 10,
-		marginRight: 10,
+		paddingRight: 10,
 	},
 });
 
