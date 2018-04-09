@@ -23,6 +23,8 @@ import InvestorListScreen from '../components/investor/list/list';
 import InvestorDetailScreen from '../components/investor/detail';
 import BuyBorrowerScreen from '../components/buyBorrower';
 import InvestorinfoScreen from '../components/investorinfo';
+import MyBorrowerScreen from '../components/myBorrower/list/index';
+import MyBorrowerDetailScreen from '../components/myBorrower/detail/detail';
 
 import CitySelectorScreen from '../components/city';
 import PublishDetailScreen from '../components/publish/detail/detail';
@@ -42,6 +44,8 @@ export const AppNavigator = StackNavigator({
   InvestorList: {screen: InvestorListScreen},
   BuyBorrower: {screen: BuyBorrowerScreen},
   Investorinfo: {screen: InvestorinfoScreen},
+  MyBorrower: {screen: MyBorrowerScreen},  
+  MyBorrowerDetail: {screen: MyBorrowerDetailScreen},  
     
 
   CitySelector: {screen: CitySelectorScreen},

@@ -57,7 +57,7 @@ class ProfileComponent extends React.Component {
               <Image style={styles.itemImg} source={require('./img/jk-wodefabu-icon.png')} />
               <Text>我的发布</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.trItem} onPress={()=>alert('去我的购买')}>
+            <TouchableOpacity style={styles.trItem} onPress={() => this.props.navigation.navigate('MyBorrower')}>
               <Image style={styles.itemImg} source={require('./img/jk-wodegoumai-icon.png')} />
               <Text>我的购买</Text>
             </TouchableOpacity>

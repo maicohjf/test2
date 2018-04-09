@@ -12,4 +12,5 @@ export default {
   black_very_light: '#999999',
   gray_light: '#CCCCCC',
   gray_strong: '#E5E5E5',
+  gray_DA: '#DADADA',
 }
