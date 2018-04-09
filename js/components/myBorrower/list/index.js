@@ -66,27 +66,30 @@ class PublishComponent extends React.Component {
 			loading: true,
 			refreshing: false
 		});
+		if(this.state.loading===true){
+			return;
+		}
 		setTimeout(() => {
 			this.setState({
 				loading: false,
 			});
 			Toast.show("上拉加载更多完成")
-		}, 1000);
+		}, 3000);
 	};
 	render() {
 		return (
 			<FlatList
 				data={this.props._messageData}
 				renderItem={this._renderItem}
-				// extraData={this.state}
-				// keyExtractor={this._keyExtractor}
+				extraData={this.state}
+				keyExtractor={this._keyExtractor}
 				// refreshing={this.state.refreshing}
 				// onRefresh={this._handleRefresh}
-				// onEndReached={this._handleLoadMore}
-				// onEndReachedThreshold={0}
-				// ItemSeparatorComponent={this._renderSeparator}
-				// ListFooterComponent={this._renderFooter}
-				// style={styles.container}
+				onEndReached={this._handleLoadMore}
+				onEndReachedThreshold={0}
+				ItemSeparatorComponent={this._renderSeparator}
+				ListFooterComponent={this._renderFooter}
+				style={styles.container}
 			/>
 		);
 	}
