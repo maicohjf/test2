@@ -16,7 +16,7 @@ const alert = Modal.alert;
 class InvestorInfo extends React.Component {
     static defaultProps = {
         investDemand: ["不介意借款人身份", "有社保有公积金", "2年以上营业执照", "无车产也可", "无房产也可"],
-        investCity: ["阿克苏", "呼和浩特", "哈尔冰", "深圳", "上海"],
+        // investCity: ["阿克苏", "呼和浩特", "哈尔冰", "深圳", "上海"],
     };
 
     constructor(props) {
@@ -74,11 +74,11 @@ class InvestorInfo extends React.Component {
                         {this.props.investDemand.map((tag, i) => this.createTag(tag))}
                     </View>
                 </View>
-                <View style={[styles.intentionContainer, styles.baseInfoTwo]}>
+                {/* <View style={[styles.intentionContainer, styles.baseInfoTwo]}>
                     <View style={styles.intentFlowContainer}>
                         {this.props.investCity.map((tag, i) => this.createTag(tag))}
                     </View>
-                </View>
+                </View> */}
             </View>
         );
     }
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         backgroundColor: Color.white,
         height: 44,
         flexDirection: 'row',
-        alignItems: 'stretch'
+        alignItems: 'stretch',
     },
     dividerLine: {
         height: 1 / PixelRatio.get(),
@@ -143,10 +143,10 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         left: 0,
-        right: 0
+        right: 0,
     },
     infoTab: {
-        width: 125
+        width: 125,
     },
     selectedLine: {
         backgroundColor: Color.blue,
@@ -155,22 +155,19 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         left: 0,
-        right: 0
+        right: 0,
     },
     infoTabText: {
         color: Color.black_light,
         fontSize: 13,
         lineHeight: 44,
-        textAlign: 'center'
+        textAlign: 'center',
     },
     baseInfoContainer: {},
     baseInfoOne: {
         paddingTop: 15,
         paddingLeft: 15,
-        backgroundColor: Color.white
-    },
-    baseInfoTwo: {
-        marginTop: 10,
+        backgroundColor: Color.white,
     },
     infoLeft: {
         lineHeight: 34,
@@ -190,7 +187,7 @@ const styles = StyleSheet.create({
         paddingTop: 15,
         paddingLeft: 10,
         paddingBottom: 5,
-        backgroundColor: Color.white
+        backgroundColor: Color.white,
     },
     intentFlowContainer: {
         flexDirection: 'row',
@@ -199,16 +196,17 @@ const styles = StyleSheet.create({
     },
     tagSolidStyle: {
         borderRadius: 50,
-        backgroundColor: '#43A4FF',
         minHeight: 30,
         margin: 5,
         justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: Color.blue_very_light,
     },
     tagSolidText: {
         paddingLeft: 10,
         paddingRight: 10,
         fontSize: 15,
-        color: Color.white,
+        color: '#43A4FF',
     },
     btnQuick: {
         marginLeft: 27,
