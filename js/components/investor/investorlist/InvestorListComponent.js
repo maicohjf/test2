@@ -77,7 +77,6 @@ export default class InvestorListComponent extends Component {
                         renderItem = {this._renderItem}
                         keyExtractor = {this._keyExtractor}
                         data = {this.props._messageData}>
-                        
                     </FlatList>
                 </View>
 

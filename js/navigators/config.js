@@ -27,6 +27,7 @@ import InvestorinfoScreen from '../components/investorinfo';
 
 import LoanCityScreen from '../components/city/loanCity';
 import PublishDetailScreen from '../components/publish/detail/detail';
+import InvestorBankListScreen from '../components/investor/investorbindbank/supportbanklist/bank';
 
 export const AppNavigator = StackNavigator({
   Login: {screen: LoginScreen},
@@ -79,6 +80,11 @@ export const AppNavigator = StackNavigator({
   Verify: {
     screen: VerifyScreenScreen, navigationOptions: ({
       title: '实名认证',
+    })
+  },
+  InvestorBankList: {
+    screen: InvestorBankListScreen, navigationOptions: ({
+      title: '支持银行',
     })
   },
 }, {

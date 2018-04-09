@@ -6,6 +6,8 @@ import { Menu, ActivityIndicator, NavBar, Toast } from 'antd-mobile';
 import InvestorListComponent from './investorlist/InvestorListComponent'
 import FadeInView from './popover/popover'
 import Carousel from 'react-native-snap-carousel';
+import { withNavigation } from 'react-navigation';
+import {connect} from 'react-redux';
 
 
 class InvestorHomeComponent extends React.Component {
@@ -38,6 +40,7 @@ class InvestorHomeComponent extends React.Component {
         <View style = {{backgroundColor: 'white', height: 44, flexDirection: 'row'}}>
           <TouchableOpacity style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}} onPress = {() => {
               this.setState({bShowPopoverView: !this.state.bShowPopoverView});
+              this.props.navigation.navigate('InvestorBankList');
           }} >
               <Text>{this.state.firstDefaultText} </Text>
               <Image source = {require('./img/Triangle-2-icon.png')}/>
@@ -81,4 +84,5 @@ const styles = StyleSheet.create({
   });
   
 /* exports ================================================================== */
-export default InvestorHomeComponent;
+const mapStateToProps = state => ({});
+export default connect(mapStateToProps)(withNavigation(InvestorHomeComponent));
