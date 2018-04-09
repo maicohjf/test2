@@ -8,7 +8,7 @@ import React, {Component}  from 'react';
 import {connect} from 'react-redux';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import SingleCitySelector from './SingleCitySelector';
-import {fetchDict, fetchAllCities} from '../../actions';
+import {fetchAllCities} from '../../actions';
 
 class LoanCityComponent extends React.Component {
 
@@ -30,6 +30,7 @@ class LoanCityComponent extends React.Component {
       id: id,
       curCity: curCity
     });
+    this.props.navigation.state.params.callBack(id, curCity);
   };
 
   render() {

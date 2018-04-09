@@ -1,36 +1,61 @@
 "use strict";
 
 import React from "react";
-import { connect } from 'react-redux';
-import { withNavigation } from 'react-navigation';
-import {View, Image, Text, StyleSheet, TouchableOpacity, Alert, ScrollView, PixelRatio, Dimensions} from "react-native";
-import SnapCarouselComponent from './carousel'
-import CreditCardComponent from './credit'
+import {connect} from 'react-redux';
+import {withNavigation} from 'react-navigation';
+import {View, Image, Text, StyleSheet, ScrollView, RefreshControl} from "react-native";
+import SnapCarouselComponent from './chip/carousel'
+import CreditCardComponent from './chip/creditCard'
 import {Button} from "antd-mobile";
+import {fetchHomeData} from '../../actions';
+import colors from '../../constants/colors';
 
 class BorrowerHomeComponent extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      refreshing: false,
+    }
   }
 
-  componentWillMount(){
-    fetch('https://api1.jirongbao.com/api/v1/area/all')
-        .then((response) => response.json())
-        .then((responseJson) => {
-          console.log(responseJson)
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+  componentWillMount() {
+    const {dispatch} = this.props;
+    dispatch(fetchHomeData());
   }
+
+  componentWillReceiveProps() {
+    this.setState({
+      refreshing: false,
+    });
+  }
+
+  _onRefresh = () => {
+    this.setState({
+      refreshing: true,
+    });
+    const {dispatch} = this.props;
+    dispatch(fetchHomeData());
+  };
+
+  _refreshControl = () => {
+    return (
+        <RefreshControl onRefresh={this._onRefresh} refreshing={this.state.refreshing}
+                        tintColor={colors.blue_very_light}
+                        title="加载中..."
+                        titleColor={colors.black_very_light}
+                        colors={[colors.blue_very_light]}
+                        progressBackgroundColor={colors.white}/>
+    );
+  };
 
   render() {
+    const {homeData} = this.props;
     return (
-        <ScrollView style={{flex: 1}}>
+        <ScrollView style={{flex: 1}} refreshControl={this._refreshControl()}>
           <View style={styles.contentContainer}>
             <View style={styles.banner}>
-              <SnapCarouselComponent />
+              <SnapCarouselComponent banners={homeData.banners}/>
             </View>
 
             <View style={styles.nav}>
@@ -69,12 +94,13 @@ class BorrowerHomeComponent extends React.Component {
                   source={require("./img/notice-icon.png")}
                   style={styles.noticeIcon}
               />
-              <Text style={styles.noticeText}>来自上海的李女士，成功借款<Text style={styles.noticeStrong}>4000</Text>元。</Text>
+              <Text style={styles.noticeText}>{homeData.notices.join(" ")}</Text>
             </View>
 
-            <CreditCardComponent/>
+            <CreditCardComponent limitAmount={homeData.quota}/>
 
-            <Button type="primary" style={styles.btn} onClick={() => this.props.navigation.navigate('PublishBorrowInfo')}>
+            <Button type="primary" style={styles.btn}
+                    onClick={() => this.props.navigation.navigate('PublishBorrowInfo')}>
               <Text style={{fontSize: 16, color: '#fff'}}>我要借款</Text>
             </Button>
           </View>
@@ -179,4 +205,11 @@ const styles = StyleSheet.create({
 });
 
 /* exports ================================================================== */
-export default connect()(withNavigation(BorrowerHomeComponent));
+
+const mapStateToProps = ({home}) => {
+  return {
+    homeData: home.homeData,
+  }
+};
+
+export default connect(mapStateToProps)(withNavigation(BorrowerHomeComponent));

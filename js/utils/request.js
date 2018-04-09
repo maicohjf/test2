@@ -31,7 +31,7 @@ export function request(url, options) {
   if (!url) {
     errors.push('url');
   }
-  if (!config.payload && (config.method && config.method !== 'get' && config.method !== 'delete')) {
+  if (!config.payload && (config.method && config.method.toUpperCase() !== 'GET' && config.method !== 'delete')) {
     errors.push('payload');
   }
   if (errors.length) {

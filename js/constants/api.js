@@ -4,4 +4,5 @@ export default {
   sendSmsCode: '/api/v1/sms/send_valid_code',
   dict: '/api/v1/system/dict',
   area: '/api/v1/area/all',
+  home:'/api/v1/home'
 }
