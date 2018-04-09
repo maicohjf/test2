@@ -188,23 +188,26 @@ export default {
   readCities: (callback) => {
     return new Promise((resolve, reject) => {
       getRealm((realm) => {
-        const cities = currentRealm.objects('City').sorted('pinyin');
+        const cities = realm.objects('City').sorted('pinyin');
         const formatedCities = {};
+
         cities.forEach(city => {
-          if (city.pinyin && city.name) {
-            const py = city.pinyin.trim();
+          const { pinyin, name, id } = city;
+          if (pinyin && name) {
+            const py = pinyin.trim();
             if (py) {
               const first = py[0].toUpperCase();
               if (!formatedCities[first]) {
                 formatedCities[first] = [];
               }
               formatedCities[first].push({
-                name: city.name,
-                id: city.id,
+                name,
+                id,
               });
             }
           }
         });
+
         const allCities = [];
         const sections = Object.keys(formatedCities);
         sections.forEach(key => {
@@ -213,6 +216,7 @@ export default {
             data: formatedCities[key],
           });
         });
+
         resolve({cities: allCities, sections: sections});
       });
     })
